@@ -40,11 +40,6 @@ namespace NiceLife
             this.SplitView.IsPaneOpen = !this.SplitView.IsPaneOpen;
         }
 
-        private void MailRadioButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(typeof(MailPage));
-        }
-
         private void KeepRadioButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(typeof(KeepPage));
