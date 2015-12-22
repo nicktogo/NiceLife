@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="ed21f416-feb3-4f60-8f31-04cce525670c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>NiceLife</DisplayName>
-    <PublisherDisplayName>NiceLife</PublisherDisplayName>
+    <PublisherDisplayName>NiceLife Team</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
