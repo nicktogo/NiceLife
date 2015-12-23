@@ -13,7 +13,7 @@ namespace NiceLife.Weather.Database
 
         protected static CityHelper helper;
 
-        public CityHelper GetHelper()
+        public static CityHelper GetHelper()
         {
             lock (typeof(CityHelper))
             {

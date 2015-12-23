@@ -57,7 +57,6 @@ namespace NiceLife.Weather.Database
                 statement.Bind("@Name", item.Name);
                 statement.Bind("@Code", item.Code);
                 statement.Bind("@CityId", item.CityId);
-                statement.Bind("@CountySelect", item.CountySelect);
 
                 statement.Step();
             }

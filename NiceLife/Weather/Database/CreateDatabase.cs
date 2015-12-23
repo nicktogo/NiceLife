@@ -34,18 +34,20 @@ namespace NiceLife.Weather.Database
             CountySelect integer default 0
             );";
 
-        public static SQLiteResult LoadDatabase()
+        public static void LoadDatabase()
         {
-            
-            using (SQLiteConnection conn = new SQLiteConnection(App.DB_NAME))
+            SQLiteConnection conn = new SQLiteConnection(App.DB_NAME);
+            using (var statement = conn.Prepare(CREATE_PROVINCE))
             {
-                var statement = conn.Prepare(CREATE_PROVINCE);
                 statement.Step();
-                statement = conn.Prepare(CREATE_CITY);
+            }
+            using (var statement = conn.Prepare(CREATE_CITY))
+            {
                 statement.Step();
-                statement = conn.Prepare(CREATE_COUNTY);
+            }
+            using (var statement = conn.Prepare(CREATE_COUNTY))
+            {
                 statement.Step();
-                return statement.Step();
             }
         }
 
