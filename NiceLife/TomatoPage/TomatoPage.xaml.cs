@@ -26,5 +26,10 @@ namespace NiceLife
         {
             this.InitializeComponent();
         }
+
+        private void Today_Tasks_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -111,7 +111,7 @@
     <Compile Include="SchedulePage.xaml.cs">
       <DependentUpon>SchedulePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage.xaml.cs">
+    <Compile Include="TomatoPage\TomatoPage.xaml.cs">
       <DependentUpon>TomatoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="WeatherPage.xaml.cs">
@@ -155,7 +155,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage.xaml">
+    <Page Include="TomatoPage\TomatoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TomatoPage\AllTasksPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TomatoPage\StatisticsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TomatoPage\HistoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TomatoPage\TodayTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
