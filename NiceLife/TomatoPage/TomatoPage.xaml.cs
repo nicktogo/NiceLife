@@ -27,9 +27,9 @@ namespace NiceLife
             this.InitializeComponent();
         }
 
-        private void Today_Tasks_Click(object sender, RoutedEventArgs e)
+        private void TodayTasks_Click(object sender, RoutedEventArgs e)
         {
-            
+            //MainFrame.Navigate(typeof(Page));
         }
     }
 }

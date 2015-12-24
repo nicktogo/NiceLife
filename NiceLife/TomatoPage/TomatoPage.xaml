@@ -19,7 +19,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock FontSize="50" Text="Tomato Clock"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
-        <Button Click="Today_Tasks_Click" FontSize="36" Grid.Row="1" Grid.Column="0" Content="Today Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+        <Button Click="TodayTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="0" Content="Today Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <Button FontSize="36" Grid.Row="1" Grid.Column="1" Content="All Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <Button FontSize="36" Grid.Row="1" Grid.Column="2" Content="Statistics &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <Button FontSize="36" Grid.Row="1" Grid.Column="3" Content="History &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
