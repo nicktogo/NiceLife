@@ -55,7 +55,7 @@ namespace NiceLife.Weather.Database
             return "INSERT INTO Province (Name, Code) VALUES (@Name, @Code)";
         }
 
-        public override List<Province> SelectAllItems()
+        public override List<Province> SelectGroupItems(long foreignId)
         {
             List<Province> items = new List<Province>();
             using (var statement = conn.Prepare(GetSelectAllSQL()))

@@ -48,7 +48,7 @@ namespace NiceLife
         private void GetProvinces()
         {
             ProvinceHelper helper = ProvinceHelper.GetHelper();
-            List<Province> LProvinces = helper.SelectAllItems();
+            List<Province> LProvinces = helper.SelectGroupItems(-1);
             if (LProvinces.Count() > 0)
             {
                 OProvinces.Clear();
@@ -66,7 +66,7 @@ namespace NiceLife
         private void GetCities()
         {
             CityHelper helper = CityHelper.GetHelper();
-            List<City> LCities = helper.SelectAllItems();
+            List<City> LCities = helper.SelectGroupItems(selectedProvince.Id);
             if (LCities.Count() > 0)
             {
                 OCities.Clear();
@@ -84,7 +84,7 @@ namespace NiceLife
         private void GetCounties()
         {
             CountyHelper helper = CountyHelper.GetHelper();
-            List<County> LCounties = helper.SelectAllItems();
+            List<County> LCounties = helper.SelectGroupItems(selectedCity.Id);
             if (LCounties.Count() > 0)
             {
                 OCounties.Clear();

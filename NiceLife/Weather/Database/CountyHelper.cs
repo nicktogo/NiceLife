@@ -62,11 +62,12 @@ namespace NiceLife.Weather.Database
             }
         }
 
-        public override List<County> SelectAllItems()
+        public override List<County> SelectGroupItems(long foreignId)
         {
             List<County> items = new List<County>();
             using (var statement = conn.Prepare(GetSelectAllSQL()))
             {
+                statement.Bind("@CityId", foreignId);
                 while (statement.Step() == SQLiteResult.ROW)
                 {
                     County county = CreateItem(statement);
@@ -112,7 +113,7 @@ namespace NiceLife.Weather.Database
 
         protected override string GetSelectAllSQL()
         {
-            return "SELECT * FROM County";
+            return "SELECT * FROM County WHERE CityId = @CityId";
         }
 
         protected override string GetSelectSQL()

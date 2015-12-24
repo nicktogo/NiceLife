@@ -29,7 +29,7 @@ namespace NiceLife.Weather
 
         public abstract void UpdateSingleItem(T item);
 
-        public abstract List<T> SelectAllItems();
+        public abstract List<T> SelectGroupItems(long foreignId);
 
         protected abstract String GetSelectAllSQL();
 
