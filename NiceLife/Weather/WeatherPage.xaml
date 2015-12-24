@@ -3,11 +3,36 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NiceLife"
+    xmlns:area="using:NiceLife.Weather.Database"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Background="LawnGreen">
-        <TextBlock FontSize="36" Text="Keep Page" Margin="12,17,0,12"/>
+        <TextBlock FontSize="36" Text="Weather Page" Margin="12,19,0,10"/>
+        <ComboBox x:Name="Province" HorizontalAlignment="Left" Margin="344,266,0,0" VerticalAlignment="Top" Width="120"
+                  ItemsSource="{x:Bind OProvinces}" SelectionChanged="Province_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="area:Province">
+                    <TextBlock Text="{x:Bind Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="City" HorizontalAlignment="Left" Margin="573,266,0,0" VerticalAlignment="Top" Width="120"
+                  ItemsSource="{x:Bind OCities}" SelectionChanged="City_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="area:City">
+                    <TextBlock Text="{x:Bind Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="County" HorizontalAlignment="Left" Margin="794,266,0,0" VerticalAlignment="Top" Width="120"
+                  ItemsSource="{x:Bind OCounties}" SelectionChanged="County_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="area:County">
+                    <TextBlock Text="{x:Bind Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Page>

@@ -36,6 +36,7 @@ namespace NiceLife
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            NiceLife.Weather.Database.CreateDatabase.LoadDatabase();
         }
 
         /// <summary>
