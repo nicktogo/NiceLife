@@ -15,28 +15,21 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace NiceLife
+namespace DatabaseUnitTest
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application
     {
-
-        public static String DB_NAME = "NiceLife.db";
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            NiceLife.Weather.Database.CreateDatabase.LoadDatabase();
         }
 
         /// <summary>
@@ -73,16 +66,13 @@ namespace NiceLife
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+            
+            Microsoft.VisualStudio.TestPlatform.TestExecutor.UnitTestClient.CreateDefaultUI();
 
-            if (rootFrame.Content == null)
-            {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
-            }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            Microsoft.VisualStudio.TestPlatform.TestExecutor.UnitTestClient.Run(e.Arguments);
         }
 
         /// <summary>
