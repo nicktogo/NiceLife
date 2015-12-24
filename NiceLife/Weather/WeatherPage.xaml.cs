@@ -124,10 +124,10 @@ namespace NiceLife
             }
             public void OnError(Exception e)
             {
-                
+                throw e;
             }
 
-            public void OnFinished(string response)
+            public async void OnFinished(string response)
             {
                 bool result = false;
                 switch (Type)
@@ -148,13 +148,22 @@ namespace NiceLife
                     switch (Type)
                     {
                         case TYPE_PROVINCE:
-                            page.GetProvinces();
+                            await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                             {
+                                 page.GetProvinces();
+                             });
                             break;
                         case TYPE_COUNTY:
-                            page.GetCounties();
+                            await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                            {
+                                page.GetCounties();
+                            });
                             break;
                         case TYPE_CITY:
-                            page.GetCities();
+                            await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                            {
+                                page.GetCities();
+                            });
                             break;
                     }
 

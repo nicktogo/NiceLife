@@ -21,7 +21,13 @@ namespace NiceLife.Weather.Util
                 {
                     httpResponse = await httpClient.GetAsync(uri);
                     httpResponse.EnsureSuccessStatusCode();
+                    var contentType = httpResponse.Content.Headers.ContentType;
+                    if (String.IsNullOrEmpty(contentType.CharSet))
+                    {
+                        contentType.CharSet = "utf-8";
+                    }
                     response = await httpResponse.Content.ReadAsStringAsync();
+
                     listener.OnFinished(response);
                 }
                 catch (Exception e)
