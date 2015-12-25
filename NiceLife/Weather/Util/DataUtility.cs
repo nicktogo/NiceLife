@@ -10,6 +10,13 @@ namespace NiceLife.Weather.Util
 {
     public class DataUtility
     {
+        private const string TAG_DATE = "date";
+        private const string TAG_HIGH = "high";
+        private const string TAG_LOW = "low";
+        private const string TAG_TYPE = "type";
+        private const string TAG_WIND_DIRECTION = "fengxiang";
+        private const string TAG_WIND_POWER = "fengli";
+
         public static bool handleProvincesResponse(string response)
         {
             if (!String.IsNullOrEmpty(response))
@@ -86,9 +93,46 @@ namespace NiceLife.Weather.Util
 
         public static bool handleWeatherResponse(string response, long CountyId)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(response);
-            XmlNodeList elements = doc.GetElementsByTagName("weather");
+            if (!String.IsNullOrEmpty(response))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(response);
+                XmlNodeList elements = doc.GetElementsByTagName("weather");
+
+                List<Forecast> forecasts = new List<Forecast>();
+                DateTime today = DateTime.Now;
+                foreach (XmlElement element in elements)
+                {
+                    Forecast forecast = new Forecast();
+                    forecast.countyId = CountyId;
+                    forecast.date = today;
+                    today = today.AddDays(1);
+
+                    XmlNodeList tempList;
+                    tempList = element.GetElementsByTagName(TAG_HIGH);
+                    forecast.hight = tempList.Item(0).InnerText.Split(@' ')[1];
+
+                    tempList = element.GetElementsByTagName(TAG_LOW);
+                    forecast.low = tempList.Item(0).InnerText.Split(@' ')[1];
+
+                    tempList = element.GetElementsByTagName(TAG_TYPE);
+                    forecast.dayType = tempList.Item(0).InnerText;
+                    forecast.nightType = tempList.Item(1).InnerText;
+
+                    tempList = element.GetElementsByTagName(TAG_WIND_DIRECTION);
+                    forecast.dayWindDirection = tempList.Item(0).InnerText;
+                    forecast.nightWindDirection = tempList.Item(1).InnerText;
+
+                    tempList = element.GetElementsByTagName(TAG_WIND_POWER);
+                    forecast.dayWindPower = tempList.Item(0).InnerText;
+                    forecast.nightWindPower = tempList.Item(1).InnerText;
+
+                    forecasts.Add(forecast);
+                }
+                ForecastHelper helper = ForecastHelper.GetHelper();
+                helper.InsertItems(forecasts);
+                return true;
+            }
             return false;
         }
     }
