@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceLife.Weather.Database;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,18 @@ namespace NiceLife.Weather
     /// </summary>
     public sealed partial class WeatherInfo : Page
     {
+        private County selectedCounty;
         public WeatherInfo()
         {
             this.InitializeComponent();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            long CountyId = (long)e.Parameter;
+            selectedCounty = CountyHelper.GetHelper().SelectSingleItemById(CountyId);
+
+            // load weather info 
         }
     }
 }

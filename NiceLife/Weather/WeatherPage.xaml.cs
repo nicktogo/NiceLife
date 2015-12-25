@@ -198,7 +198,7 @@ namespace NiceLife
             {
                 County selectedCounty = OCounties[index];
                 // show the weather
-                Frame.Navigate(typeof(Weather.WeatherInfo)); 
+                Frame.Navigate(typeof(Weather.WeatherInfo), selectedCounty.Id); 
             }
         }
     }
