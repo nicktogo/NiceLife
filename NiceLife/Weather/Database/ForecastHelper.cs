@@ -32,7 +32,9 @@ namespace NiceLife.Weather.Database
             forecast.id = (long)statement[0];
             forecast.countyId = (long)statement[1];
 
-            forecast.date = (DateTime)statement[2];
+            DateTime date;
+            DateTime.TryParse((String)statement[2], out date);
+            forecast.date = date;
             forecast.hight = (String)statement[3];
             forecast.low = (String)statement[4];
 
@@ -64,7 +66,6 @@ namespace NiceLife.Weather.Database
         {
             using (var statement = conn.Prepare(GetInsertSQL()))
             {
-                statement.Bind("@Id", item.id);
                 statement.Bind("@CountyId", item.countyId);
 
                 statement.Bind("@Date", DateTimeSQLite(item.date));
