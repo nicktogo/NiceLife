@@ -2,6 +2,9 @@
 
 using NiceLife.Weather.Database;
 using SQLitePCL;
+using System;
+using System.Collections.Generic;
+
 namespace DatabaseUnitTest
 {
     [TestClass]
@@ -67,6 +70,23 @@ namespace DatabaseUnitTest
             actual = helper.SelectSingleItemById(county.Id);
             AssertEqual(county, actual);
 
+        }
+
+        public void TestForecastHelper()
+        {
+            List<Forecast> forecasts = new List<Forecast>();
+            DateTime today = DateTime.Now;
+            for (int i = 0; i < 5; i++)
+            {
+                Forecast f = new Forecast();
+                f.date = today.AddDays(i);
+                forecasts.Add(f);
+            }
+            ForecastHelper helper = ForecastHelper.GetHelper();
+            helper.InsertItems(forecasts);
+
+            List<Forecast> actual = helper.SelectGroupItems(today);
+            Assert.AreEqual(forecasts.Count, actual.Count);
         }
 
         private void AssertEqual(Province expect, Province actual)
