@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NiceLife.Weather.Database;
+using System.Xml;
 
 namespace NiceLife.Weather.Util
 {
@@ -80,6 +81,14 @@ namespace NiceLife.Weather.Util
                 }
                 return true;
             }
+            return false;
+        }
+
+        public static bool handleWeatherResponse(string response, long CountyId)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(response);
+            XmlNodeList elements = doc.GetElementsByTagName("weather");
             return false;
         }
     }
