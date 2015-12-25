@@ -122,8 +122,8 @@ namespace NiceLife.Weather.Database
         protected override string GetInsertSQL()
         {
             return @"INSERT INTO Forecast 
-                (Id, CountyId, Date, Hight, Low, DayType, DayWindDirection, DayWindPower, NightType, NightWindDirection, NightWindPower) 
-                VALUES(@Id, @CountyId, @Date, @Hight, @Low, @DayType, @DayWindDirection, @DayWindPower, @NightType, @NightWindDirection, @NightWindPower)";
+                (CountyId, Date, Hight, Low, DayType, DayWindDirection, DayWindPower, NightType, NightWindDirection, NightWindPower) 
+                VALUES(@CountyId, @Date, @Hight, @Low, @DayType, @DayWindDirection, @DayWindPower, @NightType, @NightWindDirection, @NightWindPower)";
         }
 
         protected override string GetSelectAllSQL()
