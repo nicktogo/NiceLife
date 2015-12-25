@@ -135,10 +135,12 @@
     <Compile Include="Weather\Database\CityHelper.cs" />
     <Compile Include="Weather\Database\County.cs" />
     <Compile Include="Weather\Database\CountyHelper.cs" />
+    <Compile Include="Weather\Database\ForecastHelper.cs" />
     <Compile Include="Weather\Database\Province.cs" />
     <Compile Include="Weather\Database\ProvinceHelper.cs" />
     <Compile Include="Weather\Database\CreateDatabase.cs" />
     <Compile Include="Weather\Database\DbHelper.cs" />
+    <Compile Include="Weather\Database\Forecast.cs" />
     <Compile Include="Weather\Util\DataUtility.cs" />
     <Compile Include="Weather\Util\HttpCallbackListener.cs" />
     <Compile Include="Weather\Util\HttpUtil.cs" />
