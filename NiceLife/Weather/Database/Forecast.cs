@@ -8,6 +8,9 @@ namespace NiceLife.Weather.Database
 {
     public class Forecast
     {
+        public long id { get; set; }
+        public long countyId { get; set; }
+
         public DateTime date { get; set; }
         public String hight { get; set; }
         public String low { get; set; }

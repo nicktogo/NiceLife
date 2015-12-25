@@ -29,17 +29,20 @@ namespace NiceLife.Weather.Database
         {
             Forecast forecast = new Forecast();
 
-            forecast.date = (DateTime)statement[0];
-            forecast.hight = (String)statement[1];
-            forecast.low = (String)statement[2];
+            forecast.id = (long)statement[0];
+            forecast.countyId = (long)statement[1];
 
-            forecast.dayType = (String)statement[3];
-            forecast.dayWindDirection = (String)statement[4];
-            forecast.dayWindPower = (String)statement[5];
+            forecast.date = (DateTime)statement[2];
+            forecast.hight = (String)statement[3];
+            forecast.low = (String)statement[4];
 
-            forecast.nightType = (String)statement[6];
-            forecast.nightWindDirection = (String)statement[7];
-            forecast.nightWindPower = (String)statement[8];
+            forecast.dayType = (String)statement[5];
+            forecast.dayWindDirection = (String)statement[6];
+            forecast.dayWindPower = (String)statement[7];
+
+            forecast.nightType = (String)statement[8];
+            forecast.nightWindDirection = (String)statement[9];
+            forecast.nightWindPower = (String)statement[10];
 
             return forecast;
         }
@@ -61,6 +64,9 @@ namespace NiceLife.Weather.Database
         {
             using (var statement = conn.Prepare(GetInsertSQL()))
             {
+                statement.Bind("@Id", item.id);
+                statement.Bind("@CountyId", item.countyId);
+
                 statement.Bind("@Date", DateTimeSQLite(item.date));
                 statement.Bind("@Hight", item.hight);
                 statement.Bind("@Low", item.low);
@@ -115,8 +121,8 @@ namespace NiceLife.Weather.Database
         protected override string GetInsertSQL()
         {
             return @"INSERT INTO Forecast 
-                (Date, Hight, Low, DayType, DayWindDirection, DayWindPower, NightType, NightWindDirection, NightWindPower) 
-                VALUES(@Date, @Hight, @Low, @DayType, @DayWindDirection, @DayWindPower, @NightType, @NightWindDirection, @NightWindPower)";
+                (Id, CountyId, Date, Hight, Low, DayType, DayWindDirection, DayWindPower, NightType, NightWindDirection, NightWindPower) 
+                VALUES(@Id, @CountyId, @Date, @Hight, @Low, @DayType, @DayWindDirection, @DayWindPower, @NightType, @NightWindDirection, @NightWindPower)";
         }
 
         protected override string GetSelectAllSQL()
