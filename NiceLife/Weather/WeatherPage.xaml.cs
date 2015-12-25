@@ -190,6 +190,7 @@ namespace NiceLife
             int index = County.SelectedIndex;
             County selectedCounty = OCounties[index];
             // show the weather
+            Frame.Navigate(typeof(Weather.WeatherInfo));
         }
     }
 }

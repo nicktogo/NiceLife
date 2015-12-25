@@ -125,6 +125,9 @@
     <Compile Include="Weather\Util\DataUtility.cs" />
     <Compile Include="Weather\Util\HttpCallbackListener.cs" />
     <Compile Include="Weather\Util\HttpUtil.cs" />
+    <Compile Include="Weather\WeatherInfo.xaml.cs">
+      <DependentUpon>WeatherInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Weather\WeatherPage.xaml.cs">
       <DependentUpon>WeatherPage.xaml</DependentUpon>
     </Compile>
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TomatoPage\TodayTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Weather\WeatherInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
