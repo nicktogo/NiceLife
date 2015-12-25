@@ -19,7 +19,7 @@ namespace NiceLife.Weather.Database
             {
                 if (helper == null)
                 {
-                    helper = new ForecastHelper()
+                    helper = new ForecastHelper();
                 }
             }
             return helper;
