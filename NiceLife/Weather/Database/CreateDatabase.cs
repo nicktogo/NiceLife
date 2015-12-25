@@ -36,6 +36,8 @@ namespace NiceLife.Weather.Database
 
         // create forecast
         private static String CREATE_FORECAST = @"CREATE TABLE IF NOT EXISTS Forecast(
+            Id integer primary key autoincrement, 
+            CountyId integer, 
             Date datetime, 
             Hight text, 
             Low text, 
