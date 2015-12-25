@@ -1,4 +1,5 @@
 ﻿using NiceLife.Weather.Database;
+using NiceLife.Weather.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,7 @@ namespace NiceLife.Weather
     /// </summary>
     public sealed partial class WeatherInfo : Page
     {
+        private const string FORECAST_SOURCE = "http://wthrcdn.etouch.cn/WeatherApi?city={0}";
         private County selectedCounty;
         public WeatherInfo()
         {
@@ -34,7 +36,27 @@ namespace NiceLife.Weather
             long CountyId = (long)e.Parameter;
             selectedCounty = CountyHelper.GetHelper().SelectSingleItemById(CountyId);
 
-            // load weather info 
+            string address = String.Format(FORECAST_SOURCE, selectedCounty.Name);
+            HttpUtil.SendHttpRequest(address, new Listener(this));
+            
+        }
+
+        private class Listener : HttpCallbackListener
+        {
+            private WeatherInfo page;
+            public  Listener(WeatherInfo page)
+            {
+                this.page = page;
+            }
+            public void OnError(Exception e)
+            {
+                throw e;
+            }
+
+            public void OnFinished(string response)
+            {
+                DataUtility.handleWeatherResponse(response, page.selectedCounty.Id);
+            }
         }
     }
 }
