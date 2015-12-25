@@ -34,6 +34,19 @@ namespace NiceLife.Weather.Database
             CountySelect integer default 0
             );";
 
+        // create forecast
+        private static String CREATE_FORECAST = @"CREATE TABLE IF NOT EXISTS Forecast(
+            Date datetime, 
+            Hight text, 
+            Low text, 
+            DayType text, 
+            DayWindDirection text, 
+            DayWindPower text, 
+            NightType text, 
+            NightWindDirection text, 
+            NightWindPower text
+            );";
+
         public static void LoadDatabase()
         {
             SQLiteConnection conn = new SQLiteConnection(App.DB_NAME);
@@ -46,6 +59,10 @@ namespace NiceLife.Weather.Database
                 statement.Step();
             }
             using (var statement = conn.Prepare(CREATE_COUNTY))
+            {
+                statement.Step();
+            }
+            using (var statement = conn.Prepare(CREATE_FORECAST))
             {
                 statement.Step();
             }
