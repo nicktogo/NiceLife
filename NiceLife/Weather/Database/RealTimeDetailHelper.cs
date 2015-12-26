@@ -33,10 +33,11 @@ namespace NiceLife.Weather.Database
             d.CountyName = (string)statement[2];
             d.UpdateTime = (string)statement[3];
             d.RealtimeTemp = (string)statement[4];
-            d.RealtimeWindDirection = (string)statement[5];
-            d.RealtimeWindPower = (string)statement[6];
-            d.Sunrise = (string)statement[7];
-            d.Sunset = (string)statement[8];
+            d.Humidity = (string)statement[5];
+            d.RealtimeWindDirection = (string)statement[6];
+            d.RealtimeWindPower = (string)statement[7];
+            d.Sunrise = (string)statement[8];
+            d.Sunset = (string)statement[9];
             return d;
         }
 
@@ -62,6 +63,7 @@ namespace NiceLife.Weather.Database
                 statement.Bind("@CountyName", item.CountyName);
                 statement.Bind("@UpdateTime", item.UpdateTime);
                 statement.Bind("@RealtimeTemp", item.RealtimeTemp);
+                statement.Bind("@Humidity", item.Humidity);
                 statement.Bind("@RealtimeWindDirection", item.RealtimeWindDirection);
                 statement.Bind("@RealtimeWindPower", item.RealtimeWindPower);
                 statement.Bind("@Sunrise", item.Sunrise);
@@ -80,6 +82,7 @@ namespace NiceLife.Weather.Database
             RealtimeDetail d = null;
             using (var statement = conn.Prepare(GetSelectSQL()))
             {
+                statement.Bind("@CountyId", id);
                 if (statement.Step() == SQLiteResult.ROW)
                 {
                     d = CreateItem(statement);
@@ -101,8 +104,8 @@ namespace NiceLife.Weather.Database
         protected override string GetInsertSQL()
         {
             return @"INSERT INTO RealTimeDetail 
-                (CountyId, CountyName, UpdateTime, RealtimeTemp, RealtimeWindDirection, RealtimeWindPower, Sunrise, Sunset) 
-                VALUES(@CountyId, @CountyName, @UpdateTime, @RealtimeTemp, @RealtimeWindDirection, @RealtimeWindPower, @Sunrise, @Sunset)";
+                (CountyId, CountyName, UpdateTime, RealtimeTemp, Humidity, RealtimeWindDirection, RealtimeWindPower, Sunrise, Sunset) 
+                VALUES(@CountyId, @CountyName, @UpdateTime, @RealtimeTemp, @Humidity, @RealtimeWindDirection, @RealtimeWindPower, @Sunrise, @Sunset)";
         }
 
         protected override string GetSelectAllSQL()

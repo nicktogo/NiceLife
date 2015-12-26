@@ -15,6 +15,12 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0" Margin="10" HorizontalAlignment="Center">
+            <TextBlock Text="{x:Bind Path=realTimeDetail.DefaultRealtimeDetail.CountyName, Mode=OneWay}" VerticalAlignment="Top"/>
+            <TextBlock Text="{x:Bind Path=realTimeDetail.DefaultRealtimeDetail.UpdateTime, Mode=OneWay}" VerticalAlignment="Center"/>
+            <TextBlock Text="{x:Bind Path=realTimeDetail.DefaultRealtimeDetail.RealtimeTemp, Mode=OneWay}" VerticalAlignment="Bottom"/>
+        </Grid>
+
         <GridView Grid.Row="1" ItemsSource="{x:Bind forecasts}" Margin="10,0,-10,0"
                   IsItemClickEnabled="True" ItemClick="GridView_ItemClick">
             <GridView.ItemTemplate>

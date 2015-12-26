@@ -10,12 +10,20 @@ namespace NiceLife.Weather.Util
 {
     public class DataUtility
     {
+        private const string TAG_CITY = "city";
+        private const string TAG_UPDATE_TIME = "updatetime";
+        private const string TAG_TEMP = "wendu";
+        private const string TAG_HUMIDITY = "shidu";
+        private const string TAG_SUNRISE = "sunrise_1";
+        private const string TAG_SUNSET = "sunset_1";
+        private const string TAG_WEATHER = "weather";
         private const string TAG_DATE = "date";
         private const string TAG_HIGH = "high";
         private const string TAG_LOW = "low";
         private const string TAG_TYPE = "type";
         private const string TAG_WIND_DIRECTION = "fengxiang";
         private const string TAG_WIND_POWER = "fengli";
+        private const string TAG_YESTERDAY = "date_1";
 
         public static bool handleProvincesResponse(string response)
         {
@@ -97,11 +105,46 @@ namespace NiceLife.Weather.Util
             {
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(response);
-                XmlNodeList elements = doc.GetElementsByTagName("weather");
+
+                // get realtime detail
+                RealtimeDetail r = new RealtimeDetail();
+                r.CountyId = CountyId;
+                XmlNodeList detailTemp;
+
+                detailTemp = doc.GetElementsByTagName(TAG_CITY);
+                r.CountyName = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_UPDATE_TIME);
+                r.UpdateTime = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_TEMP);
+                r.RealtimeTemp = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_WIND_POWER);
+                r.RealtimeWindPower = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_HUMIDITY);
+                r.Humidity = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_WIND_DIRECTION);
+                r.RealtimeWindDirection = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_SUNRISE);
+                r.Sunrise = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_SUNSET);
+                r.Sunset = detailTemp.Item(0).InnerText;
+
+                RealTimeDetailHelper rHelper = RealTimeDetailHelper.GetHelper();
+                rHelper.InsertSingleItem(r);
+
+
+                // get forecast
+                XmlNodeList elements = doc.GetElementsByTagName(TAG_WEATHER);
 
                 List<Forecast> forecasts = new List<Forecast>();
                 DateTime now = DateTime.Now;
-                string yesterday = doc.GetElementsByTagName("date_1").Item(0).InnerText;
+                string yesterday = doc.GetElementsByTagName(TAG_YESTERDAY).Item(0).InnerText;
                 string actualYesterday = now.AddDays(-1).Day.ToString();
                 DateTime firstDate = yesterday.Contains(actualYesterday) ? now : now.AddDays(-1);
 
