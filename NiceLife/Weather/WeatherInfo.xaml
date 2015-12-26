@@ -5,9 +5,29 @@
     xmlns:local="using:NiceLife.Weather"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:NiceLife.Weather.Database"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Weather Info" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <GridView Grid.Row="1" ItemsSource="{x:Bind forecasts}" Margin="10,0,-10,0">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:Forecast">
+                    <StackPanel HorizontalAlignment="Center" Margin="10">
+                        <TextBlock FontSize="18" Text="{x:Bind date}" HorizontalAlignment="Center"/>
+                        <Image Width="150" Height="auto" />
+                        <Grid>
+                            <TextBlock FontSize="16" Text="{x:Bind low}" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="16" Text="{x:Bind hight}" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>
