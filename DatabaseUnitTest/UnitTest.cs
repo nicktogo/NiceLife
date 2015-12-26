@@ -272,13 +272,44 @@ http://static.etouch.cn/apps/weather/alarm_icon-1/mai_yellow-1.png
             {
                 Forecast f = new Forecast();
                 f.date = today.AddDays(i);
+                f.countyId = 1;
                 forecasts.Add(f);
             }
             ForecastHelper helper = ForecastHelper.GetHelper();
             helper.InsertItems(forecasts);
 
-            List<Forecast> actual = helper.SelectGroupItems();
+            List<Forecast> actual = helper.SelectGroupItems(1);
             Assert.AreEqual(forecasts.Count, actual.Count);
+        }
+
+        public void TestRealTimeDetailHelper()
+        {
+            RealtimeDetail d = new RealtimeDetail();
+            d.CountyId = 1;
+            d.CountyName = "嘉定";
+            d.UpdateTime = "21:06";
+            d.RealtimeTemp = "14";
+            d.RealtimeWindDirection = "西北风";
+            d.RealtimeWindPower = "1级";
+            d.Sunrise = "6:00";
+            d.Sunset = "16:00";
+
+            RealTimeDetailHelper helper = RealTimeDetailHelper.GetHelper();
+            helper.InsertSingleItem(d);
+
+            RealtimeDetail actual = helper.SelectSingleItemById(d.CountyId);
+            Assert.AreEqual(d.Id, actual.Id);
+            Assert.AreEqual(d.CountyId, actual.CountyId);
+            Assert.AreEqual(d.CountyName, actual.CountyName);
+            Assert.AreEqual(d.UpdateTime, actual.UpdateTime);
+            Assert.AreEqual(d.RealtimeTemp, actual.RealtimeTemp);
+            Assert.AreEqual(d.RealtimeWindDirection, actual.RealtimeWindDirection);
+            Assert.AreEqual(d.RealtimeWindPower, actual.RealtimeWindPower);
+            Assert.AreEqual(d.Sunrise, actual.Sunrise);
+            Assert.AreEqual(d.Sunset, actual.Sunset);
+
+            helper.DeleteSingleItemById(d.CountyId);
+            Assert.AreEqual(null, helper.SelectSingleItemById(d.CountyId));
         }
 
         private void AssertEqual(Province expect, Province actual)

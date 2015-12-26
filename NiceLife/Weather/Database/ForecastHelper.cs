@@ -92,11 +92,12 @@ namespace NiceLife.Weather.Database
             }
         }
 
-        public List<Forecast> SelectGroupItems()
+        public override List<Forecast> SelectGroupItems(long foreignId)
         {
             List<Forecast> items = new List<Forecast>();
             using (var statement = conn.Prepare(GetSelectAllSQL()))
             {
+                statement.Bind("@CountyId", foreignId);
                 while (statement.Step() == SQLiteResult.ROW)
                 {
                     Forecast f = CreateItem(statement);
@@ -104,11 +105,6 @@ namespace NiceLife.Weather.Database
                 }
             }
             return items;
-        }
-
-        public override List<Forecast> SelectGroupItems(long foreignId)
-        {
-            throw new NotImplementedException();
         }
 
         public override Forecast SelectSingleItemById(long id)
@@ -135,7 +131,7 @@ namespace NiceLife.Weather.Database
 
         protected override string GetSelectAllSQL()
         {
-            return "SELECT * FROM Forecast";
+            return "SELECT * FROM Forecast WHERE CountyId = @CountyId";
         }
 
         protected override string GetSelectSQL()

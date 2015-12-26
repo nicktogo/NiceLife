@@ -49,6 +49,19 @@ namespace NiceLife.Weather.Database
             NightWindPower text
             );";
 
+        // create RealtimeDetail
+        private static string CREATE_REALTIMEDETAIL = @"CREATE TABLE IF NOT EXISTS RealTimeDetail(
+            Id integer primary key autoincrement, 
+            CountyId integer, 
+            CountyName text, 
+            UpdateTime text, 
+            RealtimeTemp text, 
+            RealtimeWindDirection text, 
+            RealtimeWindPower text, 
+            Sunrise text, 
+            Sunset text
+            );";
+
         public static void LoadDatabase()
         {
             SQLiteConnection conn = new SQLiteConnection(App.DB_NAME);
@@ -65,6 +78,10 @@ namespace NiceLife.Weather.Database
                 statement.Step();
             }
             using (var statement = conn.Prepare(CREATE_FORECAST))
+            {
+                statement.Step();
+            }
+            using (var statement = conn.Prepare(CREATE_REALTIMEDETAIL))
             {
                 statement.Step();
             }
