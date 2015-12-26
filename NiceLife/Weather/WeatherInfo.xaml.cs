@@ -27,6 +27,7 @@ namespace NiceLife.Weather
     {
         private const string FORECAST_SOURCE = "http://wthrcdn.etouch.cn/WeatherApi?city={0}";
         private County selectedCounty;
+        private RealtimeDetailViewModel realTimeDetail = new RealtimeDetailViewModel();
         private ObservableCollection<Forecast> forecasts = new ObservableCollection<Forecast>();
         public WeatherInfo()
         {
@@ -42,9 +43,11 @@ namespace NiceLife.Weather
 
         private void GetForecast()
         {
+            RealTimeDetailHelper rHelper = RealTimeDetailHelper.GetHelper();
+            realTimeDetail.DefaultRealtimeDetail = rHelper.SelectSingleItemById(selectedCounty.Id);
             ForecastHelper helper = ForecastHelper.GetHelper();
             List<Forecast> items = helper.SelectGroupItems(selectedCounty.Id);
-            if (items.Count > 0)
+            if (realTimeDetail != null && items.Count > 0)
             {
                 foreach (Forecast f in items)
                 {

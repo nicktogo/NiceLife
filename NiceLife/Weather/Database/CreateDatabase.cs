@@ -56,6 +56,7 @@ namespace NiceLife.Weather.Database
             CountyName text, 
             UpdateTime text, 
             RealtimeTemp text, 
+            Humidity text, 
             RealtimeWindDirection text, 
             RealtimeWindPower text, 
             Sunrise text, 
