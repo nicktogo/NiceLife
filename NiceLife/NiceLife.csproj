@@ -141,6 +141,8 @@
     <Compile Include="Weather\Database\CreateDatabase.cs" />
     <Compile Include="Weather\Database\DbHelper.cs" />
     <Compile Include="Weather\Database\Forecast.cs" />
+    <Compile Include="Weather\Database\RealtimeDetail.cs" />
+    <Compile Include="Weather\Database\RealTimeDetailHelper.cs" />
     <Compile Include="Weather\Util\DataUtility.cs" />
     <Compile Include="Weather\Util\HttpCallbackListener.cs" />
     <Compile Include="Weather\Util\HttpUtil.cs" />

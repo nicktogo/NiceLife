@@ -43,7 +43,7 @@ namespace NiceLife.Weather
         private void GetForecast()
         {
             ForecastHelper helper = ForecastHelper.GetHelper();
-            List<Forecast> items = helper.SelectGroupItems();
+            List<Forecast> items = helper.SelectGroupItems(selectedCounty.Id);
             if (items.Count > 0)
             {
                 foreach (Forecast f in items)
