@@ -87,5 +87,16 @@ namespace NiceLife.Weather
                 }
             }
         }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var forecast = (Forecast)e.ClickedItem;
+            DayTpye.Text = forecast.dayType;
+            DayWindDirection.Text = forecast.dayWindDirection;
+            DayWindPower.Text = forecast.dayWindPower;
+            NightTpye.Text = forecast.nightType;
+            NightWindDirection.Text = forecast.nightWindDirection;
+            NightWindPower.Text = forecast.nightWindPower;
+        }
     }
 }
