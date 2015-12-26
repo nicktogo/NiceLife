@@ -134,6 +134,7 @@ namespace NiceLife.Weather.Util
                     forecasts.Add(forecast);
                 }
                 ForecastHelper helper = ForecastHelper.GetHelper();
+                helper.DeleteAllItems();
                 helper.InsertItems(forecasts);
                 return true;
             }

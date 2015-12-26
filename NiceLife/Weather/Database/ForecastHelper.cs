@@ -49,6 +49,14 @@ namespace NiceLife.Weather.Database
             return forecast;
         }
 
+        public bool DeleteAllItems()
+        {
+            using (var statement = conn.Prepare(GetDeleteAllSQL()))
+            {
+                return statement.Step() == SQLiteResult.DONE ? true : false ;
+            }
+        }
+
         public override void DeleteSingleItemById(long id)
         {
             throw new NotImplementedException();
@@ -84,12 +92,11 @@ namespace NiceLife.Weather.Database
             }
         }
 
-        public List<Forecast> SelectGroupItems(DateTime beginDateTime)
+        public List<Forecast> SelectGroupItems()
         {
             List<Forecast> items = new List<Forecast>();
             using (var statement = conn.Prepare(GetSelectAllSQL()))
             {
-                statement.Bind("@BeginDateTime", DateTimeSQLite(beginDateTime));
                 while (statement.Step() == SQLiteResult.ROW)
                 {
                     Forecast f = CreateItem(statement);
@@ -128,12 +135,17 @@ namespace NiceLife.Weather.Database
 
         protected override string GetSelectAllSQL()
         {
-            return "SELECT * FROM Forecast WHERE Date >= @BeginDateTime";
+            return "SELECT * FROM Forecast";
         }
 
         protected override string GetSelectSQL()
         {
             throw new NotImplementedException();
+        }
+
+        protected string GetDeleteAllSQL()
+        {
+            return "DELETE FROM Forecast";
         }
 
         private String DateTimeSQLite(DateTime dateTime)

@@ -277,7 +277,7 @@ http://static.etouch.cn/apps/weather/alarm_icon-1/mai_yellow-1.png
             ForecastHelper helper = ForecastHelper.GetHelper();
             helper.InsertItems(forecasts);
 
-            List<Forecast> actual = helper.SelectGroupItems(today);
+            List<Forecast> actual = helper.SelectGroupItems();
             Assert.AreEqual(forecasts.Count, actual.Count);
         }
 
