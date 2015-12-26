@@ -2,6 +2,7 @@
 using NiceLife.Weather.Util;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,6 +27,7 @@ namespace NiceLife.Weather
     {
         private const string FORECAST_SOURCE = "http://wthrcdn.etouch.cn/WeatherApi?city={0}";
         private County selectedCounty;
+        private ObservableCollection<Forecast> forecasts = new ObservableCollection<Forecast>();
         public WeatherInfo()
         {
             this.InitializeComponent();
@@ -35,10 +37,31 @@ namespace NiceLife.Weather
             base.OnNavigatedTo(e);
             long CountyId = (long)e.Parameter;
             selectedCounty = CountyHelper.GetHelper().SelectSingleItemById(CountyId);
+            GetForecast();
+        }
+
+        private void GetForecast()
+        {
+            ForecastHelper helper = ForecastHelper.GetHelper();
+            List<Forecast> items = helper.SelectGroupItems();
+            if (items.Count > 0)
+            {
+                foreach (Forecast f in items)
+                {
+                    forecasts.Add(f);
+                }
+            }
+            else
+            {
+                GetFromServer();
+            }
+        }
+
+        private void GetFromServer()
+        {
 
             string address = String.Format(FORECAST_SOURCE, selectedCounty.Name);
             HttpUtil.SendHttpRequest(address, new Listener(this));
-            
         }
 
         private class Listener : HttpCallbackListener
@@ -53,9 +76,15 @@ namespace NiceLife.Weather
                 throw e;
             }
 
-            public void OnFinished(string response)
+            public async void OnFinished(string response)
             {
-                DataUtility.handleWeatherResponse(response, page.selectedCounty.Id);
+                if (DataUtility.handleWeatherResponse(response, page.selectedCounty.Id))
+                {
+                    await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        page.GetForecast();
+                    });
+                }
             }
         }
     }
