@@ -100,20 +100,24 @@ namespace NiceLife.Weather.Util
                 XmlNodeList elements = doc.GetElementsByTagName("weather");
 
                 List<Forecast> forecasts = new List<Forecast>();
-                DateTime today = DateTime.Now;
+                DateTime now = DateTime.Now;
+                string yesterday = doc.GetElementsByTagName("date_1").Item(0).InnerText;
+                string actualYesterday = now.AddDays(-1).Day.ToString();
+                DateTime firstDate = yesterday.Contains(actualYesterday) ? now : now.AddDays(-1);
+
                 foreach (XmlElement element in elements)
                 {
                     Forecast forecast = new Forecast();
                     forecast.countyId = CountyId;
-                    forecast.date = today;
-                    today = today.AddDays(1);
+                    forecast.date = firstDate;
+                    firstDate = firstDate.AddDays(1);
 
                     XmlNodeList tempList;
                     tempList = element.GetElementsByTagName(TAG_HIGH);
-                    forecast.hight = tempList.Item(0).InnerText.Split(@' ')[1];
+                    forecast.hight = tempList.Item(0).InnerText.Split(' ')[1];
 
                     tempList = element.GetElementsByTagName(TAG_LOW);
-                    forecast.low = tempList.Item(0).InnerText.Split(@' ')[1];
+                    forecast.low = tempList.Item(0).InnerText.Split(' ')[1];
 
                     tempList = element.GetElementsByTagName(TAG_TYPE);
                     forecast.dayType = tempList.Item(0).InnerText;
