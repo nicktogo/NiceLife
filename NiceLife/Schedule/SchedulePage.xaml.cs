@@ -26,5 +26,20 @@ namespace NiceLife
         {
             this.InitializeComponent();
         }
+
+        private void select_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void set_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
