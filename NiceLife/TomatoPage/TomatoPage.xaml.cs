@@ -29,7 +29,19 @@ namespace NiceLife
 
         private void TodayTasks_Click(object sender, RoutedEventArgs e)
         {
-            //MainFrame.Navigate(typeof(Page));
+            this.Frame.Navigate(typeof(TodayTasksPage));
+        }
+        private void AllTasks_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AllTasksPage));
+        }
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StatisticsPage));
+        }
+        private void History_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HistoryPage));
         }
     }
 }
