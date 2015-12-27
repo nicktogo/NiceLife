@@ -27,14 +27,18 @@ namespace NiceLife
             this.InitializeComponent();
         }
 
-        private void select_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            
+            ScheduleFrame.Navigate(typeof(Add));
+        }
+
+       
+
+        private void select_Click(object sender, RoutedEventArgs e)
+        {
+            ScheduleFrame.Navigate(typeof(Select));
         }
 
         private void set_Click(object sender, RoutedEventArgs e)
@@ -43,3 +47,4 @@ namespace NiceLife
         }
     }
 }
+
