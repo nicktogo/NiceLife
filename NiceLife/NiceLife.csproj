@@ -231,10 +231,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Weather\WeatherInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Weather\WeatherPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
