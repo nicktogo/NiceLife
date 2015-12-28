@@ -22,7 +22,11 @@ namespace NiceLife.Weather.Util
                     httpResponse = await httpClient.GetAsync(uri);
                     httpResponse.EnsureSuccessStatusCode();
                     var contentType = httpResponse.Content.Headers.ContentType;
-                    if (String.IsNullOrEmpty(contentType.CharSet))
+                    if (contentType == null)
+                    {
+                        httpResponse.Content.Headers.Add("Content-Type", "text/xml;CharSet=utf-8");
+                    }
+                    else if (String.IsNullOrEmpty(contentType.CharSet))
                     {
                         contentType.CharSet = "utf-8";
                     }
