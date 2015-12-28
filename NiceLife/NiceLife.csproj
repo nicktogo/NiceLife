@@ -135,20 +135,13 @@
     <Compile Include="Weather\Database\CityHelper.cs" />
     <Compile Include="Weather\Database\County.cs" />
     <Compile Include="Weather\Database\CountyHelper.cs" />
-    <Compile Include="Weather\Database\ForecastHelper.cs" />
     <Compile Include="Weather\Database\Province.cs" />
     <Compile Include="Weather\Database\ProvinceHelper.cs" />
     <Compile Include="Weather\Database\CreateDatabase.cs" />
     <Compile Include="Weather\Database\DbHelper.cs" />
-    <Compile Include="Weather\Database\Forecast.cs" />
-    <Compile Include="Weather\Database\RealtimeDetail.cs" />
-    <Compile Include="Weather\Database\RealTimeDetailHelper.cs" />
     <Compile Include="Weather\Util\DataUtility.cs" />
     <Compile Include="Weather\Util\HttpCallbackListener.cs" />
     <Compile Include="Weather\Util\HttpUtil.cs" />
-    <Compile Include="Weather\WeatherInfo.xaml.cs">
-      <DependentUpon>WeatherInfo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Weather\WeatherPage.xaml.cs">
       <DependentUpon>WeatherPage.xaml</DependentUpon>
     </Compile>
@@ -207,14 +200,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TomatoPage\TomatoPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Weather\WeatherInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Weather\WeatherInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
