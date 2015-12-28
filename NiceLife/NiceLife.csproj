@@ -113,8 +113,17 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule\Add.xaml.cs">
+      <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Schedule\Call.cs" />
+    <Compile Include="Schedule\ColorLable.cs" />
+    <Compile Include="Schedule\Plan.cs" />
     <Compile Include="Schedule\SchedulePage.xaml.cs">
       <DependentUpon>SchedulePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Schedule\Select.xaml.cs">
+      <DependentUpon>Select.xaml</DependentUpon>
     </Compile>
     <Compile Include="TomatoPage\AllTasksPage.xaml.cs">
       <DependentUpon>AllTasksPage.xaml</DependentUpon>
@@ -179,9 +188,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Schedule\Add.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Schedule\SchedulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Schedule\Select.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="TomatoPage\AllTasksPage.xaml">
       <SubType>Designer</SubType>
