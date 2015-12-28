@@ -4,11 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NiceLife.Weather.Database;
+using System.Xml;
 
 namespace NiceLife.Weather.Util
 {
     public class DataUtility
     {
+        private const string TAG_CITY = "city";
+        private const string TAG_UPDATE_TIME = "updatetime";
+        private const string TAG_TEMP = "wendu";
+        private const string TAG_HUMIDITY = "shidu";
+        private const string TAG_SUNRISE = "sunrise_1";
+        private const string TAG_SUNSET = "sunset_1";
+        private const string TAG_WEATHER = "weather";
+        private const string TAG_DATE = "date";
+        private const string TAG_HIGH = "high";
+        private const string TAG_LOW = "low";
+        private const string TAG_TYPE = "type";
+        private const string TAG_WIND_DIRECTION = "fengxiang";
+        private const string TAG_WIND_POWER = "fengli";
+        private const string TAG_YESTERDAY = "date_1";
+
         public static bool handleProvincesResponse(string response)
         {
             if (!String.IsNullOrEmpty(response))
@@ -78,6 +94,91 @@ namespace NiceLife.Weather.Util
                     CountyHelper helper = CountyHelper.GetHelper();
                     helper.InsertItems(lcounties);
                 }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool handleWeatherResponse(string response, long CountyId)
+        {
+            if (!String.IsNullOrEmpty(response))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(response);
+
+                // get realtime detail
+                RealtimeDetail r = new RealtimeDetail();
+                r.CountyId = CountyId;
+                XmlNodeList detailTemp;
+
+                detailTemp = doc.GetElementsByTagName(TAG_CITY);
+                r.CountyName = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_UPDATE_TIME);
+                r.UpdateTime = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_TEMP);
+                r.RealtimeTemp = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_WIND_POWER);
+                r.RealtimeWindPower = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_HUMIDITY);
+                r.Humidity = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_WIND_DIRECTION);
+                r.RealtimeWindDirection = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_SUNRISE);
+                r.Sunrise = detailTemp.Item(0).InnerText;
+
+                detailTemp = doc.GetElementsByTagName(TAG_SUNSET);
+                r.Sunset = detailTemp.Item(0).InnerText;
+
+                RealTimeDetailHelper rHelper = RealTimeDetailHelper.GetHelper();
+                rHelper.InsertSingleItem(r);
+
+
+                // get forecast
+                XmlNodeList elements = doc.GetElementsByTagName(TAG_WEATHER);
+
+                List<Forecast> forecasts = new List<Forecast>();
+                DateTime now = DateTime.Now;
+                string yesterday = doc.GetElementsByTagName(TAG_YESTERDAY).Item(0).InnerText;
+                string actualYesterday = now.AddDays(-1).Day.ToString();
+                DateTime firstDate = yesterday.Contains(actualYesterday) ? now : now.AddDays(-1);
+
+                foreach (XmlElement element in elements)
+                {
+                    Forecast forecast = new Forecast();
+                    forecast.countyId = CountyId;
+                    forecast.date = firstDate;
+                    firstDate = firstDate.AddDays(1);
+
+                    XmlNodeList tempList;
+                    tempList = element.GetElementsByTagName(TAG_HIGH);
+                    forecast.hight = tempList.Item(0).InnerText.Split(' ')[1];
+
+                    tempList = element.GetElementsByTagName(TAG_LOW);
+                    forecast.low = tempList.Item(0).InnerText.Split(' ')[1];
+
+                    tempList = element.GetElementsByTagName(TAG_TYPE);
+                    forecast.dayType = tempList.Item(0).InnerText;
+                    forecast.nightType = tempList.Item(1).InnerText;
+
+                    tempList = element.GetElementsByTagName(TAG_WIND_DIRECTION);
+                    forecast.dayWindDirection = tempList.Item(0).InnerText;
+                    forecast.nightWindDirection = tempList.Item(1).InnerText;
+
+                    tempList = element.GetElementsByTagName(TAG_WIND_POWER);
+                    forecast.dayWindPower = tempList.Item(0).InnerText;
+                    forecast.nightWindPower = tempList.Item(1).InnerText;
+
+                    forecasts.Add(forecast);
+                }
+                ForecastHelper helper = ForecastHelper.GetHelper();
+                helper.DeleteAllItems();
+                helper.InsertItems(forecasts);
                 return true;
             }
             return false;

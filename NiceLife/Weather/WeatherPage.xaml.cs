@@ -174,22 +174,32 @@ namespace NiceLife
         private void Province_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = Province.SelectedIndex;
-            selectedProvince = OProvinces[index];
-            GetCities();
+            if (index != -1)
+            {
+                selectedProvince = OProvinces[index];
+                GetCities();
+            }
         }
 
         private void City_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = City.SelectedIndex;
-            selectedCity = OCities[index];
-            GetCounties();
+            if (index != -1)
+            {
+                selectedCity = OCities[index];
+                GetCounties(); 
+            }
         }
 
         private void County_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = County.SelectedIndex;
-            County selectedCounty = OCounties[index];
-            // show the weather
+            if (index != -1)
+            {
+                County selectedCounty = OCounties[index];
+                // show the weather
+                Frame.Navigate(typeof(Weather.WeatherInfo), selectedCounty.Id); 
+            }
         }
     }
 }
