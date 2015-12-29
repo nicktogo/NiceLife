@@ -43,5 +43,9 @@ namespace NiceLife
         {
             this.Frame.Navigate(typeof(HistoryPage));
         }
+        private void AddNewTask_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

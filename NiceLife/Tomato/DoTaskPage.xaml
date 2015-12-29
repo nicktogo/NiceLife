@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="NiceLife.DoTaskPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NiceLife.Tomato"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="OrangeRed">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="119*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="50" Text="Title" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
+        <TextBlock FontSize="30" Text="Description" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
+
+    </Grid>
+</Page>
