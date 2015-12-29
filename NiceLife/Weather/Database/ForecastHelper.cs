@@ -49,10 +49,11 @@ namespace NiceLife.Weather.Database
             return forecast;
         }
 
-        public bool DeleteAllItems()
+        public bool DeleteAllItems(long CountyId)
         {
             using (var statement = conn.Prepare(GetDeleteAllSQL()))
             {
+                statement.Bind("@CountyId", CountyId);
                 return statement.Step() == SQLiteResult.DONE ? true : false ;
             }
         }
@@ -141,7 +142,7 @@ namespace NiceLife.Weather.Database
 
         protected string GetDeleteAllSQL()
         {
-            return "DELETE FROM Forecast";
+            return "DELETE FROM Forecast WHERE CountyId = @CountyId";
         }
 
         private String DateTimeSQLite(DateTime dateTime)
