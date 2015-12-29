@@ -125,25 +125,29 @@
     <Compile Include="Schedule\Select.xaml.cs">
       <DependentUpon>Select.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\AllTasksPage.xaml.cs">
+    <Compile Include="Tomato\AllTasksPage.xaml.cs">
       <DependentUpon>AllTasksPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\DoTaskPage.xaml.cs">
+    <Compile Include="Tomato\Database\CreateDatabase.cs" />
+    <Compile Include="Tomato\Database\DBHelper.cs" />
+    <Compile Include="Tomato\Database\Task.cs" />
+    <Compile Include="Tomato\Database\TaskHelper.cs" />
+    <Compile Include="Tomato\DoTaskPage.xaml.cs">
       <DependentUpon>DoTaskPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\HistoryPage.xaml.cs">
+    <Compile Include="Tomato\HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\StatisticsPage.xaml.cs">
+    <Compile Include="Tomato\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\TodayTasksPage.xaml.cs">
+    <Compile Include="Tomato\TodayTasksPage.xaml.cs">
       <DependentUpon>TodayTasksPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\TomatoPage.xaml.cs">
+    <Compile Include="Tomato\TomatoPage.xaml.cs">
       <DependentUpon>TomatoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TomatoPage\ViewTasksPage.xaml.cs">
+    <Compile Include="Tomato\ViewTasksPage.xaml.cs">
       <DependentUpon>ViewTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Weather\Database\City.cs" />
@@ -213,31 +217,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TomatoPage\AllTasksPage.xaml">
+    <Page Include="Tomato\AllTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage\DoTaskPage.xaml">
+    <Page Include="Tomato\DoTaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage\HistoryPage.xaml">
+    <Page Include="Tomato\HistoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage\StatisticsPage.xaml">
+    <Page Include="Tomato\StatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage\TodayTasksPage.xaml">
+    <Page Include="Tomato\TodayTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage\TomatoPage.xaml">
+    <Page Include="Tomato\TomatoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TomatoPage\ViewTasksPage.xaml">
+    <Page Include="Tomato\ViewTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
