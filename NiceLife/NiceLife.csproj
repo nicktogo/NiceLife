@@ -128,6 +128,9 @@
     <Compile Include="TomatoPage\AllTasksPage.xaml.cs">
       <DependentUpon>AllTasksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TomatoPage\DoTaskPage.xaml.cs">
+      <DependentUpon>DoTaskPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TomatoPage\HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,9 @@
     </Compile>
     <Compile Include="TomatoPage\TomatoPage.xaml.cs">
       <DependentUpon>TomatoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TomatoPage\ViewTasksPage.xaml.cs">
+      <DependentUpon>ViewTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Weather\Database\City.cs" />
     <Compile Include="Weather\Database\CityHelper.cs" />
@@ -211,6 +217,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TomatoPage\DoTaskPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TomatoPage\HistoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +234,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TomatoPage\TomatoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TomatoPage\ViewTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Weather\WeatherInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
