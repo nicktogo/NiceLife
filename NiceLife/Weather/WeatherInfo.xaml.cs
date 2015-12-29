@@ -37,7 +37,10 @@ namespace NiceLife.Weather
         {
             base.OnNavigatedTo(e);
             long CountyId = (long)e.Parameter;
-            selectedCounty = CountyHelper.GetHelper().SelectSingleItemById(CountyId);
+            CountyHelper helper = CountyHelper.GetHelper();
+            selectedCounty = helper.SelectSingleItemById(CountyId);
+            selectedCounty.CountySelect = County.COUNT_SELECTED;
+            helper.UpdateSingleItem(selectedCounty);
             GetForecast();
         }
 

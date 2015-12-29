@@ -8,6 +8,9 @@ namespace NiceLife.Weather.Database
 {
     public class County
     {
+        public const long COUNT_UNSELECTED = 0;
+        public const long COUNT_SELECTED = 1;
+
         public static String TABLE_NAME = "County";
 
         public long Id { get; set; }
