@@ -29,7 +29,6 @@ namespace NiceLife.Tomato.Database
         {
             Task task = new Task();
 
-            task.Id = (long)statement[0];
             task.Title = (String)statement[1];
             task.Description = (String)statement[2];
 
@@ -39,8 +38,8 @@ namespace NiceLife.Tomato.Database
 
             task.Type = (String)statement[4];
             task.Status = (String)statement[5];
-            task.Total_Tomato = (long)statement[6];
-            task.Done_Tomato = (long)statement[7];
+            task.TotalTomato = (long)statement[6];
+            task.DoneTomato = (long)statement[7];
 
             return task;
         }
@@ -75,8 +74,8 @@ namespace NiceLife.Tomato.Database
                 statement.Bind("@Date", DateTimeSQLite(item.Date));
                 statement.Bind("@Type", item.Type);
                 statement.Bind("@Status", item.Status);
-                statement.Bind("@Total_Tomato", item.Total_Tomato);
-                statement.Bind("@Done_Tomato", item.Done_Tomato);
+                statement.Bind("@TotalTomato", item.TotalTomato);
+                statement.Bind("@DoneTomato", item.DoneTomato);
 
                 statement.Step();
             }
@@ -119,8 +118,8 @@ namespace NiceLife.Tomato.Database
         protected override string GetInsertSQL()
         {
             return @"INSERT INTO Task 
-                (Title, Description, Date, Type, Status, Total_Tomato, Done_Tomato) 
-                VALUES(@Title, @Description, @Date, @Type, @Status, @Total_Tomato, @Done_Tomato)";
+                (Title, Description, Date, Type, Status, TotalTomato, DoneTomato) 
+                VALUES(@Title, @Description, @Date, @Type, @Status, @TotalTomato, @DoneTomato)";
         }
 
         protected override string GetSelectAllSQL()

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NiceLife.Tomato.Database;
+using SQLitePCL;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -43,9 +45,18 @@ namespace NiceLife
         {
             this.Frame.Navigate(typeof(HistoryPage));
         }
-        private void AddNewTask_Click(object sender, RoutedEventArgs e)
+        private void NewTaskConfirm_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
+            Task task = new Task();
+            task.Title = tb_Title.Text;
+            task.Description = tb_Description.Text;
+            task.Date = dp_Date.Date.DateTime;
+            task.Type = "Normal";
+            task.Status = "Undone";
+            task.TotalTomato = cb_Tomato.SelectedIndex+1;
+            task.DoneTomato = 0;
+            TaskHelper.GetHelper().InsertSingleItem(task);
+            fo_NewTask.Hide();
+        }        
     }
 }
