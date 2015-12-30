@@ -1,4 +1,5 @@
-﻿using NiceLife.Weather.Database;
+﻿using NiceLife.Weather;
+using NiceLife.Weather.Database;
 using NiceLife.Weather.Util;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,13 @@ namespace NiceLife
         public const int TYPE_PROVINCE = 0x00;
         public const int TYPE_CITY = 0x01;
         public const int TYPE_COUNTY = 0x02;
+        public const int TYPE_FORECAST = 0x03;
 
 
 
         private Province selectedProvince;
         private City selectedCity;
+        private County selectedCounty;
 
         ObservableCollection<Province> OProvinces = new ObservableCollection<Province>();
         ObservableCollection<City> OCities = new ObservableCollection<City>();
@@ -98,28 +101,36 @@ namespace NiceLife
             }
         }
 
-        private void GetFromServer(string Code, int Type)
+        private void GetFromServer(string code, int type)
         {
-            string address;
-            if (Code == null)
+            string address = null;
+            switch (type)
             {
-                address = HttpUtil.PROVINCE_SOURCE;
+                case TYPE_PROVINCE:
+                    address = HttpUtil.PROVINCE_SOURCE;
+                    break;
+                case TYPE_COUNTY:
+                case TYPE_CITY:
+                    address = String.Format(HttpUtil.CITY_COUNTY_SOURCE, code);
+                    break;
+                case TYPE_FORECAST:
+                    address = String.Format(HttpUtil.FORECAST_SOURCE, code);
+                    break;
             }
-            else
+            if (address != null)
             {
-                address = String.Format(HttpUtil.CITY_COUNTY_SOURCE, Code);
+                HttpUtil.SendHttpRequest(address, new Listener(this, type));
             }
-            HttpUtil.SendHttpRequest(address, new Listener(this, Type));
         }
 
         private class Listener : HttpCallbackListener
         {
             private WeatherPage page;
-            private int Type;
-            public Listener(Page page, int Type)
+            private int type;
+            public Listener(Page page, int type)
             {
                 this.page = (WeatherPage)page;
-                this.Type = Type;
+                this.type = type;
             }
             public void OnError(Exception e)
             {
@@ -129,7 +140,7 @@ namespace NiceLife
             public async void OnFinished(string response)
             {
                 bool result = false;
-                switch (Type)
+                switch (type)
                 {
                     case TYPE_PROVINCE:
                         result = DataUtility.handleProvincesResponse(response);
@@ -140,11 +151,14 @@ namespace NiceLife
                     case TYPE_CITY:
                         result = DataUtility.handleCitiesResponse(response, page.selectedProvince.Id);
                         break;
+                    case TYPE_FORECAST:
+                        result = DataUtility.handleForecastResponse(response, page.selectedCounty.Id);
+                        break;
                 }
                 if (result)
                 {
                     // close progress dialog
-                    switch (Type)
+                    switch (type)
                     {
                         case TYPE_PROVINCE:
                             await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
@@ -162,6 +176,12 @@ namespace NiceLife
                             await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                             {
                                 page.GetCities();
+                            });
+                            break;
+                        case TYPE_FORECAST:
+                            await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                            {
+                                page.Frame.Navigate(typeof(WeatherFlipView));
                             });
                             break;
                     }
@@ -195,9 +215,12 @@ namespace NiceLife
             int index = County.SelectedIndex;
             if (index != -1)
             {
-                County selectedCounty = OCounties[index];
-                // show the weather
-                Frame.Navigate(typeof(Weather.WeatherInfo), selectedCounty.Id); 
+                selectedCounty = OCounties[index];
+                selectedCounty.CountySelect = Weather.Database.County.COUNT_SELECTED;
+                CountyHelper countyHelper = CountyHelper.GetHelper();
+                countyHelper.UpdateSingleItem(selectedCounty);
+                // get forecast for the selected county
+                GetFromServer(selectedCounty.Name, TYPE_FORECAST);
             }
         }
     }

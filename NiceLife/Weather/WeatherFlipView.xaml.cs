@@ -81,7 +81,7 @@ namespace NiceLife.Weather
 
             public async void OnFinished(string response)
             {
-                if (DataUtility.handleWeatherResponse(response, countyId))
+                if (DataUtility.handleForecastResponse(response, countyId))
                 {
                     await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {

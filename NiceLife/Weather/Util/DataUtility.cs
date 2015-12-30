@@ -99,7 +99,7 @@ namespace NiceLife.Weather.Util
             return false;
         }
 
-        public static bool handleWeatherResponse(string response, long CountyId)
+        public static bool handleForecastResponse(string response, long CountyId)
         {
             if (!String.IsNullOrEmpty(response))
             {
