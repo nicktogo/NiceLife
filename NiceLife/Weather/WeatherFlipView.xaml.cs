@@ -35,7 +35,6 @@ namespace NiceLife.Weather
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            GetWeathers();
         }
 
         private void GetWeathers()
@@ -140,6 +139,8 @@ namespace NiceLife.Weather
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            GetWeathers();
+
             currentFlipViewContainer = WeatherFlip.ItemContainerGenerator.ContainerFromItem(WeatherFlip.SelectedItem);
             if (currentFlipViewContainer != null)
             {
