@@ -28,7 +28,7 @@ namespace NiceLife.Tomato
 
         public abstract void UpdateSingleItem(T item);
 
-        public abstract List<T> SelectGroupItems(long foreignId);
+        public abstract List<T> SelectGroupItemsByDate(DateTime date);
 
         protected abstract String GetSelectAllSQL();
 

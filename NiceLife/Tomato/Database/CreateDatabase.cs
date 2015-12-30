@@ -16,9 +16,9 @@ namespace NiceLife.Tomato.Database
             Description text,
             Date datetime,
             Type text,
-            Status text，
-            Total_Tomato integer,
-            Done_Tomato integer
+            Status text,
+            TotalTomato integer,
+            DoneTomato integer
             );";
 
         public static void LoadDatabase()
