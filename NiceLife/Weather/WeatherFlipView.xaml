@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:data="using:NiceLife.Weather.Database">
+    xmlns:data="using:NiceLife.Weather.Database"
+    Loaded="Page_Loaded">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}">
@@ -25,9 +26,9 @@
                             <TextBlock Text="{x:Bind realtimeDetail.RealtimeTemp}" VerticalAlignment="Bottom" />
                         </Grid>
 
-                        <GridView Grid.Row="1" ItemsSource="{x:Bind forecasts}" Margin="10"
-                                  HorizontalAlignment="Center"
-                                  IsItemClickEnabled="True" ItemClick="GridView_ItemClick">
+                        <GridView x:Name="ForecastGrid" Grid.Row="1" ItemsSource="{x:Bind forecasts}" Margin="10"
+                                  HorizontalAlignment="Center" SelectionMode="Single"
+                                  SelectionChanged="ForecastGrid_SelectionChanged">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="data:Forecast">
                                     <StackPanel HorizontalAlignment="Center" Margin="10">
@@ -42,7 +43,7 @@
                             </GridView.ItemTemplate>
                         </GridView>
 
-                        <Grid Grid.Row="2" Margin="10" HorizontalAlignment="Center">
+                        <Grid Grid.Row="2" Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />

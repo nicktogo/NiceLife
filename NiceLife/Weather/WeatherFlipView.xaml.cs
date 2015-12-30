@@ -26,6 +26,7 @@ namespace NiceLife.Weather
     public sealed partial class WeatherFlipView : Page
     {
         private ObservableCollection<WeatherModel> weathers = new ObservableCollection<WeatherModel>();
+        private DependencyObject currentFlipViewContainer;
         public WeatherFlipView()
         {
             this.InitializeComponent();
@@ -91,51 +92,60 @@ namespace NiceLife.Weather
             }
         }
 
-        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        private T FindElementByName<T>(DependencyObject parent, string name) where T : FrameworkElement
         {
-            var forecast = (Forecast)e.ClickedItem;
-            var container = WeatherFlip.ItemContainerGenerator.ContainerFromItem(WeatherFlip.SelectedItem);
-            var children = GetAllChildren(container);
-
-            TextBlock textBlock;
-
-            textBlock = GetTextBlock(children, "DayType");
-            textBlock.Text = forecast.dayType;
-
-            textBlock = GetTextBlock(children, "DayWindDirection");
-            textBlock.Text = forecast.dayWindDirection;
-
-            textBlock = GetTextBlock(children, "DayWindPower");
-            textBlock.Text = forecast.dayWindPower;
-
-            textBlock = GetTextBlock(children, "NightType");
-            textBlock.Text = forecast.nightType;
-
-            textBlock = GetTextBlock(children, "NightWindDirection");
-            textBlock.Text = forecast.nightWindDirection;
-
-            textBlock = GetTextBlock(children, "NightWindPower");
-            textBlock.Text = forecast.nightWindPower;
-        }
-
-        private List<TextBlock> GetAllChildren(DependencyObject parent)
-        {
-            var _List = new List<TextBlock>();
+            T element = null;
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {
-                var _Child = VisualTreeHelper.GetChild(parent, i);
-                if (_Child is TextBlock)
+                FrameworkElement tempElement = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                if (tempElement == null)
                 {
-                    _List.Add(_Child as TextBlock);
+                    continue;
                 }
-                _List.AddRange(GetAllChildren(_Child));
+                if (tempElement is T && tempElement.Name.Equals(name))
+                {
+                    return (T)tempElement;
+                }
+                element = FindElementByName<T>(tempElement, name);
+                if (element != null)
+                {
+                    break;
+                }
             }
-            return _List;
+            return element;
         }
 
-        private TextBlock GetTextBlock(List<TextBlock> children, string name)
+        private void ForecastGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            return children.OfType<TextBlock>().First(x => x.Name.Equals(name));
+            foreach (Forecast forecast in e.AddedItems)
+            {
+                if (currentFlipViewContainer != null)
+                {
+                    var DayType = FindElementByName<TextBlock>(currentFlipViewContainer, "DayType");
+                    DayType.Text = forecast.dayType;
+                    var DayWindDirection = FindElementByName<TextBlock>(currentFlipViewContainer, "DayWindDirection");
+                    DayWindDirection.Text = forecast.dayWindDirection;
+                    var DayWindPower = FindElementByName<TextBlock>(currentFlipViewContainer, "DayWindPower");
+                    DayWindPower.Text = forecast.dayWindPower;
+                    var NightType = FindElementByName<TextBlock>(currentFlipViewContainer, "NightType");
+                    NightType.Text = forecast.nightType;
+                    var NightWindDirection = FindElementByName<TextBlock>(currentFlipViewContainer, "NightWindDirection");
+                    NightWindDirection.Text = forecast.nightWindDirection;
+                    var NightWindPower = FindElementByName<TextBlock>(currentFlipViewContainer, "NightWindPower");
+                    NightWindPower.Text = forecast.nightWindPower;
+                }
+                break;
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            currentFlipViewContainer = WeatherFlip.ItemContainerGenerator.ContainerFromItem(WeatherFlip.SelectedItem);
+            if (currentFlipViewContainer != null)
+            {
+                var ForecastGrid = FindElementByName<GridView>(currentFlipViewContainer, "ForecastGrid");
+                ForecastGrid.SelectedIndex = 0;
+            }
         }
     }
 }
