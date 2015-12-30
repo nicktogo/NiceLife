@@ -93,7 +93,49 @@ namespace NiceLife.Weather
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var forecast = (Forecast)e.ClickedItem;
+            var container = WeatherFlip.ItemContainerGenerator.ContainerFromItem(WeatherFlip.SelectedItem);
+            var children = GetAllChildren(container);
 
+            TextBlock textBlock;
+
+            textBlock = GetTextBlock(children, "DayType");
+            textBlock.Text = forecast.dayType;
+
+            textBlock = GetTextBlock(children, "DayWindDirection");
+            textBlock.Text = forecast.dayWindDirection;
+
+            textBlock = GetTextBlock(children, "DayWindPower");
+            textBlock.Text = forecast.dayWindPower;
+
+            textBlock = GetTextBlock(children, "NightType");
+            textBlock.Text = forecast.nightType;
+
+            textBlock = GetTextBlock(children, "NightWindDirection");
+            textBlock.Text = forecast.nightWindDirection;
+
+            textBlock = GetTextBlock(children, "NightWindPower");
+            textBlock.Text = forecast.nightWindPower;
+        }
+
+        private List<TextBlock> GetAllChildren(DependencyObject parent)
+        {
+            var _List = new List<TextBlock>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var _Child = VisualTreeHelper.GetChild(parent, i);
+                if (_Child is TextBlock)
+                {
+                    _List.Add(_Child as TextBlock);
+                }
+                _List.AddRange(GetAllChildren(_Child));
+            }
+            return _List;
+        }
+
+        private TextBlock GetTextBlock(List<TextBlock> children, string name)
+        {
+            return children.OfType<TextBlock>().First(x => x.Name.Equals(name));
         }
     }
 }
