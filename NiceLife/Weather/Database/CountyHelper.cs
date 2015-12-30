@@ -77,6 +77,20 @@ namespace NiceLife.Weather.Database
             return items;
         }
 
+        public List<County> GetSelectedItems()
+        {
+            List<County> items = new List<County>();
+            using (var statement = conn.Prepare(GetSelectedSQL()))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    County county = CreateItem(statement);
+                    items.Add(county);
+                }
+            }
+            return items;
+        }
+
         public override County SelectSingleItemById(long id)
         {
             County county = null;
@@ -119,6 +133,11 @@ namespace NiceLife.Weather.Database
         protected override string GetSelectSQL()
         {
             return "SELECT * FROM County WHERE Id = @Id";
+        }
+
+        protected string GetSelectedSQL()
+        {
+            return "SELECT * FROM County WHERE CountySelect = 1";
         }
 
         protected string GetUpdateCountySelectSQL()
