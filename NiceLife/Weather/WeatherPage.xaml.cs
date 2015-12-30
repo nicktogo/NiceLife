@@ -29,8 +29,7 @@ namespace NiceLife
         public const int TYPE_CITY = 0x01;
         public const int TYPE_COUNTY = 0x02;
 
-        private const string PROVINCE_SOURCE = "http://www.weather.com.cn/data/list3/city.xml";
-        private const string CITY_COUNTY_SOURCE = "http://www.weather.com.cn/data/list3/city{0}.xml";
+
 
         private Province selectedProvince;
         private City selectedCity;
@@ -104,11 +103,11 @@ namespace NiceLife
             string address;
             if (Code == null)
             {
-                address = PROVINCE_SOURCE;
+                address = HttpUtil.PROVINCE_SOURCE;
             }
             else
             {
-                address = String.Format(CITY_COUNTY_SOURCE, Code);
+                address = String.Format(HttpUtil.CITY_COUNTY_SOURCE, Code);
             }
             HttpUtil.SendHttpRequest(address, new Listener(this, Type));
         }
