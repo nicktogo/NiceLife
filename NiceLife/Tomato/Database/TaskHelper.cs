@@ -71,7 +71,7 @@ namespace NiceLife.Tomato.Database
             {
                 statement.Bind("@Title", item.Title);
                 statement.Bind("@Description", item.Description);
-                statement.Bind("@Date", DateTimeSQLite(item.Date));
+                statement.Bind("@Date", item.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 statement.Bind("@Type", item.Type);
                 statement.Bind("@Status", item.Status);
                 statement.Bind("@TotalTomato", item.TotalTomato);
@@ -81,24 +81,20 @@ namespace NiceLife.Tomato.Database
             }
         }
 
-        public override List<Task> SelectGroupItems(long foreignId)
+        public override List<Task> SelectGroupItemsByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            List<Task> items = new List<Task>();
+            using (var statement = conn.Prepare(GetSelectAllSQL()))
+            {
+                statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff")); 
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    Task task = CreateItem(statement);
+                    items.Add(task);
+                }
+            }
+            return items;
         }
-        //public override List<Task> SelectGroupItems(long foreignId)
-        //{
-        //    List<Task> items = new List<Task>();
-        //    using (var statement = conn.Prepare(GetSelectAllSQL()))
-        //    {
-        //        statement.Bind("@CountyId", foreignId);
-        //        while (statement.Step() == SQLiteResult.ROW)
-        //        {
-        //            Task f = CreateItem(statement);
-        //            items.Add(f);
-        //        }
-        //    }
-        //    return items;
-        //}
 
         public override Task SelectSingleItemById(long id)
         {
@@ -124,7 +120,7 @@ namespace NiceLife.Tomato.Database
 
         protected override string GetSelectAllSQL()
         {
-            return "SELECT * FROM Task WHERE Date = @Date";
+            return "SELECT * FROM Task WHERE Date Between date(@Date, 'start of day') and datetime(@Date, '+1 day', 'start of day')";
         }
 
         protected override string GetSelectSQL()
@@ -135,12 +131,6 @@ namespace NiceLife.Tomato.Database
         protected string GetDeleteAllSQL()
         {
             return "DELETE FROM Task";
-        }
-
-        private String DateTimeSQLite(DateTime dateTime)
-        {
-            String dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
-            return string.Format(dateTimeFormat, dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond);
         }
 
     }

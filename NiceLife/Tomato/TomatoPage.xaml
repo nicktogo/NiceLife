@@ -9,8 +9,9 @@
 
     <Grid Background="OrangeRed">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"></RowDefinition>
-            <RowDefinition Height="119*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -71,11 +72,23 @@
             </Button>
         </Grid>
 
-        <Button Click="TodayTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="0" Content="Today Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <Button Click="AllTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="1" Content="All Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <Button Click="Statistics_Click" FontSize="36" Grid.Row="1" Grid.Column="2" Content="Statistics &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <Button Click="History_Click" FontSize="36" Grid.Row="1" Grid.Column="3" Content="History &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <GridView x:Name="gridView" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
+        <Button Click="TodayTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="0" Content="Today Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="AllTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="1" Content="All Tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="Statistics_Click" FontSize="36" Grid.Row="1" Grid.Column="2" Content="Statistics &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="History_Click" FontSize="36" Grid.Row="1" Grid.Column="3" Content="History &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+
+        <Grid x:Name="g_TodayTasksContent" Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
     </Grid>
 
