@@ -128,6 +128,7 @@
     <Compile Include="Tomato\AllTasksPage.xaml.cs">
       <DependentUpon>AllTasksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tomato\CountDown.cs" />
     <Compile Include="Tomato\Database\CreateDatabase.cs" />
     <Compile Include="Tomato\Database\DBHelper.cs" />
     <Compile Include="Tomato\Database\Task.cs" />
@@ -140,9 +141,6 @@
     </Compile>
     <Compile Include="Tomato\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tomato\TodayTasksPage.xaml.cs">
-      <DependentUpon>TodayTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tomato\TomatoPage.xaml.cs">
       <DependentUpon>TomatoPage.xaml</DependentUpon>
@@ -221,6 +219,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tomato\CountDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Tomato\DoTaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,10 +232,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tomato\StatisticsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tomato\TodayTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
