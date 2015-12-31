@@ -22,5 +22,7 @@ namespace NiceLife.Weather.Database
         public String nightType { get; set; }
         public String nightWindDirection { get; set; }
         public String nightWindPower { get; set; }
+
+        public String sDate { get; set; }
     }
 }

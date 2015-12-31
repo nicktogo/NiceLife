@@ -35,6 +35,7 @@ namespace NiceLife.Weather.Database
             DateTime date;
             DateTime.TryParse((String)statement[2], out date);
             forecast.date = date;
+            forecast.sDate = DateTimeFormatter(date);
             forecast.hight = (String)statement[3];
             forecast.low = (String)statement[4];
 
@@ -143,6 +144,12 @@ namespace NiceLife.Weather.Database
         protected string GetDeleteAllSQL()
         {
             return "DELETE FROM Forecast WHERE CountyId = @CountyId";
+        }
+
+        public string DateTimeFormatter(DateTime dateTime)
+        {
+            String format = "{0}.{1}";
+            return string.Format(format, dateTime.Month, dateTime.Day);
         }
 
         private String DateTimeSQLite(DateTime dateTime)

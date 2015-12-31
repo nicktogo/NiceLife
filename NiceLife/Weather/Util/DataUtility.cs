@@ -158,9 +158,19 @@ namespace NiceLife.Weather.Util
                     XmlNodeList tempList;
                     tempList = element.GetElementsByTagName(TAG_HIGH);
                     forecast.hight = tempList.Item(0).InnerText.Split(' ')[1];
+                    int index = forecast.hight.IndexOf('℃');
+                    if (index != -1)
+                    {
+                        forecast.hight = forecast.hight.Remove(index);
+                    }
 
                     tempList = element.GetElementsByTagName(TAG_LOW);
                     forecast.low = tempList.Item(0).InnerText.Split(' ')[1];
+                    index = forecast.low.IndexOf('℃');
+                    if (index != -1)
+                    {
+                        forecast.low = forecast.low.Remove(index);
+                    }
 
                     tempList = element.GetElementsByTagName(TAG_TYPE);
                     forecast.dayType = tempList.Item(0).InnerText;
