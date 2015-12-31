@@ -9,8 +9,26 @@
     xmlns:data="using:NiceLife.Weather.Database"
     Loaded="Page_Loaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}"
+    <Page.Resources>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextTrimming" Value="None"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+            <Setter Property="TextLineBounds" Value="Full"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid >
+        <Image Opacity="0.7" Stretch="UniformToFill">
+            <Image.Source>
+                <BitmapImage UriSource="{x:Bind backgroudImageUri}" />
+            </Image.Source>
+        </Image>
+            <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}"
                   SelectionChanged="WeatherFlip_SelectionChanged">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="data:WeatherModel">
@@ -22,18 +40,30 @@
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0" Margin="10">
-                            <StackPanel HorizontalAlignment="Center" Margin="10">
-                                <TextBlock Text="{x:Bind realtimeDetail.CountyName}" 
-                                           Margin="10"
-                                           VerticalAlignment="Top" />
-                                <TextBlock Text="{x:Bind realtimeDetail.UpdateTime}" 
-                                           Margin="10"
-                                           VerticalAlignment="Center" />
-                                <TextBlock Text="{x:Bind realtimeDetail.RealtimeTemp}" 
-                                           Margin="10"
-                                           VerticalAlignment="Bottom" />
-                            </StackPanel>
-                            <AutoSuggestBox x:Name="SearchArea" PlaceholderText="你的城市" 
+                            <RelativePanel HorizontalAlignment="Center" Margin="10">
+                                <TextBlock x:Name="CountyName" Text="{x:Bind realtimeDetail.CountyName}" Style="{StaticResource TextBlockStyle}"
+                                           FontSize="32"
+                                           Margin="8"
+                                           RelativePanel.AlignTopWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                                <RelativePanel RelativePanel.Below="CountyName"
+                                               RelativePanel.AlignHorizontalCenterWith="CountyName">
+                                    <TextBlock x:Name="RealtimeTemp" Text="{x:Bind realtimeDetail.RealtimeTemp}" Style="{StaticResource TextBlockStyle}"
+                                           FontSize="64"
+                                           Margin="0, -16, 8, 8"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                                    <TextBlock Text="°C" Style="{StaticResource TextBlockStyle}"
+                                           FontWeight="Bold"
+                                           Margin="-8, 0, 0, 0"
+                                           RelativePanel.RightOf="RealtimeTemp"/>
+                                    <TextBlock Text="{x:Bind realtimeDetail.UpdateTime}" Style="{StaticResource TextBlockStyle}"
+                                           Margin="-8, -8, 8, 8"
+                                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                                           RelativePanel.Below="RealtimeTemp"
+                                           RelativePanel.RightOf="RealtimeTemp" />
+                                </RelativePanel>
+                            </RelativePanel>
+                            <AutoSuggestBox x:Name="SearchArea" PlaceholderText="更多城市" 
                                             Margin="10" QueryIcon="Find" MinWidth="150"
                                             TextChanged="SearchArea_TextChanged"
                                             SuggestionChosen="SearchArea_SuggestionChosen"

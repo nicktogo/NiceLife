@@ -20,16 +20,18 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NiceLife.Weather
 {
-    /// <summary>
+    /// <summary>                                              
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class WeatherFlipView : Page
     {
         private ObservableCollection<WeatherModel> weathers = new ObservableCollection<WeatherModel>();
         private DependencyObject currentFlipViewContainer;
+        private Uri backgroudImageUri;
         public WeatherFlipView()
         {
             this.InitializeComponent();
+            backgroudImageUri = new Uri("http://s.cn.bing.net/az/hprichbg/rb/SalzburgFireworks_ZH-CN12027615955_1920x1080.jpg");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
