@@ -162,9 +162,13 @@
     <Compile Include="Weather\Database\Forecast.cs" />
     <Compile Include="Weather\Database\RealtimeDetail.cs" />
     <Compile Include="Weather\Database\RealTimeDetailHelper.cs" />
+    <Compile Include="Weather\Database\WeatherModel.cs" />
     <Compile Include="Weather\Util\DataUtility.cs" />
     <Compile Include="Weather\Util\HttpCallbackListener.cs" />
     <Compile Include="Weather\Util\HttpUtil.cs" />
+    <Compile Include="Weather\WeatherFlipView.xaml.cs">
+      <DependentUpon>WeatherFlipView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Weather\WeatherInfo.xaml.cs">
       <DependentUpon>WeatherInfo.xaml</DependentUpon>
     </Compile>
@@ -242,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tomato\ViewTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Weather\WeatherFlipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

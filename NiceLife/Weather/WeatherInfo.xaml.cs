@@ -37,7 +37,10 @@ namespace NiceLife.Weather
         {
             base.OnNavigatedTo(e);
             long CountyId = (long)e.Parameter;
-            selectedCounty = CountyHelper.GetHelper().SelectSingleItemById(CountyId);
+            CountyHelper helper = CountyHelper.GetHelper();
+            selectedCounty = helper.SelectSingleItemById(CountyId);
+            selectedCounty.CountySelect = County.COUNT_SELECTED;
+            helper.UpdateSingleItem(selectedCounty);
             GetForecast();
         }
 
@@ -81,7 +84,7 @@ namespace NiceLife.Weather
 
             public async void OnFinished(string response)
             {
-                if (DataUtility.handleWeatherResponse(response, page.selectedCounty.Id))
+                if (DataUtility.handleForecastResponse(response, page.selectedCounty.Id))
                 {
                     await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {

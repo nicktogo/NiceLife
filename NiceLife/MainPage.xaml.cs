@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceLife.Weather.Database;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,7 +58,9 @@ namespace NiceLife
 
         private void WeatherRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(typeof(WeatherPage));
+            CountyHelper countyHelper = CountyHelper.GetHelper();
+            List<County> counties = countyHelper.GetSelectedItems();
+            bool b = counties.Count > 0 ? MainFrame.Navigate(typeof(Weather.WeatherFlipView)) : MainFrame.Navigate(typeof(WeatherPage));
         }
     }
 }

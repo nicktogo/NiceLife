@@ -9,6 +9,8 @@ namespace NiceLife.Weather.Database
 {
     public class CountyHelper : DbHelper<County>
     {
+        public const long ALL_COUNTIES = 0x00;
+
         private CountyHelper() : base() { }
 
         private static CountyHelper helper;
@@ -65,9 +67,26 @@ namespace NiceLife.Weather.Database
         public override List<County> SelectGroupItems(long foreignId)
         {
             List<County> items = new List<County>();
-            using (var statement = conn.Prepare(GetSelectAllSQL()))
+            using (var statement = conn.Prepare(foreignId == ALL_COUNTIES ? GetSelectAllSQL(): GetSelectAllByCitySQL()))
             {
-                statement.Bind("@CityId", foreignId);
+                if (foreignId != ALL_COUNTIES)
+                {
+                    statement.Bind("@CityId", foreignId);
+                }
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    County county = CreateItem(statement);
+                    items.Add(county);
+                }
+            }
+            return items;
+        }
+
+        public List<County> GetSelectedItems()
+        {
+            List<County> items = new List<County>();
+            using (var statement = conn.Prepare(GetSelectedSQL()))
+            {
                 while (statement.Step() == SQLiteResult.ROW)
                 {
                     County county = CreateItem(statement);
@@ -113,12 +132,22 @@ namespace NiceLife.Weather.Database
 
         protected override string GetSelectAllSQL()
         {
+            return "SELECT * FROM County";
+        }
+
+        protected string GetSelectAllByCitySQL()
+        {
             return "SELECT * FROM County WHERE CityId = @CityId";
         }
 
         protected override string GetSelectSQL()
         {
             return "SELECT * FROM County WHERE Id = @Id";
+        }
+
+        protected string GetSelectedSQL()
+        {
+            return "SELECT * FROM County WHERE CountySelect = 1";
         }
 
         protected string GetUpdateCountySelectSQL()

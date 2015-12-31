@@ -9,6 +9,10 @@ namespace NiceLife.Weather.Util
 {
     public class HttpUtil
     {
+        public const string FORECAST_SOURCE = "http://wthrcdn.etouch.cn/WeatherApi?city={0}";
+        public const string PROVINCE_SOURCE = "http://www.weather.com.cn/data/list3/city.xml";
+        public const string CITY_COUNTY_SOURCE = "http://www.weather.com.cn/data/list3/city{0}.xml";
+
         public static async void SendHttpRequest(string address, HttpCallbackListener listener)
         {
             await Task.Run(async () =>
