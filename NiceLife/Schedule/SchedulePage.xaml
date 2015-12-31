@@ -8,25 +8,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Grid Background="#FFAEB9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="119*"></RowDefinition>
+        </Grid.RowDefinitions>
 
 
-    <Canvas Background="#FFAEB9">
-
-
-        <Grid Background="#FFE4E1" VerticalAlignment="Top"  Width="1275" HorizontalAlignment="Left" >
+        <Grid  Grid.Row="0" Background="#FFE4E1"  HorizontalAlignment="Right" Height="121" VerticalAlignment="Top" Width="1280" >
             <TextBlock FontSize="48" Text="Mail Page" Margin="30,30,1002,12"/>
-            <AppBarButton x:Name="add" Click="add_Click" HorizontalAlignment="Left" Icon="Add" Label="Add" VerticalAlignment="Top" Width="100" Height="100" FontSize="13.333" Margin="955,30,0,0"/>
-            <AppBarButton x:Name="select" Click="select_Click" HorizontalAlignment="Left" Icon="Find" Label="Selecting" VerticalAlignment="Top" Width="100" Height="100" FontSize="13.333" Margin="1065,30,0,0"/>
-            <AppBarButton x:Name="set" Click="set_Click" HorizontalAlignment="Left" Icon="Setting" Label="Setting" VerticalAlignment="Top" Width="100" Height="100" FontSize="13.333" Margin="1175,30,0,0"/>
+            <AppBarButton x:Name="add" Click="add_Click" HorizontalAlignment="Left" Icon="Accept" Label="add" VerticalAlignment="Top" Width="100" Height="100" FontSize="13.333" Margin="955,30,0,0"/>
+            <AppBarButton x:Name="select" Click="select_Click" HorizontalAlignment="Left" Icon="Accept" Label="add" VerticalAlignment="Top" Width="100" Height="100" FontSize="13.333" Margin="1065,30,0,0"/>
+            <AppBarButton x:Name="set" Click="set_Click" HorizontalAlignment="Left" Icon="Accept" Label="add" VerticalAlignment="Top" Width="100" Height="100" FontSize="13.333" Margin="1175,30,0,0"/>
 
 
 
         </Grid>
-        <Grid Height="575" Canvas.Top="145" Width="1280">
-            <Frame x:Name="ScheduleFrame" />
+        <Grid  Grid.Row="2">
+            <Frame Name="ScheduleFrame" >
+                
+            </Frame>
 
         </Grid>
 
-    </Canvas>
-
+    </Grid>
 </Page>

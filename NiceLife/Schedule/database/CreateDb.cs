@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NiceLife.Schedule.database
+namespace NiceLife.Schedule.Database
 {
     class CreateDb
     {
@@ -17,17 +17,17 @@ namespace NiceLife.Schedule.database
             BeginDate datetime,
             EndDate datetime,
             Last integer,
-            Loop integer,
+            Loop integer，
             IsRemind integer,
             RemindId integer
             
             );";
-        private static String CREATE_ColorLable = @"CREATE TABLE IF NOT EXISTS ColorLable (
+        private static String CREATE_Call = @"CREATE TABLE IF NOT EXISTS Call (
             Id integer primary key autoincrement,  
             Color text,
             Mean text
             );";
-        private static String CREATE_Call = @"CREATE TABLE IF NOT EXISTS Call (
+        private static String CREATE_ColorLable = @"CREATE TABLE IF NOT EXISTS ColorLable (
             Id integer primary key autoincrement,  
             Date datetime,
             Type integer,
