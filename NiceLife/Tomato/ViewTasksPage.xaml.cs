@@ -24,12 +24,16 @@ namespace NiceLife
     /// </summary>
     public sealed partial class ViewTasksPage : Page
     {
+        public List<Task> taskList = null;
+
         public void fresh()
         {
-            List<Task> taskList = TaskHelper.GetHelper().SelectGroupItemsByDate(dp_ViewDate.Date.DateTime);
+            if (taskList != null)
+                taskList.Clear();
+            
+            taskList = TaskHelper.GetHelper().SelectGroupItemsByDate(dp_ViewDate.Date.DateTime);
 
             if (dp_ViewDate.Date.DateTime.ToString("yyyy-MM-dd") == DateTime.Now.Date.ToString("yyyy-MM-dd"))
-                //if (dp_ViewDate.Date.ToString("yyyy-MM-dd") == DateTime.Now.Date.ToString("yyyy-MM-dd"))
                 tb_IsToday.Visibility = Visibility.Visible;
             else
                 tb_IsToday.Visibility = Visibility.Collapsed;
@@ -69,7 +73,7 @@ namespace NiceLife
 
                     TextBlock tb_TaskContentTitle = new TextBlock();
                     tb_TaskContentTitle.Text = taskList.ElementAt(count).Title;
-                    tb_TaskContentTitle.FontSize = 30;
+                    tb_TaskContentTitle.FontSize = 20;
                     tb_TaskContentTitle.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentTitle);
                     Grid.SetRow(tb_TaskContentTitle, 0);
@@ -77,7 +81,7 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentTitle, 0);
 
                     TextBlock tb_TaskContentTotalTomato = new TextBlock();
-                    tb_TaskContentTotalTomato.Text = "Total🍅:" + taskList.ElementAt(count).TotalTomato;
+                    tb_TaskContentTotalTomato.Text = "总🍅：" + taskList.ElementAt(count).TotalTomato;
                     tb_TaskContentTotalTomato.FontSize = 15;
                     tb_TaskContentTotalTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentTotalTomato);
@@ -86,7 +90,7 @@ namespace NiceLife
                     Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                     TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                    tb_TaskContentDoneTomato.Text = "Done🍅:" + taskList.ElementAt(count).DoneTomato;
+                    tb_TaskContentDoneTomato.Text = "已完成🍅：" + taskList.ElementAt(count).DoneTomato;
                     tb_TaskContentDoneTomato.FontSize = 10;
                     tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -94,13 +98,14 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                     TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                    tb_TaskContentUndoneTomato.Text = "Undone🍅:" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
+                    tb_TaskContentUndoneTomato.Text = "未完成🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
                     tb_TaskContentUndoneTomato.FontSize = 10;
                     tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);
                     Grid.SetRow(tb_TaskContentUndoneTomato, 2);
                     Grid.SetColumn(tb_TaskContentUndoneTomato, 1);
 
+                    g_TaskContent.Tag = count;
                     g_TaskContent.Tapped += G_TaskContent_Tapped;
 
                     count++;
@@ -115,7 +120,16 @@ namespace NiceLife
 
         private void G_TaskContent_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(DoTaskPage));
+            Task task = taskList.ElementAt((int)((Grid)sender).Tag);
+            this.Frame.Navigate(typeof(DoTaskPage), task);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            DateTime date = (DateTime)e.Parameter;
+            dp_ViewDate.Date = date;
+            fresh();
         }
 
         public ViewTasksPage()

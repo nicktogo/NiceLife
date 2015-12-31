@@ -25,9 +25,14 @@ namespace NiceLife
     /// </summary>
     public sealed partial class TomatoPage : Page
     {
-        public void fresh()
+        List<Task> taskList = null;
+        List<DateTime> dateList = null;
+
+        public void TodayTasksFresh()
         {
-            List<Task> taskList = TaskHelper.GetHelper().SelectGroupItemsByDate(DateTime.Now);
+            if (taskList != null)
+                taskList.Clear();
+            taskList = TaskHelper.GetHelper().SelectGroupItemsByDate(DateTime.Now);
 
             int count = 0;
             for (int i = 0; i < 4; i++)
@@ -51,7 +56,7 @@ namespace NiceLife
 
                         TextBlock tb_TaskContentTitle = new TextBlock();
                         tb_TaskContentTitle.Text = taskList.ElementAt(count).Title;
-                        tb_TaskContentTitle.FontSize = 30;
+                        tb_TaskContentTitle.FontSize = 20;
                         tb_TaskContentTitle.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentTitle);
                         Grid.SetRow(tb_TaskContentTitle, 0);
@@ -59,7 +64,7 @@ namespace NiceLife
                         Grid.SetColumn(tb_TaskContentTitle, 0);
 
                         TextBlock tb_TaskContentTotalTomato = new TextBlock();
-                        tb_TaskContentTotalTomato.Text = "Total🍅:" + taskList.ElementAt(count).TotalTomato;
+                        tb_TaskContentTotalTomato.Text = "总🍅：" + taskList.ElementAt(count).TotalTomato;
                         tb_TaskContentTotalTomato.FontSize = 15;
                         tb_TaskContentTotalTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentTotalTomato);
@@ -68,7 +73,7 @@ namespace NiceLife
                         Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                         TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                        tb_TaskContentDoneTomato.Text = "Done🍅:" + taskList.ElementAt(count).DoneTomato;
+                        tb_TaskContentDoneTomato.Text = "已完成🍅：" + taskList.ElementAt(count).DoneTomato;
                         tb_TaskContentDoneTomato.FontSize = 10;
                         tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -76,13 +81,14 @@ namespace NiceLife
                         Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                         TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                        tb_TaskContentUndoneTomato.Text = "Undone🍅:" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
+                        tb_TaskContentUndoneTomato.Text = "未完成🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
                         tb_TaskContentUndoneTomato.FontSize = 10;
                         tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);
                         Grid.SetRow(tb_TaskContentUndoneTomato, 2);
                         Grid.SetColumn(tb_TaskContentUndoneTomato, 1);
 
+                        g_TaskContent.Tag = count;
                         g_TaskContent.Tapped += G_TaskContent_Tapped;
 
                         count++;
@@ -111,26 +117,96 @@ namespace NiceLife
                 }
         }
 
+        public void AllTasksFresh()
+        {
+            if (dateList != null)
+                dateList.Clear();
+            dateList = TaskHelper.GetHelper().SelectDate();
+
+            int count = 0;
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 2; j++)
+                {
+                    if (count < dateList.Count && count != 7)
+                    {
+                        Grid g_DateContent = new Grid();
+                        g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                        g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
+                        g_DateContent.Margin = new Thickness(5, 5, 5, 5);
+                        g_AllTasksContent.Children.Add(g_DateContent);
+                        Grid.SetRow(g_DateContent, i);
+                        Grid.SetColumn(g_DateContent, j);
+
+                        TextBlock tb_DateContent = new TextBlock();
+                        tb_DateContent.Text = dateList.ElementAt(count).Date.ToString("yyyy-MM-dd");
+                        tb_DateContent.FontSize = 20;
+                        tb_DateContent.VerticalAlignment = VerticalAlignment.Center;
+                        tb_DateContent.HorizontalAlignment = HorizontalAlignment.Center;
+                        g_DateContent.Children.Add(tb_DateContent);
+
+                        g_DateContent.Tag = dateList.ElementAt(count).Date;
+                        g_DateContent.Tapped += G_DateContent_Tapped;
+
+                        count++;
+                    }
+                    else if (dateList.Count > 7 && count == 7)
+                    {
+                        Grid g_DateContent = new Grid();
+                        g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                        g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
+                        g_DateContent.Margin = new Thickness(5, 5, 5, 5);
+                        g_AllTasksContent.Children.Add(g_DateContent);
+                        Grid.SetRow(g_DateContent, i);
+                        Grid.SetColumn(g_DateContent, j);
+
+                        TextBlock tb_MoreDate = new TextBlock();
+                        tb_MoreDate.Text = "...";
+                        tb_MoreDate.FontSize = 50;
+                        tb_MoreDate.HorizontalAlignment = HorizontalAlignment.Center;
+                        tb_MoreDate.VerticalAlignment = VerticalAlignment.Center;
+                        g_DateContent.Children.Add(tb_MoreDate);
+
+                        g_DateContent.Tapped += G_DateContent_Tapped_More;
+                    }
+                    else break;
+                }
+        }
+
         public TomatoPage()
         {
             this.InitializeComponent();
 
-            fresh();
+            TodayTasksFresh();
+            AllTasksFresh();
         }
 
         private void G_TaskContent_Tapped_More(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ViewTasksPage));
+            this.Frame.Navigate(typeof(ViewTasksPage), DateTime.Now);
         }
 
         private void G_TaskContent_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(DoTaskPage));
+            Task task = taskList.ElementAt((int)((Grid)sender).Tag);
+            this.Frame.Navigate(typeof(DoTaskPage), task);
+        }
+
+        private void G_DateContent_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            DateTime date = (DateTime)((Grid)sender).Tag;
+            this.Frame.Navigate(typeof(ViewTasksPage), date);
+        }
+
+        private void G_DateContent_Tapped_More(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AllTasksPage), dateList);
         }
 
         private void TodayTasks_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(TodayTasksPage));
+            this.Frame.Navigate(typeof(ViewTasksPage), DateTime.Now);
         }
         private void AllTasks_Click(object sender, RoutedEventArgs e)
         {
@@ -161,7 +237,7 @@ namespace NiceLife
             dp_Date.Date = DateTime.Now;
             cb_Tomato.SelectedIndex = 0;
 
-            fresh();
+            TodayTasksFresh();
 
             fo_NewTask.Hide();
         }        

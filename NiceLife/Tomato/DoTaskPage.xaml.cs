@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceLife.Tomato.Database;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,26 @@ namespace NiceLife
     /// </summary>
     public sealed partial class DoTaskPage : Page
     {
+        Task task;
+
+        public void fresh()
+        {
+            tb_Title.Text = task.Title;
+            tb_Description.Text = task.Description;
+        }
+
         public DoTaskPage()
         {
             this.InitializeComponent();
+
+            
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            task = (Task)e.Parameter;
+            fresh();
         }
     }
 }
