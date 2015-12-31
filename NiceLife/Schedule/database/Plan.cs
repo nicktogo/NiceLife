@@ -4,17 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NiceLife.Schedule
+namespace NiceLife.Schedule.database
 {
     class Plan
     {
+        public static String TABLE_NAME = "Plan";
         public long Id { get; set; }
         public String Title { get; set; }
-        public long colorId { get; set; }
-        public long callId { get; set; }
-        public string Text { get; set; }
-        public string beginTime { get; set; }
-        public string endTime { get; set; }
-        public int call_YorN { get; set; }
+        public long ColorId { get; set; }
+        public long RemindId { get; set; }
+        public string Description { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int IsRemind { get; set; }
+        public long Last { get; set; }
+        public int Loop { get; set; }
+        
     }
 }
