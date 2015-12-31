@@ -166,7 +166,64 @@ namespace NiceLife.Weather
 
         private void SearchArea_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
+            if (args.ChosenSuggestion != null)
+            {
+                // user selected a county from dropdown list
+                AddWeather(args.ChosenSuggestion as County);
+            }
+            else
+            {
+                // user submit directly
+            }
+        }
 
+        private void AddWeather(County county)
+        {
+            if (county == null)
+            {
+                return;
+            }
+            CountyHelper countyHelper = CountyHelper.GetHelper();
+            county.CountySelect = County.COUNT_SELECTED;
+            countyHelper.UpdateSingleItem(county);
+
+            string address = String.Format(HttpUtil.FORECAST_SOURCE, county.Name);
+            HttpUtil.SendHttpRequest(address, new ForecastListener(this, county));
+        }
+
+        private class ForecastListener : HttpCallbackListener
+        {
+            private WeatherFlipView page;
+            private County county;
+            public ForecastListener(WeatherFlipView page, County county)
+            {
+                this.page = page;
+                this.county = county;
+            }
+            public void OnError(Exception e)
+            {
+                throw e;
+            }
+
+            public async void OnFinished(string response)
+            {
+                bool result = false;
+                result = DataUtility.handleForecastResponse(response, county.Id);
+                if (result)
+                {
+                    WeatherModel weatherModel = new WeatherModel();
+                    weatherModel.realtimeDetail = RealTimeDetailHelper.GetHelper().SelectSingleItemById(county.Id);
+                    List<Forecast> forecasts = ForecastHelper.GetHelper().SelectGroupItems(county.Id);
+                    foreach (Forecast f in forecasts)
+                    {
+                        weatherModel.forecasts.Add(f);
+                    }
+                    await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        page.weathers.Add(weatherModel);
+                    });
+                }
+            }
         }
     }
 }
