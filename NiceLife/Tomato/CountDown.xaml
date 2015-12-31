@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="NiceLife.CountDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="110" d:DesignWidth="150">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*" />
+            <ColumnDefinition Width="13"/>
+            <ColumnDefinition Width="43*" />
+            <ColumnDefinition Width="13"/>
+            <ColumnDefinition Width="43*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="00" Name="HourArea"  VerticalAlignment="Center" FontSize="30" Grid.Column="0" Foreground="DarkOrange" />
+        <TextBlock Text=":" Name="HourSplitMinute"  VerticalAlignment="Center" FontSize="30" Grid.Column="1" Foreground="DarkOrange" />
+        <TextBlock Text="00" Name="MinuteArea" VerticalAlignment="Center" FontSize="30" Grid.Column="2" Foreground="DarkOrange" />
+        <TextBlock Text=":" Name="MinuteSplitSecond"  VerticalAlignment="Center" FontSize="30" Grid.Column="3" Foreground="DarkOrange" />
+        <TextBlock Text="00"  Name="SecondArea" VerticalAlignment="Center" FontSize="30" Grid.Column="4" Foreground="DarkOrange" />
+    </Grid>
+</UserControl>
