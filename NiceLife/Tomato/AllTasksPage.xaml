@@ -12,7 +12,9 @@
             <RowDefinition Height="25*"></RowDefinition>
             <RowDefinition Height="119*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock FontSize="50" Text="All Tasks"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
-        
+        <TextBlock FontSize="50" Text="全部任务"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
+
+        <ScrollViewer x:Name="sv_AllTasksContent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>
+
     </Grid>
 </Page>
