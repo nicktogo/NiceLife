@@ -120,7 +120,7 @@ namespace NiceLife
 
         private void G_TaskContent_Tapped_More(object sender, TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AllTasksPage));
+            this.Frame.Navigate(typeof(ViewTasksPage));
         }
 
         private void G_TaskContent_Tapped(object sender, TappedRoutedEventArgs e)

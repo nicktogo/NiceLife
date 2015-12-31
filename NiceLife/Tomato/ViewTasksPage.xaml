@@ -2,7 +2,7 @@
     x:Class="NiceLife.ViewTasksPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:NiceLife.TomatoPage"
+    xmlns:local="using:NiceLife"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -18,8 +18,14 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock FontSize="50" Text="Tasks"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
-        <DatePicker Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBlock FontSize="50" Text="Tasks" Margin="50,30,0,30"/>
+            <DatePicker x:Name="dp_ViewDate" DateChanged="dp_ViewDate_DateChanged" Margin="50,30,0,30"/>
+            <TextBlock x:Name="tb_IsToday" FontSize="20" Text="Today"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,30,0,30"/>
+        </StackPanel>
+        
+        <ScrollViewer x:Name="sv_TasksContent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>
 
     </Grid>
 </Page>

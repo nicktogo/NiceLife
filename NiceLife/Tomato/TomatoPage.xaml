@@ -50,7 +50,7 @@
                             <TextBox x:Name="tb_Description" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                             <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Date:</TextBlock>
                             <DatePicker x:Name="dp_Date" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Tomato:</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Tomato:</TextBlock>
                             <ComboBox x:Name="cb_Tomato" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectedIndex="0" xml:space ="preserve">
                                 <ComboBoxItem>1   🍅</ComboBoxItem>
                                 <ComboBoxItem>2   🍅🍅</ComboBoxItem>
