@@ -29,6 +29,7 @@ namespace NiceLife.Tomato.Database
         {
             Task task = new Task();
 
+            task.Id = (long)statement[0];
             task.Title = (String)statement[1];
             task.Description = (String)statement[2];
 
@@ -84,9 +85,53 @@ namespace NiceLife.Tomato.Database
         public override List<Task> SelectGroupItemsByDate(DateTime date)
         {
             List<Task> items = new List<Task>();
-            using (var statement = conn.Prepare(GetSelectAllSQL()))
+            using (var statement = conn.Prepare(GetSelectTaskByDateSQL()))
             {
                 statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff")); 
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    Task task = CreateItem(statement);
+                    items.Add(task);
+                }
+            }
+            return items;
+        }
+
+        public override List<DateTime> SelectDate()
+        {
+            List<DateTime> items = new List<DateTime>();
+            using (var statement = conn.Prepare(GetSelectDateSQL()))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime date;
+                    DateTime.TryParse((String)statement[0], out date);
+                    items.Add(date);
+                }
+            }
+            return items;
+        }
+
+        public override List<DateTime> SelectAllDate()
+        {
+            List<DateTime> items = new List<DateTime>();
+            using (var statement = conn.Prepare(GetSelectAllDateSQL()))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime date;
+                    DateTime.TryParse((String)statement[0], out date);
+                    items.Add(date);
+                }
+            }
+            return items;
+        }
+
+        public override List<Task> SelectAllItems()
+        {
+            List<Task> items = new List<Task>();
+            using (var statement = conn.Prepare(GetSelectAllSQL()))
+            {
                 while (statement.Step() == SQLiteResult.ROW)
                 {
                     Task task = CreateItem(statement);
@@ -118,14 +163,14 @@ namespace NiceLife.Tomato.Database
                 VALUES(@Title, @Description, @Date, @Type, @Status, @TotalTomato, @DoneTomato)";
         }
 
-        protected override string GetSelectAllSQL()
+        protected override string GetSelectTaskByDateSQL()
         {
             return "SELECT * FROM Task WHERE Date Between date(@Date, 'start of day') and datetime(@Date, '+1 day', 'start of day')";
         }
 
-        protected override string GetSelectSQL()
+        protected override string GetSelectDateSQL()
         {
-            throw new NotImplementedException();
+            return "select DISTINCT strftime('%Y-%m-%d', Date) from Task where strftime('%Y-%m-%d', Date) >= strftime('%Y-%m-%d', 'now') order by Date ASC";
         }
 
         protected string GetDeleteAllSQL()
@@ -133,5 +178,14 @@ namespace NiceLife.Tomato.Database
             return "DELETE FROM Task";
         }
 
+        protected override string GetSelectAllSQL()
+        {
+            return "SELECT * FROM Task order by Date ASC";
+        }
+
+        protected override string GetSelectAllDateSQL()
+        {
+            return "select DISTINCT strftime('%Y-%m-%d', Date) from Task order by Date ASC";
+        }
     }
 }

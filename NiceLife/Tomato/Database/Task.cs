@@ -10,6 +10,7 @@ namespace NiceLife.Tomato.Database
     {
         public static String TABLE_NAME = "Task";
 
+        public long Id { get; set; }
         public String Title { get; set; }
         public String Description { get; set; }
         public DateTime Date { get; set; }

@@ -30,11 +30,21 @@ namespace NiceLife.Tomato
 
         public abstract List<T> SelectGroupItemsByDate(DateTime date);
 
+        public abstract List<DateTime> SelectDate();
+
+        public abstract List<DateTime> SelectAllDate();
+
+        public abstract List<T> SelectAllItems();
+
+        protected abstract String GetSelectTaskByDateSQL();
+
+        protected abstract String GetSelectDateSQL();
+
+        protected abstract String GetSelectAllDateSQL();
+
         protected abstract String GetSelectAllSQL();
 
         public abstract T SelectSingleItemById(long id);
-
-        protected abstract String GetSelectSQL();
 
         public abstract T CreateItem(ISQLiteStatement statement);
     }
