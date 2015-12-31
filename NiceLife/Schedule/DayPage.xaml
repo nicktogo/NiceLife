@@ -17,7 +17,7 @@
             <FlyoutBase.AttachedFlyout>
                 <DatePickerFlyout/>
             </FlyoutBase.AttachedFlyout>
-            <DatePicker Grid.Row="0" Name="choose" HorizontalAlignment="Left" Margin="34,19,0,0" VerticalAlignment="Top"/>
+            <DatePicker Grid.Row="0" DataContextChanged="choose_DataContextChanged" Name="choose" HorizontalAlignment="Left" Margin="34,19,0,0" VerticalAlignment="Top"/>
 
         </Grid>
         <Grid Name="time" Grid.Row="1"  Background="#FFFBF9FB" Opacity="0.5">

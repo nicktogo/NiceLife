@@ -14,7 +14,7 @@
             <RowDefinition Height="90*"/>
 
         </Grid.RowDefinitions>
-        <SplitView x:Name="SplitView" OpenPaneLength="500" CompactPaneLength="100"
+        <SplitView x:Name="SplitView" OpenPaneLength="700" CompactPaneLength="100"
                    DisplayMode="CompactOverlay" IsPaneOpen="False" PaneBackground="#FFAEB9" Grid.Row="0">
             <SplitView.Pane>
                 <StackPanel x:Name="SplitViewPanePanel" Orientation="Horizontal" >
@@ -22,6 +22,7 @@
 
                     <Button x:Name="button" Content="Month" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button_Click" Background="#33F9F4F4"/>
                     <Button x:Name="button1" Content="Day" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button1_Click" Background="#33F7F4F4"/>
+                    <Button x:Name="button2" Content="List" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button2_Click" Background="#33F7F4F4"/>
 
 
 

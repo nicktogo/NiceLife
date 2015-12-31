@@ -61,7 +61,9 @@ namespace NiceLife
             RemindTime.IsEnabled = false;
             comboBox_remind.IsEnabled = false;
             BeginDate.Date = dateTime;
-            EndDate.Date = dateTime;
+            beginDate = dateTime;
+            endDate = dateTime.AddHours(1);
+           
         }
         
         private void save_Click(object sender, RoutedEventArgs e)
@@ -161,6 +163,22 @@ namespace NiceLife
                 ph.InsertSingleItem(plan);
 
                 DateTime bd = beginDate,ed= endDate;
+                if (loop == 0)
+                {
+                    if (last != 0)
+                    {
+                        for (int i = 0; i < last; i++)
+                        {
+                            plan.BeginDate = bd.AddDays(1);
+                            plan.EndDate = ed.AddDays(1);
+                            bd = bd.AddDays(1);
+                            ed = ed.AddDays(1);
+
+                            ph.InsertSingleItem(plan);
+
+                        }
+                    }
+                }
                 if (loop != 0)
                 {
                     if (loop == 2)
@@ -329,19 +347,14 @@ namespace NiceLife
         {
             beginDate = BeginDate.Date.Value.UtcDateTime;
 
-            beginDate.Add(BeginTime.Time);
+           
+
+            endDate = BeginDate.Date.Value.UtcDateTime;
+
+            
         }
 
-        private void EndDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
-        {
-            endDate = EndDate.Date.Value.UtcDateTime;
-            endDate.Add(EndTime.Time);
-            if (endDate.Year != beginDate.Year || endDate.Month != beginDate.Month || endDate.Day != beginDate.Day)
-            {
-                textBox_last.IsEnabled = false;
-                last = 0;
-            }
-        }
+       
 
         private void textBox_last_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -376,6 +389,16 @@ namespace NiceLife
                 radioButton_N.IsChecked = false;
             }
            
+        }
+
+        private void BeginTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
+        {
+            beginDate.Add(BeginTime.Time);
+        }
+
+        private void EndTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
+        {
+            endDate=beginDate.Date.Add(EndTime.Time);
         }
     }
     

@@ -85,7 +85,29 @@ namespace NiceLife.Schedule.db
             }
             return items;
         }
-
+        public  List<Call> SelectlistItems(DateTime date)
+        {
+            List<Call> items = new List<Call>();
+            using (var statement = conn.Prepare(GetSelectlistSQL()))
+            {
+             
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime d;
+                    DateTime.TryParse((String)statement[1], out d);
+                    if (d.Date == date.Date)
+                    {
+                        Call c = CreateItem(statement);
+                        items.Add(c);
+                    }
+                }
+            }
+            return items;
+        }
+        protected  String GetSelectlistSQL()
+        {
+            return "SELECT * FROM Call ";
+        }
         protected override String GetSelectAllSQL()
         {
             return "SELECT * FROM Call WHERE Id = @Id";

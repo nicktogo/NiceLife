@@ -41,17 +41,18 @@ namespace NiceLife.Schedule.db
          
                 statement.Bind("@Title", item.Title);
                 statement.Bind("@ColorId", item.ColorId);
-                statement.Bind("@RemindId", item.RemindId);
+               
                 statement.Bind("@Description", item.Description);
                 
                 statement.Bind("@BeginDate", DateTimeSQLite(item.BeginDate));
                 statement.Bind("@EndDate", DateTimeSQLite(item.EndDate));
                 
                 
-                statement.Bind("@IsRemind", item.IsRemind);
+                
                 statement.Bind("@Last", item.Last);
                 statement.Bind("@Loop", item.Loop);
-
+                statement.Bind("@IsRemind", item.IsRemind);
+                statement.Bind("@RemindId", item.RemindId);
                 statement.Step();
                
                 return 0;
@@ -62,7 +63,7 @@ namespace NiceLife.Schedule.db
 
         protected override String GetInsertSQL()
         {
-            return "INSERT INTO Plan (Title,ColorId,RemindId,Description,BeginDate,EndDate,IsRemind,Last,Loop) VALUES (@Title,@ColorId,@RemindId,@Description,@BeginDate,@EndDate,@IsRemind,@Last,@Loop)";
+            return "INSERT INTO Plan (Title,ColorId,Description,BeginDate,EndDate,Last,Loop,IsRemind,RemindId) VALUES (@Title,@ColorId,@Description,@BeginDate,@EndDate,@Last,@Loop,@IsRemind,@RemindId)";
         }
 
         public override void DeleteSingleItemById(long id)
@@ -94,7 +95,48 @@ namespace NiceLife.Schedule.db
             }
             return items;
         }
-
+        public  List<Plan> SelectByDate(DateTime date)
+        {
+            List<Plan> items = new List<Plan>();
+            using (var statement = conn.Prepare(GetSelectByDate()))
+            {
+               // statement.Bind("@BeginDate", DateTimeSelect(date));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime d;
+                    DateTime.TryParse((String)statement[4], out d);
+                    if (d.Date == date.Date)
+                    {
+                        Plan plan = CreateItem(statement);
+                        items.Add(plan);
+                    }
+                }
+            }
+            return items;
+        }
+        public List<Plan> SelectByAgo(DateTime date)
+        {
+            List<Plan> items = new List<Plan>();
+            using (var statement = conn.Prepare(GetSelectByDate()))
+            {
+                // statement.Bind("@BeginDate", DateTimeSelect(date));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime d;
+                    DateTime.TryParse((String)statement[4], out d);
+                    if (d.Date < date.Date)
+                    {
+                        Plan plan = CreateItem(statement);
+                        items.Add(plan);
+                    }
+                }
+            }
+            return items;
+        }
+        protected  String GetSelectByDate()
+        {
+            return "SELECT * FROM Plan";
+        }
         protected override String GetSelectAllSQL()
         {
             return "SELECT * FROM Plan WHERE RemindId = @RemindId";
@@ -127,16 +169,18 @@ namespace NiceLife.Schedule.db
             plan.Id = (long)statement[0];
             plan.Title = (String)statement[1];
             plan.ColorId = (long)statement[2];
-            plan.RemindId = (long)statement[3];
-            plan.IsRemind = (int)statement[4];
-            plan.Description = (String)statement[5];
+            
+           
+            plan.Description = (String)statement[3];
             DateTime date;
-            DateTime.TryParse((String)statement[6], out date);
+            DateTime.TryParse((String)statement[4], out date);
             plan.BeginDate = date;
-            DateTime.TryParse((String)statement[7], out date);
+            DateTime.TryParse((String)statement[5], out date);
             plan.EndDate = date;
-            plan.Last = (long)statement[8];
-            plan.Loop = (int)statement[9];
+            plan.Last = (long)statement[6];
+            plan.Loop = Convert.ToInt16( statement[7]);
+            plan.IsRemind = Convert.ToInt16(statement[8]);
+            plan.RemindId = (long)statement[9];
             return plan;
         }
         private String DateTimeSQLite(DateTime dateTime)
@@ -144,5 +188,6 @@ namespace NiceLife.Schedule.db
             String dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
             return string.Format(dateTimeFormat, dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond);
         }
+        
     }
 }

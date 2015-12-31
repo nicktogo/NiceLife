@@ -9,20 +9,35 @@
 
     <Grid Background="#FFE4E1" Margin="0,0,0,0" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
             <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
 
-                <ColumnDefinition />
-                <ColumnDefinition />
+        <Grid Name="color" Grid.Row="1" Background="#FFFBF7F7" Opacity="0.5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="40*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="40*"/>
 
             </Grid.ColumnDefinitions>
         </Grid>
-        <Grid Grid.Row="1">
-            <Button x:Name="button_last" Content="LAST" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
-            <Button x:Name="button_next" Content="NEXT" HorizontalAlignment="Left" Margin="1071,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
+        <Grid Grid.Row="2">
+            <Button x:Name="button_last" Click="button_last_Click" Content="LAST" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
+            <Button x:Name="button_next" Click="button_next_Click" Content="NEXT" HorizontalAlignment="Left" Margin="1071,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
         </Grid>
+        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="add" Margin="1082,9,0,-3" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable"/>
+        <AppBarButton x:Name="appBarButton_edit" Click="appBarButton_edit_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="edit" Margin="1147,8,0,-2" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable"/>
+        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="edit" Margin="1212,8,0,-2" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable"/>
+
     </Grid>
 </Page>

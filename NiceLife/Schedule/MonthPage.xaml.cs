@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -74,7 +75,7 @@ namespace NiceLife
 
                         TextBlock t = new TextBlock();
                         t.FontSize = 52;
-
+                        t.Foreground = new SolidColorBrush(Colors.DarkGray);
 
                         t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                         t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
@@ -100,7 +101,11 @@ namespace NiceLife
                         t.FontSize = 52;
                         if (k == today.Day)
                         {
-                            ///color
+                            t.Foreground =new SolidColorBrush(Colors.Red);
+                        }
+                        else
+                        {
+                            t.Foreground = new SolidColorBrush(Colors.Black);
                         }
 
                         t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
@@ -116,7 +121,7 @@ namespace NiceLife
                         TextBlock t = new TextBlock();
                         t.FontSize = 52;
 
-
+                        t.Foreground = new SolidColorBrush(Colors.DarkGray);
                         t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                         t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                         t.Text = Convert.ToString(kk);
