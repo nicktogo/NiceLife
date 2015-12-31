@@ -33,7 +33,7 @@ namespace NiceLife.Schedule.database
 
         }
 
-        public override long InsertSingleItem(ColorLable item)
+        public override void InsertSingleItem(ColorLable item)
         {
             using (var statement = conn.Prepare(GetInsertSQL()))
             {
@@ -43,8 +43,6 @@ namespace NiceLife.Schedule.database
 
 
                 statement.Step();
-               // conn.Prepare("select last_insert_rowid()");
-                return 0;
             }
         }
 

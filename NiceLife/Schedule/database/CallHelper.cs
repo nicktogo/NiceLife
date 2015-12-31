@@ -33,20 +33,17 @@ namespace NiceLife.Schedule.database
 
         }
 
-        public override long InsertSingleItem(Call item)
+        public override void InsertSingleItem(Call item)
         {
             using (var statement = conn.Prepare(GetInsertSQL()))
             {
                 
-                statement.Bind("@Date", DateTimeSQLite(item.Date));
+                statement.Bind("@Date", item.Date);
                 statement.Bind("@Type", item.Type);
                 statement.Bind("@State", item.State);
 
 
                 statement.Step();
-                var statement2 = conn.Prepare("select max(Id) from Call");
-                statement.Step();
-                return (long)statement[0];
             }
         }
        
@@ -115,17 +112,10 @@ namespace NiceLife.Schedule.database
             Call c = new Call();
 
             c.Id = (long)statement[0];
-            DateTime date;
-            DateTime.TryParse((String)statement[1], out date);
-            c.Date =date;
+            c.Date = (DateTime)statement[1];
             c.Type = (String)statement[2];
             c.State = (int)statement[3];
             return c;
-        }
-        private String DateTimeSQLite(DateTime dateTime)
-        {
-            String dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
-            return string.Format(dateTimeFormat, dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond);
         }
     }
 }
