@@ -148,5 +148,25 @@ namespace NiceLife.Weather
                 ForecastGrid.SelectedIndex = 0;
             }
         }
+
+        private void SearchArea_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var counties = CountyHelper.GetHelper().SelectGroupItems(CountyHelper.ALL_COUNTIES);
+                sender.ItemsSource = counties;
+            }
+        }
+
+        private void SearchArea_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            var county = args.SelectedItem as County;
+            sender.Text = county == null ? "" : county.Name;
+        }
+
+        private void SearchArea_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+
+        }
     }
 }
