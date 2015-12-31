@@ -31,7 +31,7 @@ namespace NiceLife.Weather
         public WeatherFlipView()
         {
             this.InitializeComponent();
-            backgroudImageUri = new Uri("http://s.cn.bing.net/az/hprichbg/rb/SalzburgFireworks_ZH-CN12027615955_1920x1080.jpg");
+            backgroudImageUri = new Uri("http://s.cn.bing.net/az/hprichbg/rb/PolarBearPlunge_ZH-CN11777095530_1920x1080.jpg");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

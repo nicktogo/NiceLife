@@ -20,8 +20,48 @@
             <Setter Property="TextLineBounds" Value="Full"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-        <Style x:Name="ForecastItemStyle" TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemExpanded}">
-            
+        <Style x:Key="GridViewItemStyle1" TargetType="GridViewItem">
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,4,4"/>
+            <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <ListViewItemPresenter 
+                            CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" 
+                            ContentMargin="{TemplateBinding Padding}" 
+                            CheckMode="Overlay" 
+                            ContentTransitions="{TemplateBinding ContentTransitions}" 
+                            CheckBoxBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}" 
+                            DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" 
+                            DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
+                            DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
+                            DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
+                            FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}" 
+                            FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            PointerOverForeground="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                            PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}" 
+                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
+                            PointerOverBackground="{ThemeResource SystemControlHighlightAltChromeWhiteBrush}" 
+                            ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}" 
+                            SelectedPressedBackground="{ThemeResource SystemControlHighlightAltChromeWhiteBrush}" 
+                            SelectionCheckMarkVisualEnabled="True" 
+                            SelectedForeground="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                            SelectedPointerOverBackground="{ThemeResource SystemControlHighlightAltChromeWhiteBrush}" 
+                            SelectedBackground="{ThemeResource SystemControlHighlightAltChromeWhiteBrush}" 
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Background="#190000FF"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
 
@@ -31,19 +71,22 @@
                 <BitmapImage UriSource="{x:Bind backgroudImageUri}" />
             </Image.Source>
         </Image>
-            <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}"
+        <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}"
                   SelectionChanged="WeatherFlip_SelectionChanged">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="data:WeatherModel">
-                    <Grid>
+                    <Grid Margin="32">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="Auto" MinHeight="96" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" Margin="10">
-                            <RelativePanel HorizontalAlignment="Center" Margin="10">
+                        <Grid Grid.Row="0" Margin="8" >
+                            <RelativePanel HorizontalAlignment="Center" Background="#0C0000FF" RenderTransformOrigin="0.5,0.5" ManipulationMode="TranslateY">
+                                <RelativePanel.RenderTransform>
+                                    <CompositeTransform/>
+                                </RelativePanel.RenderTransform>
                                 <TextBlock x:Name="CountyName" Text="{x:Bind realtimeDetail.CountyName}" Style="{StaticResource TextBlockStyle}"
                                            FontSize="32"
                                            Margin="8"
@@ -75,15 +118,26 @@
                                             DisplayMemberPath="Name"/>
                         </Grid>
 
-                        <GridView x:Name="ForecastGrid" ItemsSource="{x:Bind forecasts}" Grid.Row="1" Margin="8"
+                        <GridView x:Name="ForecastGrid" ItemsSource="{x:Bind forecasts}" Grid.Row="1"
                                   HorizontalAlignment="Center" SelectionMode="Single"
-                                  SelectionChanged="ForecastGrid_SelectionChanged">
+                                  SelectionChanged="ForecastGrid_SelectionChanged" ItemContainerStyle="{StaticResource GridViewItemStyle1}" Background="#0C0000FF" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsTapEnabled="False" Padding="0" Margin="32">
+                            <GridView.HeaderTransitions>
+                                <TransitionCollection>
+                                    <PopupThemeTransition/>
+                                </TransitionCollection>
+                            </GridView.HeaderTransitions>
+
+                            <GridView.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="五日预报" Style="{StaticResource TitleTextBlockStyle}" Foreground="{ThemeResource ComboBoxItemSelectedForegroundThemeBrush}" FontWeight="SemiLight" FontSize="32" TextWrapping="Wrap" OpticalMarginAlignment="TrimSideBearings" Margin="8" CharacterSpacing="2" IsDoubleTapEnabled="False" ManipulationMode="TranslateInertia"/>
+                                </DataTemplate>
+                            </GridView.HeaderTemplate>
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="data:Forecast">
-                                    <StackPanel HorizontalAlignment="Center" Margin="10">
+                                    <StackPanel HorizontalAlignment="Center" Margin="16">
                                         <TextBlock FontSize="24" Text="{x:Bind sDate}" HorizontalAlignment="Center"
                                                    Style="{StaticResource TextBlockStyle}"/>
-                                        <Image Width="150" Height="auto" />
+                                        <Image Width="150" Height="150" />
                                         <Grid>
                                             <TextBlock FontSize="24" Text="{x:Bind low}" HorizontalAlignment="Left"
                                                        Style="{StaticResource TextBlockStyle}"/>
@@ -95,13 +149,13 @@
                             </GridView.ItemTemplate>
                         </GridView>
 
-                        <Grid Grid.Row="2" Margin="8">
+                        <Grid Grid.Row="2" Margin="32">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel HorizontalAlignment="Center">
+                            <StackPanel HorizontalAlignment="Center" Background="#0C0000FF">
                                 <TextBlock x:Name="DayType" FontSize="16"
                                            Style="{StaticResource TextBlockStyle}"/>
                                 <TextBlock x:Name="DayWindDirection" FontSize="16"
@@ -110,15 +164,13 @@
                                            Style="{StaticResource TextBlockStyle}"/>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="1">
-                                <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock x:Name="NightType" FontSize="16" 
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Background="#0C0000FF">
+                                <TextBlock x:Name="NightType" FontSize="16" 
                                                Style="{StaticResource TextBlockStyle}"/>
-                                    <TextBlock x:Name="NightWindDirection" FontSize="16" 
+                                <TextBlock x:Name="NightWindDirection" FontSize="16" 
                                                Style="{StaticResource TextBlockStyle}"/>
-                                    <TextBlock x:Name="NightWindPower" FontSize="16" 
+                                <TextBlock x:Name="NightWindPower" FontSize="16" 
                                                Style="{StaticResource TextBlockStyle}"/>
-                                </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Grid>
