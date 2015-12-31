@@ -37,6 +37,7 @@ namespace NiceLife
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             NiceLife.Weather.Database.CreateDatabase.LoadDatabase();
+            NiceLife.Tomato.Database.CreateDatabase.LoadDatabase();
         }
 
         /// <summary>
