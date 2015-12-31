@@ -113,17 +113,25 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schedule\Add.xaml.cs">
-      <DependentUpon>Add.xaml</DependentUpon>
+    <Compile Include="Schedule\Add.xaml.cs" />
+    <Compile Include="Schedule\DayPage.xaml.cs">
+      <DependentUpon>DayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Schedule\Call.cs" />
-    <Compile Include="Schedule\ColorLable.cs" />
-    <Compile Include="Schedule\Plan.cs" />
-    <Compile Include="Schedule\SchedulePage.xaml.cs">
-      <DependentUpon>SchedulePage.xaml</DependentUpon>
+    <Compile Include="Schedule\db\Call.cs" />
+    <Compile Include="Schedule\db\CallHelper.cs" />
+    <Compile Include="Schedule\db\ColorLable.cs" />
+    <Compile Include="Schedule\db\ColorLableHelper.cs" />
+    <Compile Include="Schedule\db\CreateDb.cs" />
+    <Compile Include="Schedule\db\DbHelper.cs" />
+    <Compile Include="Schedule\db\Plan.cs" />
+    <Compile Include="Schedule\db\PlanHelper.cs" />
+    <Compile Include="Schedule\MonthPage.xaml.cs">
+      <DependentUpon>MonthPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Schedule\Select.xaml.cs">
-      <DependentUpon>Select.xaml</DependentUpon>
+    <Compile Include="Schedule\SchedulePage.xaml.cs" />
+    <Compile Include="Schedule\Select.xaml.cs" />
+    <Compile Include="Schedule\Set.xaml.cs">
+      <DependentUpon>Set.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tomato\AllTasksPage.xaml.cs">
       <DependentUpon>AllTasksPage.xaml</DependentUpon>
@@ -211,11 +219,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Schedule\SchedulePage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Schedule\DayPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Schedule\MonthPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Schedule\SchedulePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Schedule\Select.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Schedule\Set.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

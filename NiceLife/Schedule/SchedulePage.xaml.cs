@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using NiceLife.Schedule.db;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,7 @@ namespace NiceLife
         public SchedulePage()
         {
             this.InitializeComponent();
+            CreateDb.LoadDatabase();
         }
 
         
@@ -43,7 +45,7 @@ namespace NiceLife
 
         private void set_Click(object sender, RoutedEventArgs e)
         {
-
+            ScheduleFrame.Navigate(typeof(Set));
         }
     }
 }

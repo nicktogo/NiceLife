@@ -19,7 +19,7 @@ namespace NiceLife.Schedule
 
         public abstract void InsertItems(List<T> items);
 
-        public abstract void InsertSingleItem(T item);
+        public abstract long InsertSingleItem(T item);
 
         protected abstract String GetInsertSQL();
 

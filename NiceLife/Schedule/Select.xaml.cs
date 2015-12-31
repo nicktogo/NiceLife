@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceLife.Schedule;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,25 @@ namespace NiceLife
         public Select()
         {
             this.InitializeComponent();
+        }
+
+        private void appBarButton2_Click(object sender, RoutedEventArgs e)
+        {
+            this.SplitView.IsPaneOpen = !this.SplitView.IsPaneOpen;
+           
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            this.SplitView.IsPaneOpen = !this.SplitView.IsPaneOpen;
+            Frame.Navigate(typeof(MonthPage));
+           
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            this.SplitView.IsPaneOpen = !this.SplitView.IsPaneOpen;
+            Frame.Navigate(typeof(DayPage));
         }
     }
 }

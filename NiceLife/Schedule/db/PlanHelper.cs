@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLitePCL;
 
-namespace NiceLife.Schedule.database
+namespace NiceLife.Schedule.db
 {
     class PlanHelper : DbHelper<Plan>
     {
@@ -34,28 +34,35 @@ namespace NiceLife.Schedule.database
 
         }
 
-        public override void InsertSingleItem(Plan item)
+        public override long InsertSingleItem(Plan item)
         {
             using (var statement = conn.Prepare(GetInsertSQL()))
             {
+         
                 statement.Bind("@Title", item.Title);
-                statement.Bind("@Description", item.Description);
-                
-                statement.Bind("@BeginDate", item.BeginDate);
-                statement.Bind("@EndDate", item.EndDate);
                 statement.Bind("@ColorId", item.ColorId);
                 statement.Bind("@RemindId", item.RemindId);
+                statement.Bind("@Description", item.Description);
+                
+                statement.Bind("@BeginDate", DateTimeSQLite(item.BeginDate));
+                statement.Bind("@EndDate", DateTimeSQLite(item.EndDate));
+                
+                
                 statement.Bind("@IsRemind", item.IsRemind);
                 statement.Bind("@Last", item.Last);
                 statement.Bind("@Loop", item.Loop);
 
                 statement.Step();
+               
+                return 0;
+
             }
+            
         }
 
         protected override String GetInsertSQL()
         {
-            return "INSERT INTO Plan (Title,ColorId,RemindId,BeginDate,EndDate,IsRemind,Last,Loop,Description) VALUES (@Title,@ColorId,@RemindId,@BeginDate,@EndDate,@IsRemind,@Last,@Loop,@Description)";
+            return "INSERT INTO Plan (Title,ColorId,RemindId,Description,BeginDate,EndDate,IsRemind,Last,Loop) VALUES (@Title,@ColorId,@RemindId,@Description,@BeginDate,@EndDate,@IsRemind,@Last,@Loop)";
         }
 
         public override void DeleteSingleItemById(long id)
@@ -123,11 +130,19 @@ namespace NiceLife.Schedule.database
             plan.RemindId = (long)statement[3];
             plan.IsRemind = (int)statement[4];
             plan.Description = (String)statement[5];
-            plan.BeginDate = (DateTime)statement[6];
-            plan.EndDate = (DateTime)statement[7];
+            DateTime date;
+            DateTime.TryParse((String)statement[6], out date);
+            plan.BeginDate = date;
+            DateTime.TryParse((String)statement[7], out date);
+            plan.EndDate = date;
             plan.Last = (long)statement[8];
             plan.Loop = (int)statement[9];
             return plan;
+        }
+        private String DateTimeSQLite(DateTime dateTime)
+        {
+            String dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
+            return string.Format(dateTimeFormat, dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond);
         }
     }
 }

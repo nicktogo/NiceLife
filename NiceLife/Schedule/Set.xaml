@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="NiceLife.Set"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NiceLife"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#FFE4E1" Margin="0,0,0,0" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition />
+                <ColumnDefinition />
+
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button x:Name="button_last" Content="LAST" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
+            <Button x:Name="button_next" Content="NEXT" HorizontalAlignment="Left" Margin="1071,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
+        </Grid>
+    </Grid>
+</Page>

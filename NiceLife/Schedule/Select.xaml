@@ -7,36 +7,37 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#FFE4E1">
+    <Grid Background="#FFE4E1" HorizontalAlignment="Stretch" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="80*"/>
+
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+
         </Grid.RowDefinitions>
+        <SplitView x:Name="SplitView" OpenPaneLength="500" CompactPaneLength="100"
+                   DisplayMode="CompactOverlay" IsPaneOpen="False" PaneBackground="#FFAEB9" Grid.Row="0">
+            <SplitView.Pane>
+                <StackPanel x:Name="SplitViewPanePanel" Orientation="Horizontal" >
+                    <AppBarButton x:Name="appBarButton2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Add" Label="" Width="100" Click="appBarButton2_Click" />
 
-        <Grid Background="#FFAEB9" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                    <Button x:Name="button" Content="Month" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button_Click" Background="#33F9F4F4"/>
+                    <Button x:Name="button1" Content="Day" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button1_Click" Background="#33F7F4F4"/>
 
-            </Grid.ColumnDefinitions>
-            <Button x:Name="button" Content="Year" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Height="144" Width="320" FontSize="29.333"/>
-            <Button x:Name="button1" Content="Month" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="320" FontSize="29.333"/>
-            <Button x:Name="button2" Content="Day" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="320" FontSize="29.333"/>
-            <Button x:Name="button3" Content="Custum" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="144" Width="320" FontSize="29.333"/>
 
+
+                </StackPanel>
+            </SplitView.Pane>
+
+        </SplitView>
+        <Grid  >
+
+            <!--
+            <Button x:Name="button1" Content="Month" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="90" Width="430" FontSize="29.333" Background="#338DEAD1"/>
+            <Button x:Name="button2" Content="Day" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="90" Width="430" FontSize="29.333" Background="#338DEAD1"/>
+            <Button x:Name="button3" Content="Custum" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="90" Width="430" FontSize="29.333" Background="#338DEAD1"/>
+-->
         </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="90*"/>
-                <ColumnDefinition Width="5*"/>
-
-            </Grid.ColumnDefinitions>
-            <AppBarButton x:Name="appBarButton" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Label="" Margin="0,282,0,0" VerticalAlignment="Top" Height="88" FontSize="29.333" Icon="Back"/>
-            <AppBarButton x:Name="appBarButton1" Grid.Column="1" HorizontalAlignment="Left" Icon="Forward" Label="" Margin="1148,282,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        </Grid>
+        <Frame x:Name="Frame" Content="" Grid.Row="1" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Height="648" Width="1280"/>
 
 
     </Grid>
