@@ -221,8 +221,19 @@ namespace NiceLife.Weather
                     await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
                         page.weathers.Add(weatherModel);
+                        page.WeatherFlip.SelectedItem = weatherModel;
                     });
                 }
+            }
+        }
+
+        private void WeatherFlip_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            currentFlipViewContainer = WeatherFlip.ItemContainerGenerator.ContainerFromItem(WeatherFlip.SelectedItem);
+            if (currentFlipViewContainer != null)
+            {
+                var ForecastGrid = FindElementByName<GridView>(currentFlipViewContainer, "ForecastGrid");
+                ForecastGrid.SelectedIndex = 0;
             }
         }
     }

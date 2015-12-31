@@ -10,7 +10,8 @@
     Loaded="Page_Loaded">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}">
+        <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}"
+                  SelectionChanged="WeatherFlip_SelectionChanged">
             <FlipView.ItemTemplate>
                 <DataTemplate x:DataType="data:WeatherModel">
                     <Grid>
