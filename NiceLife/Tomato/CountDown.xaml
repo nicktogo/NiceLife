@@ -4,19 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="110" d:DesignWidth="150">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="43*" />
-            <ColumnDefinition Width="13"/>
-            <ColumnDefinition Width="43*" />
-            <ColumnDefinition Width="13"/>
-            <ColumnDefinition Width="43*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="00" Name="HourArea"  VerticalAlignment="Center" FontSize="30" Grid.Column="0" Foreground="DarkOrange" />
-        <TextBlock Text=":" Name="HourSplitMinute"  VerticalAlignment="Center" FontSize="30" Grid.Column="1" Foreground="DarkOrange" />
-        <TextBlock Text="00" Name="MinuteArea" VerticalAlignment="Center" FontSize="30" Grid.Column="2" Foreground="DarkOrange" />
-        <TextBlock Text=":" Name="MinuteSplitSecond"  VerticalAlignment="Center" FontSize="30" Grid.Column="3" Foreground="DarkOrange" />
-        <TextBlock Text="00"  Name="SecondArea" VerticalAlignment="Center" FontSize="30" Grid.Column="4" Foreground="DarkOrange" />
-    </Grid>
+             d:DesignHeight="110" d:DesignWidth="600">
+
+    <StackPanel Orientation="Horizontal">
+        <Button x:Name="btn_StartAndStop" Click="btn_StartAndStop_Click" Content="开始" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Grid Margin="50,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="43*" />
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="43*"/>
+                <ColumnDefinition Width="150*"/>
+
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+                <TextBlock x:Name="tb_TotalTomato" FontSize="20" Text="总🍅：" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" />
+                <TextBlock x:Name="tb_DoneTomato" FontSize="20" Text="已完成🍅：" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                <TextBlock x:Name="tb_UndoneTomato" FontSize="20" Text="未完成🍅：" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="00" Name="MinuteArea" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" Grid.Column="0" Foreground="DarkOrange" />
+            <TextBlock Grid.Row="1" Text=":" Name="MinuteSplitSecond"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Foreground="DarkOrange" />
+            <TextBlock Grid.Row="1" Text="00"  Name="SecondArea" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Grid.Column="2" Foreground="DarkOrange" />
+            <TextBlock Grid.Row="1" Text="番茄时间"  Name="Period" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Grid.Column="3"/>
+        </Grid>
+    </StackPanel>
+    
 </UserControl>

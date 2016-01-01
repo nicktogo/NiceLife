@@ -49,8 +49,21 @@
                             <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">描述：</TextBlock>
                             <TextBox x:Name="tb_Description" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                             <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">日期：</TextBlock>
-                            <DatePicker x:Name="dp_Date" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">番茄数：</TextBlock>
+                            
+                            <!--<DatePicker x:Name="dp_Date" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
+                            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal">
+                                <Button Content="选择日期" >
+                                    <Button.Flyout>
+                                        <DatePickerFlyout x:Name="dp_Date">
+
+                                        </DatePickerFlyout>
+                                    </Button.Flyout>
+                                </Button>
+                                <TextBlock x:Name="tb_Date" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="60,0,0,0"/>
+                            </StackPanel>
+                            
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">番茄数：</TextBlock>
                             <ComboBox x:Name="cb_Tomato" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectedIndex="0" xml:space ="preserve">
                                 <ComboBoxItem>1   🍅</ComboBoxItem>
                                 <ComboBoxItem>2   🍅🍅</ComboBoxItem>
