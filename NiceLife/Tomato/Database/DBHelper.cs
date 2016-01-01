@@ -22,11 +22,11 @@ namespace NiceLife.Tomato
 
         protected abstract String GetInsertSQL();
 
-        public abstract void DeleteSingleItemById(long id);
+        public abstract void DeleteSingleItem(T item);
 
-        public abstract void UpdateItems(List<T> items);
+        public abstract void UpdateDoneTomato(T item);
 
-        public abstract void UpdateSingleItem(T item);
+        public abstract void UpdateStatus(T item);
 
         public abstract List<T> SelectGroupItemsByDate(DateTime date);
 

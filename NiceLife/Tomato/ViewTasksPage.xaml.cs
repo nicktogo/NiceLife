@@ -25,9 +25,13 @@ namespace NiceLife
     public sealed partial class ViewTasksPage : Page
     {
         public List<Task> taskList = null;
+        public DateTime date;
+        Grid g_ViewTasksContent;
 
         public void fresh()
         {
+            if(g_ViewTasksContent != null)
+                g_ViewTasksContent.Children.Clear();
             if (taskList != null)
                 taskList.Clear();
             
@@ -38,8 +42,8 @@ namespace NiceLife
             else
                 tb_IsToday.Visibility = Visibility.Collapsed;
 
-            Grid g_ViewTasksContent = new Grid();
-            for(int rowCount = 0; rowCount < taskList.Count/8+1; rowCount++)
+            g_ViewTasksContent = new Grid();
+            for (int rowCount = 0; rowCount < taskList.Count/8+1; rowCount++)
             {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(120);
@@ -58,7 +62,18 @@ namespace NiceLife
                 for (int j =0; j < 8; j++)
                 {
                     Grid g_TaskContent = new Grid();
-                    g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+                    if (taskList.ElementAt(count).Status == "Done")
+                        g_TaskContent.Background = new SolidColorBrush(Colors.Green);
+                    else
+                    {
+                        if(taskList.ElementAt(count).Date.Date.CompareTo(DateTime.Now.Date) < 0)
+                            g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+                        else
+                        {
+                            g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_TaskContent.RightTapped += G_TaskContent_RightTapped;
+                        }
+                    } 
                     g_TaskContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                     g_TaskContent.VerticalAlignment = VerticalAlignment.Stretch;
                     g_TaskContent.Margin = new Thickness(5, 5, 5, 5);
@@ -124,10 +139,27 @@ namespace NiceLife
             this.Frame.Navigate(typeof(DoTaskPage), task);
         }
 
+        private void G_TaskContent_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            MenuFlyout mfo = new MenuFlyout();
+            MenuFlyoutItem mfoItem = new MenuFlyoutItem();
+            mfoItem.Text = "删除";
+            mfoItem.Click += deleteTask;
+            mfoItem.Tag = taskList.ElementAt((int)(((Grid)sender).Tag));
+            mfo.Items.Add(mfoItem);
+            mfo.ShowAt((Grid)sender);
+        }
+
+        private void deleteTask(object sender, RoutedEventArgs e)
+        {
+            TaskHelper.GetHelper().DeleteSingleItem((Task)(((MenuFlyoutItem)sender).Tag));
+            fresh();
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            DateTime date = (DateTime)e.Parameter;
+            date = (DateTime)e.Parameter;
             dp_ViewDate.Date = date;
             fresh();
         }
