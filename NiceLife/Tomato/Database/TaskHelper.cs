@@ -53,9 +53,19 @@ namespace NiceLife.Tomato.Database
             }
         }
 
-        public override void DeleteSingleItemById(long id)
+        public override void DeleteSingleItem(Task item)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(DeleteSingleItemSQL()))
+            {
+                statement.Bind("@Id", item.Id);
+
+                statement.Step();
+            }
+        }
+
+        private string DeleteSingleItemSQL()
+        {
+            return "delete from Task where Id = @Id";
         }
 
         public override void InsertItems(List<Task> items)
@@ -141,19 +151,36 @@ namespace NiceLife.Tomato.Database
             return items;
         }
 
-        public override Task SelectSingleItemById(long id)
+        public override void UpdateDoneTomato(Task item)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(UpdateDoneTomatoSQL()))
+            {
+                statement.Bind("@Id", item.Id);
+                statement.Bind("@DoneTomato", item.DoneTomato);
+
+                statement.Step();
+            }
         }
 
-        public override void UpdateItems(List<Task> items)
+        private string UpdateDoneTomatoSQL()
         {
-            throw new NotImplementedException();
+            return "update Task set DoneTomato = @DoneTomato where Id = @Id";
         }
 
-        public override void UpdateSingleItem(Task item)
+        public override void UpdateStatus(Task item)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(UpdateStatusSQL()))
+            {
+                statement.Bind("@Id", item.Id);
+                statement.Bind("@Status", item.Status);
+
+                statement.Step();
+            }
+        }
+
+        private string UpdateStatusSQL()
+        {
+            return "update Task set Status = @Status where Id = @Id";
         }
 
         protected override string GetInsertSQL()
@@ -170,7 +197,7 @@ namespace NiceLife.Tomato.Database
 
         protected override string GetSelectDateSQL()
         {
-            return "select DISTINCT strftime('%Y-%m-%d', Date) from Task where strftime('%Y-%m-%d', Date) >= strftime('%Y-%m-%d', 'now') order by Date ASC";
+            return "select DISTINCT strftime('%Y-%m-%d', Date) from Task where strftime('%Y-%m-%d', Date) >= strftime('%Y-%m-%d', 'now', 'localtime') order by Date ASC";
         }
 
         protected string GetDeleteAllSQL()
@@ -186,6 +213,11 @@ namespace NiceLife.Tomato.Database
         protected override string GetSelectAllDateSQL()
         {
             return "select DISTINCT strftime('%Y-%m-%d', Date) from Task order by Date ASC";
+        }
+
+        public override Task SelectSingleItemById(long id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

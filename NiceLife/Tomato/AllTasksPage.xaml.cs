@@ -26,9 +26,12 @@ namespace NiceLife
     {
         public List<Task> allTaskList = null;
         public List<DateTime> allDateList = null;
+        Grid g_AllTasksContent;
 
         public void fresh()
         {
+            if (g_AllTasksContent != null)
+                g_AllTasksContent.Children.Clear();
             if (allTaskList != null)
                 allTaskList.Clear();
             if (allDateList != null)
@@ -37,7 +40,7 @@ namespace NiceLife
             allTaskList = TaskHelper.GetHelper().SelectAllItems();
             allDateList = TaskHelper.GetHelper().SelectAllDate();
 
-            Grid g_AllTasksContent = new Grid();
+            g_AllTasksContent = new Grid();
             for (int rowCount = 0; rowCount < (allTaskList.Count+allDateList.Count) / 8 + 1; rowCount++)
             {
                 RowDefinition rowdef = new RowDefinition();
@@ -61,7 +64,10 @@ namespace NiceLife
                     if(totalCount == 0)
                     {
                         Grid g_DateContent = new Grid();
-                        g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                        if (allTaskList.ElementAt(taskCount).Date.Date.CompareTo(DateTime.Now.Date) < 0)
+                            g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                        else
+                            g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
                         g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -89,7 +95,10 @@ namespace NiceLife
                             if (allTaskList.ElementAt(taskCount).Date.ToString("yyyy-MM-dd") != allTaskList.ElementAt(taskCount - 1).Date.ToString("yyyy-MM-dd") && lastIsDate == false)
                             {
                                 Grid g_DateContent = new Grid();
-                                g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                                if (allTaskList.ElementAt(taskCount).Date.Date.CompareTo(DateTime.Now.Date) < 0)
+                                    g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                                else
+                                    g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
                                 g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                                 g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                                 g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -117,7 +126,18 @@ namespace NiceLife
                     
                     
                     Grid g_TaskContent = new Grid();
-                    g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+                    if (allTaskList.ElementAt(taskCount).Status == "Done")
+                        g_TaskContent.Background = new SolidColorBrush(Colors.Green);
+                    else
+                    {
+                        if (allTaskList.ElementAt(taskCount).Date.Date.CompareTo(DateTime.Now.Date) < 0)
+                            g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+                        else
+                        {
+                            g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_TaskContent.RightTapped += G_TaskContent_RightTapped;
+                        }      
+                    }
                     g_TaskContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                     g_TaskContent.VerticalAlignment = VerticalAlignment.Stretch;
                     g_TaskContent.Margin = new Thickness(5, 5, 5, 5);
@@ -190,6 +210,23 @@ namespace NiceLife
         {
             Task task = allTaskList.ElementAt((int)((Grid)sender).Tag);
             this.Frame.Navigate(typeof(DoTaskPage), task);
+        }
+
+        private void G_TaskContent_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            MenuFlyout mfo = new MenuFlyout();
+            MenuFlyoutItem mfoItem = new MenuFlyoutItem();
+            mfoItem.Text = "删除";
+            mfoItem.Click += deleteTask;
+            mfoItem.Tag = allTaskList.ElementAt((int)(((Grid)sender).Tag));
+            mfo.Items.Add(mfoItem);
+            mfo.ShowAt((Grid)sender);
+        }
+
+        private void deleteTask(object sender, RoutedEventArgs e)
+        {
+            TaskHelper.GetHelper().DeleteSingleItem((Task)(((MenuFlyoutItem)sender).Tag));
+            fresh();
         }
 
         public AllTasksPage()

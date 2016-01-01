@@ -7,15 +7,63 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="OrangeRed">
+    <Grid x:Name="g_DoTask" Background="OrangeRed">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"></RowDefinition>
-            <RowDefinition Height="25*"></RowDefinition>
-            <RowDefinition Height="25*"></RowDefinition>
+            <RowDefinition Height="35*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
             <RowDefinition Height="119*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btn_NewInterrupt" FontSize="40" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Content="+" Height="80" Width="80" Margin="0,10,34,10">
+            <Button.Flyout>
+                <Flyout x:Name="fo_NewInterrupt">
+                    <Grid Height="188" Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40*"></RowDefinition>
+                            <RowDefinition Height="40*"></RowDefinition>
+                            <RowDefinition Height="40*"></RowDefinition>
+                            <RowDefinition Height="40*"></RowDefinition>
+                            <RowDefinition Height="60*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80*"></ColumnDefinition>
+                            <ColumnDefinition Width="280*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">标题：</TextBlock>
+                        <TextBox x:Name="tb_InterruptTitle" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">描述：</TextBlock>
+                        <TextBox x:Name="tb_InterruptDescription" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">中断类型：</TextBlock>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                            <RadioButton x:Name="rb_Internal" GroupName="InterruptType" IsChecked="True">内部中断</RadioButton>
+                            <RadioButton x:Name="rb_External" GroupName="InterruptType">外部中断</RadioButton>
+                        </StackPanel>
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">番茄数：</TextBlock>
+                        <ComboBox x:Name="cb_InterruptTomato" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectedIndex="0" xml:space ="preserve">
+                                <ComboBoxItem>1   🍅</ComboBoxItem>
+                                <ComboBoxItem>2   🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>3   🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>4   🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>5   🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>6   🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>7   🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>8   🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>9   🍅🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>10 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>11 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                                <ComboBoxItem>12 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
+                            </ComboBox>
+                        <Button x:Name="btn_NewInterruptConfirm" Click="btn_NewInterruptConfirm_Click" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="确认"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+
         <TextBlock x:Name="tb_Title" FontSize="50" Text="标题" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
         <TextBlock x:Name="tb_Description" FontSize="30" Text="描述" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
-        <local:CountDown Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
     </Grid>
 </Page>

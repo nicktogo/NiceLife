@@ -30,6 +30,7 @@ namespace NiceLife
 
         public void TodayTasksFresh()
         {
+            g_TodayTasksContent.Children.Clear();
             if (taskList != null)
                 taskList.Clear();
             taskList = TaskHelper.GetHelper().SelectGroupItemsByDate(DateTime.Now);
@@ -41,7 +42,17 @@ namespace NiceLife
                     if (count < taskList.Count && count != 7)
                     {
                         Grid g_TaskContent = new Grid();
-                        g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+
+                        g_TaskContent.Tag = count;
+                        g_TaskContent.Tapped += G_TaskContent_Tapped;
+
+                        if (taskList.ElementAt(count).Status == "Done")
+                            g_TaskContent.Background = new SolidColorBrush(Colors.Green);
+                        else
+                        {
+                            g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_TaskContent.RightTapped += G_TaskContent_RightTapped;
+                        }
                         g_TaskContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_TaskContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_TaskContent.Margin = new Thickness(5, 5, 5, 5);
@@ -88,15 +99,14 @@ namespace NiceLife
                         Grid.SetRow(tb_TaskContentUndoneTomato, 2);
                         Grid.SetColumn(tb_TaskContentUndoneTomato, 1);
 
-                        g_TaskContent.Tag = count;
-                        g_TaskContent.Tapped += G_TaskContent_Tapped;
+                        
 
                         count++;
                     }
                     else if (taskList.Count > 7 && count == 7)
                     {
                         Grid g_TaskContent = new Grid();
-                        g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+                        g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
                         g_TaskContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_TaskContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_TaskContent.Margin = new Thickness(5, 5, 5, 5);
@@ -117,8 +127,27 @@ namespace NiceLife
                 }
         }
 
+        private void G_TaskContent_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            MenuFlyout mfo = new MenuFlyout();
+            MenuFlyoutItem mfoItem = new MenuFlyoutItem();
+            mfoItem.Text = "删除";
+            mfoItem.Click += deleteTask;
+            mfoItem.Tag = taskList.ElementAt((int)(((Grid)sender).Tag));
+            mfo.Items.Add(mfoItem);
+            mfo.ShowAt((Grid)sender);
+        }
+
+        private void deleteTask(object sender, RoutedEventArgs e)
+        {
+            TaskHelper.GetHelper().DeleteSingleItem((Task)(((MenuFlyoutItem)sender).Tag));
+            TodayTasksFresh();
+            AllTasksFresh();
+        }
+
         public void AllTasksFresh()
         {
+            g_AllTasksContent.Children.Clear();
             if (dateList != null)
                 dateList.Clear();
             dateList = TaskHelper.GetHelper().SelectDate();
@@ -130,7 +159,7 @@ namespace NiceLife
                     if (count < dateList.Count && count != 7)
                     {
                         Grid g_DateContent = new Grid();
-                        g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                        g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
                         g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -153,7 +182,7 @@ namespace NiceLife
                     else if (dateList.Count > 7 && count == 7)
                     {
                         Grid g_DateContent = new Grid();
-                        g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                        g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
                         g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -180,6 +209,13 @@ namespace NiceLife
 
             TodayTasksFresh();
             AllTasksFresh();
+            tb_Date.Text = dp_Date.Date.ToString("yyyy-MM-dd");
+            tb_Date.DataContextChanged += Tb_Date_DataContextChanged;
+        }
+
+        private void Tb_Date_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            tb_Date.Text = dp_Date.Date.ToString("yyyy-MM-dd");
         }
 
         private void G_TaskContent_Tapped_More(object sender, TappedRoutedEventArgs e)
