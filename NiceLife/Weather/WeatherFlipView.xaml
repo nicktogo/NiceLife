@@ -66,11 +66,8 @@
     </Page.Resources>
 
     <Grid >
-        <Image Opacity="0.7" Stretch="UniformToFill">
-            <Image.Source>
-                <BitmapImage UriSource="{x:Bind backgroudImageUri}" />
-            </Image.Source>
-        </Image>
+        <Image Source="{x:Bind backgroudSource, Mode=OneWay}" Opacity="0.7" Stretch="UniformToFill" />
+        
         <FlipView x:Name="WeatherFlip" ItemsSource="{x:Bind weathers, Mode=OneWay}"
                   SelectionChanged="WeatherFlip_SelectionChanged">
             <FlipView.ItemTemplate>

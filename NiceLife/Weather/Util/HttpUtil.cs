@@ -58,7 +58,7 @@ namespace NiceLife.Weather.Util
                 try
                 {
                     StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-                    StorageFile imageFile = await localFolder.CreateFileAsync("background_test.jpg", CreationCollisionOption.ReplaceExisting);
+                    StorageFile imageFile = await localFolder.CreateFileAsync(WeatherFlipView.BACKGROUND_IMAGE_NAME, CreationCollisionOption.ReplaceExisting);
                     await FileIO.WriteBytesAsync(imageFile, imageBytes);
                 }
                 catch (Exception e)

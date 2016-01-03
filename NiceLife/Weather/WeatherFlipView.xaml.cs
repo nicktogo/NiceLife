@@ -8,12 +8,15 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -27,11 +30,32 @@ namespace NiceLife.Weather
     {
         private ObservableCollection<WeatherModel> weathers = new ObservableCollection<WeatherModel>();
         private DependencyObject currentFlipViewContainer;
-        private Uri backgroudImageUri;
+        private BitmapImage backgroudSource = new BitmapImage();
+        public const string BACKGROUND_IMAGE_NAME = "background.jpg";
         public WeatherFlipView()
         {
             this.InitializeComponent();
-            backgroudImageUri = new Uri("http://s.cn.bing.net/az/hprichbg/rb/PolarBearPlunge_ZH-CN11777095530_1920x1080.jpg");
+
+            // set background image
+            GetBackgroundFromFile();
+        }
+
+        private async void GetBackgroundFromFile()
+        {
+            try
+            {
+                StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                StorageFile backgroundFile = await localFolder.GetFileAsync(BACKGROUND_IMAGE_NAME);
+                using (IRandomAccessStream fileStream = await backgroundFile.OpenAsync(FileAccessMode.Read))
+                {
+                    await backgroudSource.SetSourceAsync(fileStream);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Uri uri = new Uri("ms-appx:///Assets/DefaultBackground.jpg");
+                backgroudSource.UriSource = uri;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
