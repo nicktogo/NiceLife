@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NiceLife.Weather.Database;
 using System.Xml;
+using Windows.Storage;
 
 namespace NiceLife.Weather.Util
 {
@@ -24,6 +25,8 @@ namespace NiceLife.Weather.Util
         private const string TAG_WIND_DIRECTION = "fengxiang";
         private const string TAG_WIND_POWER = "fengli";
         private const string TAG_YESTERDAY = "date_1";
+
+        private const string TAG_IMAGE_URL = "url";
 
         public static bool handleProvincesResponse(string response)
         {
@@ -193,5 +196,40 @@ namespace NiceLife.Weather.Util
             }
             return false;
         }
+
+        public static void requestImageResource()
+        {
+            HttpUtil.SendHttpRequest(HttpUtil.IMAGE_SOURCE, new Listener());
+        }
+
+        public static bool handleImageResponse(string response)
+        {
+            if (!String.IsNullOrEmpty(response))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(response);
+
+                XmlNodeList tempList = doc.GetElementsByTagName(TAG_IMAGE_URL);
+                string imageURL = String.Format(HttpUtil.IMAGE_PREFIX, tempList.Item(0).InnerText);
+
+                HttpUtil.SendGetImageResquest(imageURL, new Listener());
+                return true;
+            }
+            return false;
+        }
+
+        private class Listener : HttpCallbackListener
+        {
+            public void OnError(Exception e)
+            {
+                throw e;
+            }
+
+            public void OnFinished(string response)
+            {
+                handleImageResponse(response);
+            }
+        }
+
     }
 }

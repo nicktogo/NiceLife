@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceLife.Weather.Util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,8 @@ namespace NiceLife
             this.Suspending += OnSuspending;
             NiceLife.Weather.Database.CreateDatabase.LoadDatabase();
             NiceLife.Tomato.Database.CreateDatabase.LoadDatabase();
+
+            DataUtility.requestImageResource();
         }
 
         /// <summary>
