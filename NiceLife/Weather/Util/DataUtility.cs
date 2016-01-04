@@ -110,37 +110,36 @@ namespace NiceLife.Weather.Util
                 doc.LoadXml(response);
 
                 // get realtime detail
-                RealtimeDetail r = new RealtimeDetail();
-                r.CountyId = CountyId;
+                RealtimeDetail realtimeDetail = new RealtimeDetail();
+                realtimeDetail.CountyId = CountyId;
                 XmlNodeList detailTemp;
 
                 detailTemp = doc.GetElementsByTagName(TAG_CITY);
-                r.CountyName = detailTemp.Item(0).InnerText;
+                realtimeDetail.CountyName = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_UPDATE_TIME);
-                r.UpdateTime = detailTemp.Item(0).InnerText;
+                realtimeDetail.UpdateTime = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_TEMP);
-                r.RealtimeTemp = detailTemp.Item(0).InnerText;
+                realtimeDetail.RealtimeTemp = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_WIND_POWER);
-                r.RealtimeWindPower = detailTemp.Item(0).InnerText;
+                realtimeDetail.RealtimeWindPower = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_HUMIDITY);
-                r.Humidity = detailTemp.Item(0).InnerText;
+                realtimeDetail.Humidity = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_WIND_DIRECTION);
-                r.RealtimeWindDirection = detailTemp.Item(0).InnerText;
+                realtimeDetail.RealtimeWindDirection = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_SUNRISE);
-                r.Sunrise = detailTemp.Item(0).InnerText;
+                realtimeDetail.Sunrise = detailTemp.Item(0).InnerText;
 
                 detailTemp = doc.GetElementsByTagName(TAG_SUNSET);
-                r.Sunset = detailTemp.Item(0).InnerText;
+                realtimeDetail.Sunset = detailTemp.Item(0).InnerText;
 
                 RealTimeDetailHelper rHelper = RealTimeDetailHelper.GetHelper();
-                rHelper.DeleteSingleItemById(CountyId);
-                rHelper.InsertSingleItem(r);
+                rHelper.InsertOrUpdateItem(realtimeDetail);
 
 
                 // get forecast

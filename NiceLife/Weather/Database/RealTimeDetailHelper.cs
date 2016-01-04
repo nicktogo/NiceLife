@@ -98,7 +98,31 @@ namespace NiceLife.Weather.Database
 
         public override void UpdateSingleItem(RealtimeDetail item)
         {
-            throw new NotImplementedException();
+            using(var statement = conn.Prepare(GetUpdateSingleItemSQL()))
+            {
+                statement.Bind("@CountyId", item.CountyId);
+                statement.Bind("@UpdateTime", item.UpdateTime);
+                statement.Bind("@RealtimeTemp", item.RealtimeTemp);
+                statement.Bind("@Humidity", item.Humidity);
+                statement.Bind("@RealtimeWindDirection", item.RealtimeWindDirection);
+                statement.Bind("@RealtimeWindPower", item.RealtimeWindPower);
+                statement.Bind("@Sunrise", item.Sunrise);
+                statement.Bind("@Sunset", item.Sunset);
+                statement.Step();
+            }
+        }
+
+        public void InsertOrUpdateItem(RealtimeDetail item)
+        {
+            RealtimeDetail realtimeDetail = SelectSingleItemById(item.CountyId);
+            if (realtimeDetail == null)
+            {
+                InsertSingleItem(item);
+            }
+            else
+            {
+                UpdateSingleItem(item);
+            }
         }
 
         protected override string GetInsertSQL()
@@ -121,6 +145,12 @@ namespace NiceLife.Weather.Database
         protected string GetDeleteSQL()
         {
             return "DELETE FROM RealTimeDetail WHERE CountyId = @CountyId";
+        }
+
+        protected string GetUpdateSingleItemSQL()
+        {
+            return @"UPDATE RealTimeDetail SET UpdateTime = @UpdateTime, RealtimeTemp = @RealtimeTemp, Humidity = @Humidity, RealtimeWindDirection = @RealtimeWindDirection, RealtimeWindPower = @RealtimeWindPower, Sunrise = @Sunrise, Sunset = @Sunset
+                WHERE CountyId = @CountyId";
         }
     }
 }

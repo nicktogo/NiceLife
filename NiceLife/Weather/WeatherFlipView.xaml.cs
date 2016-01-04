@@ -37,6 +37,7 @@ namespace NiceLife.Weather
         private BitmapImage backgroudSource = new BitmapImage();
 
         private bool isFromMainPage = false;
+        private bool isRefreshBottonClicked = false;
         public WeatherFlipView()
         {
             this.InitializeComponent();
@@ -71,6 +72,11 @@ namespace NiceLife.Weather
 
         private void GetWeathers()
         {
+            if (isRefreshBottonClicked)
+            {
+                weathers.Clear();
+            }
+
             CountyHelper countyHelper = CountyHelper.GetHelper();
             List<County> counties = countyHelper.GetSelectedItems();
 
@@ -79,7 +85,6 @@ namespace NiceLife.Weather
             foreach (County county in counties)
             {
                 WeatherModel weatherModel = new WeatherModel();
-                long countyId = county.Id;
                 weatherModel.realtimeDetail = realTimeDetailHelper.SelectSingleItemById(county.Id);
                 List<Forecast> forecasts = forecastHelper.SelectGroupItems(county.Id);
                 foreach (Forecast f in forecasts)
@@ -281,7 +286,8 @@ namespace NiceLife.Weather
 
         private void RefreshWeather_Click(object sender, RoutedEventArgs e)
         {
-
+            isRefreshBottonClicked = true;
+            GetFromServer();
         }
     }
 }
