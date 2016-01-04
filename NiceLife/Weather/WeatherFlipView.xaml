@@ -106,13 +106,18 @@
                                            RelativePanel.RightOf="RealtimeTemp" />
                                 </RelativePanel>
                             </RelativePanel>
-                            <AutoSuggestBox x:Name="SearchArea" PlaceholderText="更多城市" Background="#19000000"
-                                            Margin="10" QueryIcon="Find" MinWidth="150"
+
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                <Button x:Name="RefreshWeather" Content="更新"  Background="#19000000" Click="RefreshWeather_Click"
+                                        Margin="16, 16, 16, 112" MinWidth="50" MinHeight="25"/>
+                                <AutoSuggestBox x:Name="SearchArea" PlaceholderText="更多城市"  Background="#19000000"
+                                            Margin="16" QueryIcon="Find" MinWidth="150"
                                             TextChanged="SearchArea_TextChanged"
                                             SuggestionChosen="SearchArea_SuggestionChosen"
                                             QuerySubmitted="SearchArea_QuerySubmitted"
-                                            HorizontalAlignment="Right" 
                                             DisplayMemberPath="Name"/>
+                            </StackPanel>
+                            
                         </Grid>
 
                         <GridView x:Name="ForecastGrid" ItemsSource="{x:Bind forecasts}" Grid.Row="1"

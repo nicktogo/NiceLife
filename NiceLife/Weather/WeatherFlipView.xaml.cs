@@ -28,10 +28,15 @@ namespace NiceLife.Weather
     /// </summary>
     public sealed partial class WeatherFlipView : Page
     {
+        public const string BACKGROUND_IMAGE_NAME = "background.jpg";
+        public const int NAVIGATED_FROM_MAINPAGE = 0x00;
+        public const int NAVIGATED_FROM_WEATHERPAGE = 0x01;
+
         private ObservableCollection<WeatherModel> weathers = new ObservableCollection<WeatherModel>();
         private DependencyObject currentFlipViewContainer;
         private BitmapImage backgroudSource = new BitmapImage();
-        public const string BACKGROUND_IMAGE_NAME = "background.jpg";
+
+        private bool isFromMainPage = false;
         public WeatherFlipView()
         {
             this.InitializeComponent();
@@ -61,6 +66,7 @@ namespace NiceLife.Weather
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            isFromMainPage = (int)e.Parameter == NAVIGATED_FROM_MAINPAGE ? true : false;
         }
 
         private void GetWeathers()
@@ -84,11 +90,14 @@ namespace NiceLife.Weather
             }
         }
 
-        private void GetFromServer(County county)
+        private void GetFromServer()
         {
-
-            string address = String.Format(HttpUtil.FORECAST_SOURCE, county.Name);
-            HttpUtil.SendHttpRequest(address, new Listener(this, county.Id));
+            List<County> counties = CountyHelper.GetHelper().GetSelectedItems();
+            foreach (County county in counties)
+            {
+                string address = String.Format(HttpUtil.FORECAST_SOURCE, county.Name);
+                HttpUtil.SendHttpRequest(address, new Listener(this, county.Id));
+            }
         }
 
         private class Listener : HttpCallbackListener
@@ -165,8 +174,15 @@ namespace NiceLife.Weather
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            GetWeathers();
-
+            if (isFromMainPage)
+            {
+                //update all forecast
+                GetFromServer();
+            }
+            else
+            {
+                GetWeathers();
+            }
             currentFlipViewContainer = WeatherFlip.ItemContainerGenerator.ContainerFromItem(WeatherFlip.SelectedItem);
             if (currentFlipViewContainer != null)
             {
@@ -261,6 +277,11 @@ namespace NiceLife.Weather
                 var ForecastGrid = FindElementByName<GridView>(currentFlipViewContainer, "ForecastGrid");
                 ForecastGrid.SelectedIndex = 0;
             }
+        }
+
+        private void RefreshWeather_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

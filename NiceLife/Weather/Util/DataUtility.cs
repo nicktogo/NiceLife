@@ -139,6 +139,7 @@ namespace NiceLife.Weather.Util
                 r.Sunset = detailTemp.Item(0).InnerText;
 
                 RealTimeDetailHelper rHelper = RealTimeDetailHelper.GetHelper();
+                rHelper.DeleteSingleItemById(CountyId);
                 rHelper.InsertSingleItem(r);
 
 

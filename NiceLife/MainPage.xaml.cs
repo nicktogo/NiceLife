@@ -91,7 +91,7 @@ namespace NiceLife
         {
             CountyHelper countyHelper = CountyHelper.GetHelper();
             List<County> counties = countyHelper.GetSelectedItems();
-            bool b = counties.Count > 0 ? MainFrame.Navigate(typeof(Weather.WeatherFlipView)) : MainFrame.Navigate(typeof(WeatherPage));
+            bool b = counties.Count > 0 ? MainFrame.Navigate(typeof(Weather.WeatherFlipView), Weather.WeatherFlipView.NAVIGATED_FROM_MAINPAGE) : MainFrame.Navigate(typeof(WeatherPage));
         }
     }
 }

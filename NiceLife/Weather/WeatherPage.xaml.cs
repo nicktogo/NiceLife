@@ -181,7 +181,7 @@ namespace NiceLife
                         case TYPE_FORECAST:
                             await page.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                             {
-                                page.Frame.Navigate(typeof(WeatherFlipView));
+                                page.Frame.Navigate(typeof(WeatherFlipView), WeatherFlipView.NAVIGATED_FROM_WEATHERPAGE);
                             });
                             break;
                     }
