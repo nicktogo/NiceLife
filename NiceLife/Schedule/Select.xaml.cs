@@ -46,5 +46,11 @@ namespace NiceLife
             this.SplitView.IsPaneOpen = !this.SplitView.IsPaneOpen;
             Frame.Navigate(typeof(DayPage));
         }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            this.SplitView.IsPaneOpen = !this.SplitView.IsPaneOpen;
+            Frame.Navigate(typeof(ListPage));
+        }
     }
 }

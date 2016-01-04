@@ -83,9 +83,28 @@ namespace NiceLife.Schedule.db
             return items;
         }
 
+        public  List<ColorLable> SelectlistItems()
+        {
+            List<ColorLable> items = new List<ColorLable>();
+            using (var statement = conn.Prepare(GetSelectlistSQL()))
+            {
+                
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    ColorLable c = CreateItem(statement);
+                    items.Add(c);
+                }
+            }
+            return items;
+        }
+
         protected override String GetSelectAllSQL()
         {
             return "SELECT * FROM ColorLable WHERE Id = @Id";
+        }
+        protected  String GetSelectlistSQL()
+        {
+            return "SELECT * FROM ColorLable";
         }
 
         public override ColorLable SelectSingleItemById(long id)

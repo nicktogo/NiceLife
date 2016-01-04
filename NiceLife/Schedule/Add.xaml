@@ -38,7 +38,7 @@
                 </TextBox.BorderBrush>
 
             </TextBox>
-            <TextBox x:Name="textBox_dsp" TextWrapping="Wrap" Text="" FontSize="29.333" Margin="30,161,68,468">
+            <TextBox x:Name="textBox_dsp" TextWrapping="Wrap" Text="" FontSize="29.333" Margin="30,161,192,468">
                 <TextBox.BorderBrush>
 
                     <LinearGradientBrush EndPoint="1,1" StartPoint="1,0">
@@ -77,11 +77,11 @@
             <CheckBox x:Name="checkBox_month" Content="every month" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="32" Foreground="#FF3AAFC9" Margin="672,128,-516,0" Click="checkBox_month_Checked"/>
             <CheckBox x:Name="checkBox_year" Content="every year" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="32" Foreground="#FF3AAFC9" Margin="672,182,-482,0" Click="checkBox_year_Checked"/>
             <CalendarDatePicker HorizontalAlignment="Left" Margin="30,280,0,0" VerticalAlignment="Top" Width="264" Foreground="#FF3AAFC9" BorderBrush="#FF3AAFC9" FontSize="29.333" Height="40" x:Name="BeginDate" DateChanged="BeginDate_DateChanged"/>
-            <CalendarDatePicker HorizontalAlignment="Left" Margin="30,386,0,0" VerticalAlignment="Top" Width="264" Foreground="#FF3AAFC9" BorderBrush="#FF3AAFC9" FontSize="29.333" Height="44" x:Name="EndDate" DateChanged="EndDate_DateChanged"/>
-            <TimePicker HorizontalAlignment="Left" Margin="30,323,0,0" VerticalAlignment="Top" Width="264" x:Name="BeginTime" Foreground="#FF3AAFC9" BorderBrush="#FF3AAFC9"/>
-            <TimePicker  HorizontalAlignment="Left" Margin="30,431,0,0" VerticalAlignment="Top" Width="264" x:Name="EndTime" Foreground="#FF3AAFC9" BorderBrush="#FF3AAFC9"/>
+            <TimePicker TimeChanged="BeginTime_TimeChanged" HorizontalAlignment="Left" Margin="30,323,0,0" VerticalAlignment="Top" Width="264" x:Name="BeginTime" Foreground="#FF3AAFC9" BorderBrush="#FF3AAFC9"/>
+            <TimePicker TimeChanged="EndTime_TimeChanged" HorizontalAlignment="Left" Margin="30,389,0,0" VerticalAlignment="Top" Width="264" x:Name="EndTime" Foreground="#FF3AAFC9" BorderBrush="#FF3AAFC9"/>
             <ComboBox x:Name="comboBox_color" HorizontalAlignment="Left" Margin="32,98,0,0" VerticalAlignment="Top" Width="262"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="158,528,0,0" TextWrapping="Wrap" Text="days" VerticalAlignment="Top" FontSize="29.333" Foreground="#FF3AAFC9"/>
+            <Button x:Name="save" Click="save_Click" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5" FontSize="29.333" Background="#338DEAD1" Foreground="#FF3AAFC9" Margin="204,177,48,468"/>
 
 
         </Grid>
@@ -106,8 +106,7 @@
             <ComboBox x:Name="comboBox_remind" HorizontalAlignment="Left" Margin="32,484,0,0" VerticalAlignment="Top" Width="264"/>
             <CheckBox x:Name="checkBox_day" Content="every day" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="32" Background="{x:Null}" Foreground="#FF3AAFC9" Margin="32,15,0,0" Click="checkBox_day_Checked"/>
             <CheckBox x:Name="checkBox_week" Content="every week"  HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="32" Background="{x:Null}" Foreground="#FF3AAFC9" Margin="32,71,0,0" Click="checkBox_week_Checked"/>
-            <Button x:Name="save" Click="save_Click" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5" FontSize="29.333" Background="#338DEAD1" Foreground="#FF3AAFC9" Margin="186,635,66,10"/>
-            
+
         </Grid>
     </Canvas>
 </Page>

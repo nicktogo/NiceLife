@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using NiceLife.Schedule.db;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -23,11 +26,39 @@ namespace NiceLife
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        List<Call> call;
+        List<Plan> infor;
         public MainPage()
         {
             this.InitializeComponent();
+           // check();
         }
+        public void check()
+        {
+            while (true)
+            {
+                CallHelper callp =CallHelper.GetHelper();
+                call = callp.SelectlistItems(DateTime.Now);
+                for(int i = 0; i < call.Count; i++)
+                {
+                    PlanHelper ph = PlanHelper.GetHelper();
+                    infor = ph.SelectGroupItems(call.ElementAt(i).Id);
+                }
+                for (int i = 0; i < call.Count; i++)
+                {
+                    if (call.ElementAt(i).Date == DateTime.Now)
+                    {
+                        ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
+                        XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                        XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+                        toastTextElements[0].AppendChild(toastXml.CreateTextNode(infor.ElementAt(i).Title+":"+ infor.ElementAt(i).Description));
+                        ToastNotification toast = new ToastNotification(toastXml);
+                        ToastNotificationManager.CreateToastNotifier().Show(toast);
+                    }
+                }
 
+            }
+        }
         private void BackRadioButton_Click(object sender, RoutedEventArgs e)
         {
             if (MainFrame.CanGoBack)

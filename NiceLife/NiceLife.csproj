@@ -117,6 +117,7 @@
     <Compile Include="Schedule\DayPage.xaml.cs">
       <DependentUpon>DayPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Schedule\db\Alarm.cs" />
     <Compile Include="Schedule\db\Call.cs" />
     <Compile Include="Schedule\db\CallHelper.cs" />
     <Compile Include="Schedule\db\ColorLable.cs" />
@@ -125,6 +126,9 @@
     <Compile Include="Schedule\db\DbHelper.cs" />
     <Compile Include="Schedule\db\Plan.cs" />
     <Compile Include="Schedule\db\PlanHelper.cs" />
+    <Compile Include="Schedule\ListPage.xaml.cs">
+      <DependentUpon>ListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Schedule\MonthPage.xaml.cs">
       <DependentUpon>MonthPage.xaml</DependentUpon>
     </Compile>
@@ -222,6 +226,10 @@
     <Page Include="Schedule\DayPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Schedule\ListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Schedule\MonthPage.xaml">
       <Generator>MSBuild:Compile</Generator>
