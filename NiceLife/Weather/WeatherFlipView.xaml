@@ -106,7 +106,7 @@
                                            RelativePanel.RightOf="RealtimeTemp" />
                                 </RelativePanel>
                             </RelativePanel>
-                            <AutoSuggestBox x:Name="SearchArea" PlaceholderText="更多城市" 
+                            <AutoSuggestBox x:Name="SearchArea" PlaceholderText="更多城市" Background="#19000000"
                                             Margin="10" QueryIcon="Find" MinWidth="150"
                                             TextChanged="SearchArea_TextChanged"
                                             SuggestionChosen="SearchArea_SuggestionChosen"
