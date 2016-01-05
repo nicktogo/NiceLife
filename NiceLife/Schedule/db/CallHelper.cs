@@ -45,8 +45,8 @@ namespace NiceLife.Schedule.db
 
                 statement.Step();
                 var statement2 = conn.Prepare("select max(Id) from Call");
-                statement.Step();
-                return (long)statement[0];
+                statement2.Step();
+                return (long)statement2[0];
             }
         }
        
@@ -58,7 +58,11 @@ namespace NiceLife.Schedule.db
 
         public override void DeleteSingleItemById(long id)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(GetDeleteSingleSQL()))
+            {
+                statement.Bind("@Id", id);
+                statement.Step();
+            }
         }
 
         public override void UpdateItems(List<Call> items)
@@ -68,7 +72,18 @@ namespace NiceLife.Schedule.db
 
         public override void UpdateSingleItem(Call item)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(GetUpdateSingleSQL()))
+            {
+
+                statement.Bind("@Date", DateTimeSQLite(item.Date));
+                statement.Bind("@Type", item.Type);
+                statement.Bind("@State", item.State);
+                statement.Bind("@Id", item.Id);
+
+                statement.Step();
+              
+                
+            }
         }
 
         public override List<Call> SelectGroupItems(long Id)
@@ -103,6 +118,14 @@ namespace NiceLife.Schedule.db
                 }
             }
             return items;
+        }
+        protected string GetUpdateSingleSQL()
+        {
+            return "UPDATE  Call SET Date=@Date,Type=@Type,State = @State WHERE Id=@Id";
+        }
+        protected string GetDeleteSingleSQL()
+        {
+            return "DELETE FROM Call WHERE Id=@Id";
         }
         protected  String GetSelectlistSQL()
         {
