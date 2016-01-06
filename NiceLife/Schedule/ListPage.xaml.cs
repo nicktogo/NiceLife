@@ -29,7 +29,7 @@ namespace NiceLife.Schedule
         public
             ObservableCollection<Alarm> UsefulAlarm = new ObservableCollection<Alarm>();
         List<Plan> list;
-        DateTime now = DateTime.Today;
+        DateTime now = DateTime.Now;
         string choose="";
         public ListPage()
         {
@@ -43,10 +43,13 @@ namespace NiceLife.Schedule
         {
             UsefulAlarm.Clear();
             choose = "doing";
+            ColorLable c;
             PlanHelper ph = PlanHelper.GetHelper();
             list = ph.SelectByDoing(now);
             for (int i = 0; i < list.Count(); i++) {
-                UsefulAlarm.Add(new Alarm(i,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate));
+                ColorLableHelper clp = ColorLableHelper.GetHelper();
+                c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
+                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
                     }
             listView1.DataContext = UsefulAlarm;
         }
@@ -55,18 +58,21 @@ namespace NiceLife.Schedule
         {
             UsefulAlarm.Clear();
             choose = "done";
+            ColorLable c;
             PlanHelper ph = PlanHelper.GetHelper();
             list = ph.SelectByAgo(now);
             for (int i = 0; i < list.Count(); i++)
             {
-                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate));
+                ColorLableHelper clp = ColorLableHelper.GetHelper();
+                c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
+                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
             }
             listView1.DataContext = UsefulAlarm;
         }
         public void reflash()
         {
             PlanHelper ph = PlanHelper.GetHelper();
-            
+            ColorLable c;
             UsefulAlarm.Clear();
 
             if (choose == "doing")
@@ -88,7 +94,9 @@ namespace NiceLife.Schedule
             }
             for (int i = 0; i < list.Count(); i++)
             {
-                UsefulAlarm.Add(new Alarm(i+1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate));
+                ColorLableHelper clp = ColorLableHelper.GetHelper();
+                c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
+                UsefulAlarm.Add(new Alarm(i+1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
             }
             listView1.DataContext = UsefulAlarm;
         }
@@ -100,7 +108,7 @@ namespace NiceLife.Schedule
                 if (list.ElementAt(listView1.SelectedIndex).IsRemind == 1)
                 {
                     CallHelper cp = CallHelper.GetHelper();
-                    cp.DeleteSingleItemById(list.ElementAt(listView1.SelectedIndex).RemindId);
+                    cp.DeleteSingleItemById(list.ElementAt(listView1.SelectedIndex).Id);
                 }
                 ph.DeleteSingleItemById(list.ElementAt(listView1.SelectedIndex).Id);
                 list.RemoveAt(listView1.SelectedIndex);
@@ -110,14 +118,7 @@ namespace NiceLife.Schedule
 
 
         private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {/*
-            ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(listView1.SelectedIndex.ToString()));
-            ToastNotification toast = new ToastNotification(toastXml);
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
-        */
+        {
             }
 
         private void time_DateChanged(object sender, DatePickerValueChangedEventArgs e)
@@ -139,11 +140,14 @@ namespace NiceLife.Schedule
         {
             UsefulAlarm.Clear();
             choose = "undo";
+            ColorLable c;
             PlanHelper ph = PlanHelper.GetHelper();
             list = ph.SelectByFurture(now);
             for (int i = 0; i < list.Count(); i++)
             {
-                UsefulAlarm.Add(new Alarm(i + 1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate));
+                ColorLableHelper clp = ColorLableHelper.GetHelper();
+                c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
+                UsefulAlarm.Add(new Alarm(i + 1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
             }
             listView1.DataContext = UsefulAlarm;
         }

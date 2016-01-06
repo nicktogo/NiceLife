@@ -13,14 +13,16 @@ namespace NiceLife.Schedule.db
         public string Description { get; set; }
         public DateTime BeginTime { get; set; }
         public DateTime EndTime { get; set; }
+        public string Color { get; set; }
         public Alarm() { }
-        public Alarm(int num,string title, string description, DateTime beginTime,DateTime endTime)
+        public Alarm(int num,string title, string description, DateTime beginTime,DateTime endTime,string color)
         {
             Num = num;
             Title = title;
             Description = description;
             BeginTime = beginTime;
             EndTime = endTime;
+            Color = color;
         }
         public override string ToString()
         {

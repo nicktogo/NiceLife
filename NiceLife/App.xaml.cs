@@ -39,6 +39,7 @@ namespace NiceLife
             this.Suspending += OnSuspending;
             NiceLife.Weather.Database.CreateDatabase.LoadDatabase();
             NiceLife.Tomato.Database.CreateDatabase.LoadDatabase();
+            NiceLife.Schedule.db.CreateDb.LoadDatabase();
 
             DataUtility.requestImageResource();
         }

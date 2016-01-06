@@ -29,56 +29,31 @@ namespace NiceLife.Schedule
     {
         DateTime current;
         List<Plan> list;
-        private const string PLANTASK = "PLANTAKS";
+        private const string PLANTASK = "PlanTask";
         ObservableCollection<Alarm> UsefulAlarm = new ObservableCollection<Alarm>();
         public DayPage()
         {
             this.InitializeComponent();
             current = DateTime.Today;
             choose.Date = current.Date;
-           
+            
             showtime(current);
+           
         }
-        private async void RegisterLiveTileTask()
-  {
-    var status = await BackgroundExecutionManager.RequestAccessAsync();
-      if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
-      {
-          return;
-      }
-            foreach (var cur in BackgroundTaskRegistration.AllTasks)
-            {
-                if (cur.Value.Name == PLANTASK)
-                {
-                    cur.Value.Unregister(true);
-                }
-            }
-
-            var taskBuilder = new BackgroundTaskBuilder
-     {
-          Name = PLANTASK,
-          TaskEntryPoint = typeof(PlanTask).FullName
-     };
-     taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
- 
-     var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-     updater.Clear();
-     var updater2 = TileUpdateManager.CreateTileUpdaterForSecondaryTile("appdota2");
-     updater2.Clear();
-     taskBuilder.SetTrigger(new TimeTrigger(1, false));
-     taskBuilder.Register();
- }
+  
         public void showtime(DateTime now)
         {
            
             
             current = now;
             PlanHelper ph = PlanHelper.GetHelper();
-           
+            ColorLable c;
             list = ph.SelectByDate(now);
             for (int i = 0; i < list.Count(); i++)
             {
-                UsefulAlarm.Add(new Alarm(i, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate));
+                ColorLableHelper clp = ColorLableHelper.GetHelper();
+                c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
+                UsefulAlarm.Add(new Alarm(i, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
             }
             listView1.DataContext = UsefulAlarm;
 

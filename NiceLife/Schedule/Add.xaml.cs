@@ -16,6 +16,7 @@ using NiceLife.Schedule.db;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using System.Globalization;
+using NiceLife;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -30,8 +31,9 @@ namespace NiceLife
         private Call c_ini;
         private string title;
         private string description;
-        private long id;
-
+        private long PlanId;
+        private string audioSrc;
+        private string isSilent;
         private long colorId;
         private long remindId;
         private DateTime remindDate;
@@ -42,6 +44,7 @@ namespace NiceLife
         private int isRemind;
         private long last;
         private int loop;
+        private List<ColorLable> color;
         
         public Add()
         {
@@ -63,7 +66,13 @@ namespace NiceLife
             BeginDate.Date = dateTime.Date;
             BeginTime.Time = dateTime.TimeOfDay;
             EndTime.Time = dateTime.AddHours(1).TimeOfDay;
-           
+            ColorLableHelper clp = ColorLableHelper.GetHelper();
+            color = clp.SelectlistItems();
+            for (int i = 0; i < color.Count(); i++)
+            {
+                comboBox_color.Items.Add(color.ElementAt(i).Color);
+            }
+            comboBox_color.SelectedIndex = 0;
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -71,6 +80,7 @@ namespace NiceLife
             p_ini = (Plan)e.Parameter;
             if (p_ini != null)
             {
+                PlanId = p_ini.Id;
                 textBox_title.Text = p_ini.Title;
                 ColorLableHelper clp = ColorLableHelper.GetHelper();
                 //   comboBox_color.SelectedValue = clp.SelectSingleItemById(p_ini.ColorId);
@@ -88,7 +98,7 @@ namespace NiceLife
                 {
                     radioButton_Y.IsChecked = true;
                     CallHelper ch = CallHelper.GetHelper();
-                    c_ini = ch.SelectSingleItemById(p_ini.RemindId);
+                    c_ini = ch.SelectSingleItemById(p_ini.Id);
                     if (c_ini != null)
                     {
                         RemindDate.Date = c_ini.Date.Date;
@@ -109,7 +119,9 @@ namespace NiceLife
             beginDate = beginDate.Add(BeginTime.Time);
             endDate = BeginDate.Date.Value.Date;
             endDate = beginDate.Add(BeginTime.Time);
-
+            audioSrc =comboBox_remind.SelectedValue.ToString();
+            isSilent = checkBoxSilent.IsChecked == true ? "true" : "false";
+            colorId = color.ElementAt(comboBox_color.SelectedIndex).Id;
             if (textBox_last.Text != "")
                 last = int.Parse(textBox_last.Text);
 
@@ -168,15 +180,6 @@ namespace NiceLife
                     ToastNotification toast = new ToastNotification(toastXml);
                     ToastNotificationManager.CreateToastNotifier().Show(toast);
 
-                    /*  if (!radioButton_Y.IsChecked.Value&&!radioButton_N.IsChecked.Value)
-                      {
-                          ToastTemplateType toastTemplate2 = ToastTemplateType.ToastImageAndText01;
-                          XmlDocument toastXml2 = ToastNotificationManager.GetTemplateContent(toastTemplate2);
-                          XmlNodeList toastTextElements2 = toastXml2.GetElementsByTagName("Remind");
-                          toastTextElements2[0].AppendChild(toastXml2.CreateTextNode("Do you want to be reminded?"));
-                          ToastNotification toast2 = new ToastNotification(toastXml2);
-                          ToastNotificationManager.CreateToastNotifier().Show(toast2);
-                      }*/
 
                 }
                 else {
@@ -185,7 +188,6 @@ namespace NiceLife
        
                     plan.Title = title;
                     plan.ColorId = colorId;
-                    plan.RemindId = check_remind();
                     plan.IsRemind = isRemind;
                     plan.Description = description;
                     plan.BeginDate = beginDate;
@@ -194,7 +196,9 @@ namespace NiceLife
                     plan.Loop = loop;
                     PlanHelper ph = PlanHelper.GetHelper();
                     ph.InsertSingleItem(plan);
-
+                    PlanId = ph.GetMaxId();
+                    check_remind();
+                    
                     DateTime bd = beginDate, ed = endDate;
                     if (loop == 0)
                     {
@@ -208,8 +212,9 @@ namespace NiceLife
                                 bd = bd.AddDays(1);
                                 remindDate = remindDate.AddDays(1);
                                 ed = ed.AddDays(1);
-                                plan.RemindId = check_remind();
                                 ph.InsertSingleItem(plan);
+                                PlanId = ph.GetMaxId();
+                                check_remind();
 
                             }
                         }
@@ -231,8 +236,9 @@ namespace NiceLife
                                         bd = bd.AddDays(1);
                                         ed = ed.AddDays(1);
                                         remindDate = remindDate.AddDays(1);
-                                        plan.RemindId = check_remind();
                                         ph.InsertSingleItem(plan);
+                                        PlanId = ph.GetMaxId();
+                                        check_remind();
 
                                     }
                                 }
@@ -242,8 +248,9 @@ namespace NiceLife
                                 remindDate = remindDate.AddDays(7 - last);
                                 plan.BeginDate = bd;
                                 plan.EndDate = ed;
-                                plan.RemindId = check_remind();
                                 ph.InsertSingleItem(plan);
+                                PlanId = ph.GetMaxId();
+                                check_remind();
                             }
                         }
                         if (loop == 2)
@@ -260,8 +267,9 @@ namespace NiceLife
                                         bd = bd.AddDays(1);
                                         ed = ed.AddDays(1);
                                         remindDate = remindDate.AddDays(1);
-                                        plan.RemindId = check_remind();
                                         ph.InsertSingleItem(plan);
+                                        PlanId = ph.GetMaxId();
+                                        check_remind();
 
                                     }
                                 }
@@ -273,8 +281,9 @@ namespace NiceLife
                                 remindDate = remindDate.AddMonths(1);
                                 plan.BeginDate = bd;
                                 plan.EndDate = ed;
-                                plan.RemindId = check_remind();
                                 ph.InsertSingleItem(plan);
+                                PlanId = ph.GetMaxId();
+                                check_remind();
                             }
 
                         }
@@ -292,8 +301,9 @@ namespace NiceLife
                                         remindDate = remindDate.AddDays(1);
                                         bd = bd.AddDays(1);
                                         ed = ed.AddDays(1);
-                                        plan.RemindId = check_remind();
                                         ph.InsertSingleItem(plan);
+                                        PlanId = ph.GetMaxId();
+                                        check_remind();
 
                                     }
                                 }
@@ -305,8 +315,9 @@ namespace NiceLife
                                 remindDate = remindDate.AddYears(1);
                                 plan.BeginDate = bd;
                                 plan.EndDate = ed;
-                                plan.RemindId = check_remind();
                                 ph.InsertSingleItem(plan);
+                                PlanId = ph.GetMaxId();
+                                check_remind();
                             }
                         }
                     }
@@ -318,6 +329,7 @@ namespace NiceLife
                     ToastNotification toast = new ToastNotification(toastXml);
                     ToastNotificationManager.CreateToastNotifier().Show(toast);
                     ini();
+                    
                 }
             }
             else
@@ -336,14 +348,15 @@ namespace NiceLife
                     if (c_ini != null)
                     {
                         c_ini.Date = remindDate;
+                        c_ini.Date = c_ini.Date.Add(RemindTime.Time);
                         c_ini.Type = remindType;
                         CallHelper cp = CallHelper.GetHelper();
                         cp.UpdateSingleItem(c_ini);
-                        p_ini.RemindId = c_ini.Id;
+                        
                     }
                     else
                     {
-                        p_ini.RemindId = check_remind();
+                        check_remind();
                     }
                 }
                 else
@@ -370,7 +383,42 @@ namespace NiceLife
            
     }
 
-        
+        public void check_remind()
+        {
+            Call remind = new Call();
+            if (isRemind == 1)
+            {
+                remind.PlanId = PlanId;
+                remind.Date = RemindDate.Date.Value.Date;
+
+                remind.Date = remind.Date.Add(RemindTime.Time);
+                remind.Type = remindType;
+                remind.State = 1;
+                if (RemindDate.Date.Value.Date == DateTime.Today)
+                {
+                    try
+                    {
+
+                        XmlDocument xdoc = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+
+                        var txtnodes = xdoc.GetElementsByTagName("text");
+                        txtnodes[0].InnerText = title + ":" + description;
+
+                        ScheduledToastNotification toast3 = new ScheduledToastNotification(xdoc, remind.Date);
+                        ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast3);
+                    }
+                    catch (Exception ex)
+                    {
+
+
+                    }
+                }
+                CallHelper ch = CallHelper.GetHelper();
+                ch.InsertSingleItem(remind);
+            }
+             
+
+        }
 
         private void radioButton_N_Checked(object sender, RoutedEventArgs e)
         {
@@ -425,21 +473,7 @@ namespace NiceLife
                 last_ini();
             }
         }
-        public long check_remind()
-        {
-            Call remind = new Call();
-            if (isRemind == 1)
-            {
-                remind.Date = RemindDate.Date.Value.Date;
-                remind.Date = remind.Date.Add(RemindTime.Time);
-                remind.Type = remindType;
-                remind.State = 1;
-                CallHelper ch = CallHelper.GetHelper();
-                return ch.InsertSingleItem(remind);
-            }
-            return 0;
-
-        }
+      
         private void checkBox_month_Checked(object sender, RoutedEventArgs e)
         {
             if (checkBox_month.IsChecked.Value)
@@ -541,6 +575,11 @@ namespace NiceLife
         private void EndTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
         {
             endDate=beginDate.Date.Add(EndTime.Time);
+        }
+
+        private void comboBox_color_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+
         }
     }
     
