@@ -41,19 +41,18 @@ namespace NiceLife.Schedule.db
                 statement.Bind("@Date", DateTimeSQLite(item.Date));
                 statement.Bind("@Type", item.Type);
                 statement.Bind("@State", item.State);
+                statement.Bind("@PlanId", item.PlanId);
 
 
                 statement.Step();
-                var statement2 = conn.Prepare("select max(Id) from Call");
-                statement2.Step();
-                return (long)statement2[0];
+                return 0;
             }
         }
        
 
         protected override String GetInsertSQL()
         {
-            return "INSERT INTO Call (Date,Type,State) VALUES (@Date,@Type,@State)";
+            return "INSERT INTO Call (Date,Type,State,PlanId) VALUES (@Date,@Type,@State,@PlanId)";
         }
 
         public override void DeleteSingleItemById(long id)
@@ -136,12 +135,12 @@ namespace NiceLife.Schedule.db
             return "SELECT * FROM Call WHERE Id = @Id";
         }
 
-        public override Call SelectSingleItemById(long id)
+        public override Call SelectSingleItemById(long Pid)
         {
             Call c = null;
             using (var statement = conn.Prepare(GetSelectSQL()))
             {
-                statement.Bind("@Id", id);
+                statement.Bind("@PlanId", Pid);
                 if (statement.Step() == SQLiteResult.ROW)
                 {
                     c = CreateItem(statement);
@@ -152,7 +151,7 @@ namespace NiceLife.Schedule.db
 
         protected override String GetSelectSQL()
         {
-            return "SELECT * FROM Call WHERE Id = @Id";
+            return "SELECT * FROM Call WHERE PlanId = @PlanId";
         }
 
         public override Call CreateItem(ISQLiteStatement statement)
@@ -164,7 +163,8 @@ namespace NiceLife.Schedule.db
             DateTime.TryParse((String)statement[1], out date);
             c.Date =date;
             c.Type = (String)statement[2];
-            c.State = (int)statement[3];
+            c.State = (long)statement[3];
+            c.PlanId=(long)statement[4];
             return c;
         }
         private String DateTimeSQLite(DateTime dateTime)

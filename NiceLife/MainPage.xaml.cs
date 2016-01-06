@@ -27,37 +27,43 @@ namespace NiceLife
     public sealed partial class MainPage : Page
     {
         List<Call> call;
-        List<Plan> infor;
+       
         public MainPage()
         {
+           
             this.InitializeComponent();
-           // check();
+            check();
         }
-        public void check()
+        public  void check()
         {
-            while (true)
-            {
+          //  Schedule.db.CreateDb.LoadDatabase();
                 CallHelper callp =CallHelper.GetHelper();
                 call = callp.SelectlistItems(DateTime.Now);
-                for(int i = 0; i < call.Count; i++)
-                {
-                    PlanHelper ph = PlanHelper.GetHelper();
-                    infor = ph.SelectGroupItems(call.ElementAt(i).Id);
-                }
-                for (int i = 0; i < call.Count; i++)
-                {
-                    if (call.ElementAt(i).Date == DateTime.Now)
-                    {
-                        ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
-                        XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-                        XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-                        toastTextElements[0].AppendChild(toastXml.CreateTextNode(infor.ElementAt(i).Title+":"+ infor.ElementAt(i).Description));
-                        ToastNotification toast = new ToastNotification(toastXml);
-                        ToastNotificationManager.CreateToastNotifier().Show(toast);
-                    }
-                }
+            for (int i = 0; i < call.Count; i++)
+            {
+                PlanHelper ph = PlanHelper.GetHelper();
+                Plan plan = ph.SelectSingleItemById(call.ElementAt(i).PlanId);
 
+                    DateTime toastTime;
+                    try
+                    {
+                        toastTime =call.ElementAt(i).Date;
+                        XmlDocument xdoc = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+
+                        var txtnodes = xdoc.GetElementsByTagName("text");
+                        txtnodes[0].InnerText = plan.Title+":"+ plan.Description;
+                       
+                        ScheduledToastNotification toast3 = new ScheduledToastNotification(xdoc, toastTime);
+                        ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast3);
+                    }
+                    catch (Exception ex)
+                    {
+                       //
+                       
+                    }
+                
             }
+            
         }
         private void BackRadioButton_Click(object sender, RoutedEventArgs e)
         {

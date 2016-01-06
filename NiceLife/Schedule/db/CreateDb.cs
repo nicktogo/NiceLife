@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace NiceLife.Schedule.db
 {
     class CreateDb
@@ -18,10 +19,8 @@ namespace NiceLife.Schedule.db
             EndDate datetime,
             Last integer,
             Loop integer,
-            IsRemind integer,
-            RemindId integer
-            
-            );";
+            IsRemind integer
+           );";
         private static String CREATE_ColorLable = @"CREATE TABLE IF NOT EXISTS ColorLable (
             Id integer primary key autoincrement,  
             Color text,
@@ -31,7 +30,8 @@ namespace NiceLife.Schedule.db
             Id integer primary key autoincrement,  
             Date datetime,
             Type integer,
-            State integer
+            State integer,
+            PlanId integer
             );";
 
         public static void LoadDatabase()

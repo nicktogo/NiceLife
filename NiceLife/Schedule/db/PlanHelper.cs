@@ -10,6 +10,7 @@ namespace NiceLife.Schedule.db
     class PlanHelper : DbHelper<Plan>
     {
         private PlanHelper() : base() { }
+        
 
         private static PlanHelper helper;
 
@@ -21,7 +22,9 @@ namespace NiceLife.Schedule.db
                 {
                     helper = new PlanHelper();
                 }
+               
             }
+           
             return helper;
         }
 
@@ -52,18 +55,18 @@ namespace NiceLife.Schedule.db
                 statement.Bind("@Last", item.Last);
                 statement.Bind("@Loop", item.Loop);
                 statement.Bind("@IsRemind", item.IsRemind);
-                statement.Bind("@RemindId", item.RemindId);
-                statement.Step();
                
-                return 0;
+                statement.Step();
+
+               
 
             }
-            
+            return 0;
         }
 
         protected override String GetInsertSQL()
         {
-            return "INSERT INTO Plan (Title,ColorId,Description,BeginDate,EndDate,Last,Loop,IsRemind,RemindId) VALUES (@Title,@ColorId,@Description,@BeginDate,@EndDate,@Last,@Loop,@IsRemind,@RemindId)";
+            return "INSERT INTO Plan (Title,ColorId,Description,BeginDate,EndDate,Last,Loop,IsRemind) VALUES (@Title,@ColorId,@Description,@BeginDate,@EndDate,@Last,@Loop,@IsRemind)";
         }
 
         public override void DeleteSingleItemById(long id)
@@ -98,7 +101,7 @@ namespace NiceLife.Schedule.db
                 statement.Bind("@Last", item.Last);
                 statement.Bind("@Loop", item.Loop);
                 statement.Bind("@IsRemind", item.IsRemind);
-                statement.Bind("@RemindId", item.RemindId);
+                
                 statement.Bind("@Id", item.Id);
                 statement.Step();
 
@@ -106,7 +109,7 @@ namespace NiceLife.Schedule.db
 
             }
         }
-
+        //unuseful
         public override List<Plan> SelectGroupItems(long foreignId)
         {
             List<Plan> items = new List<Plan>();
@@ -118,6 +121,18 @@ namespace NiceLife.Schedule.db
                     Plan plan = CreateItem(statement);
                     items.Add(plan);
                 }
+            }
+            return items;
+        }
+        public  Plan SelectSingleItems(long Id)
+        {
+            Plan items;
+            using (var statement = conn.Prepare(GetSelectSingleSQL()))
+            {
+                statement.Bind("@Id", Id);
+
+                items = CreateItem(statement);
+              
             }
             return items;
         }
@@ -200,23 +215,41 @@ namespace NiceLife.Schedule.db
             }
             return items;
         }
-        protected String GetUpdateSingleSQL()
+        public long GetMaxId()
         {
-            return "UPDATE Plan SET Title = @Title,ColorId = @ColorId,Description = @Description,BeginDate = @BeginDate,EndDate = @EndDate,Last = @Last,Loop = @Loop,IsRemind = @IsRemind,RemindId = @RemindId WHERE Id = @Id";
+            long Id=0;
+            using (var statement = conn.Prepare(GetMaxSQL()))
+            {
+                statement.Step();
+                Id= (long)statement[0];
+              
+            }
+            return 0;
         }
-        protected String GetDeleteSingleSQL()
+        protected string GetMaxSQL()
+        {
+            return "SELECT MAX(Id) FROM Plan";
+        }
+        protected string GetUpdateSingleSQL()
+        {
+            return "UPDATE Plan SET Title = @Title,ColorId = @ColorId,Description = @Description,BeginDate = @BeginDate,EndDate = @EndDate,Last = @Last,Loop = @Loop,IsRemind = @IsRemind WHERE Id = @Id";
+        }
+        protected string GetDeleteSingleSQL()
         {
             return "DELETE  FROM Plan WHERE Id=@Id";
         }
-        protected  String GetSelectByDate()
+        protected  string GetSelectByDate()
         {
             return "SELECT * FROM Plan";
         }
-        protected override String GetSelectAllSQL()
+        protected override string GetSelectAllSQL()
         {
             return "SELECT * FROM Plan WHERE RemindId = @RemindId";
         }
-
+        protected string GetSelectSingleSQL()
+        {
+            return "SELECT * FROM Plan WHERE Id = @Id";
+        }
         public override Plan SelectSingleItemById(long id)
         {
             Plan plan = null;
@@ -255,7 +288,7 @@ namespace NiceLife.Schedule.db
             plan.Last = (long)statement[6];
             plan.Loop = Convert.ToInt16( statement[7]);
             plan.IsRemind = Convert.ToInt16(statement[8]);
-            plan.RemindId = (long)statement[9];
+            
             return plan;
         }
         private String DateTimeSQLite(DateTime dateTime)

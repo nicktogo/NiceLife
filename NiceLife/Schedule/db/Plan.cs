@@ -12,7 +12,7 @@ namespace NiceLife.Schedule.db
         public long Id { get; set; }
         public String Title { get; set; }
         public long ColorId { get; set; }
-        public long RemindId { get; set; }
+       // public long RemindId { get; set; }
         public string Description { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }

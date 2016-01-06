@@ -17,12 +17,12 @@
         <ListView Name="listView1" ItemsSource="{Binding}"  FontSize="28" Margin="127,0,124,10" Grid.Row="1" SelectionChanged="listView1_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate >
-                    <StackPanel Orientation="Vertical" Margin="8">
-                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Num}" IsReadOnly="True" Foreground="#FF5F97E8"/>
-                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Title}" IsReadOnly="True" Foreground="#FF5F97E8"/>
-                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Description}" IsReadOnly="True" Foreground="#FF5F97E8"/>
-                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding BeginTime}" IsReadOnly="True" Foreground="#FF5F97E8"/>
-                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding EndTime}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                    <StackPanel Orientation="Vertical" Margin="8" >
+                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Num}" Background="{Binding Color}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Title}" Background="{Binding Color}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Description}" Background="{Binding Color}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding BeginTime}" Background="{Binding Color}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                        <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding EndTime}" Background="{Binding Color}" IsReadOnly="True" Foreground="#FF5F97E8"/>
 
                     </StackPanel>
                 </DataTemplate>

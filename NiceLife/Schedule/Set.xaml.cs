@@ -16,6 +16,7 @@ using NiceLife.Schedule.db;
 
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using System.Collections.ObjectModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -28,157 +29,76 @@ namespace NiceLife
     
     public sealed partial class Set : Page
     {
-        int page = 1;
-        int cur_page = 1;
-        int cur_count = 0;
-        int all = 0;
-        int change = 0;
-        List<ColorLable> list;
+
+        public bool ReadOnly{ get; set; }
+        public string Textcolor { get; set; }
+        List <ColorLable> list;
+        ObservableCollection<ColorLable> UsefulAlarm = new ObservableCollection<ColorLable>();
         public Set()
         {
             this.InitializeComponent();
-            appBarButton_save.Visibility = Visibility.Collapsed;
-            ColorLableHelper ch = ColorLableHelper.GetHelper();
-            list = ch.SelectlistItems();
-            all = list.Count();
-            page = (all / 12) + 1;
-            cur_count = all % 12;
-            showpage(1);
+
+            show();
+
+
         }
-        public void showpage(int p)
+       
+      public void show()
         {
-             change = 0;
-            color.Children.Clear();
-            cur_page = p;
-            int begin ;
-            if (p == 1)
+            listView1.Items.Clear();
+            ColorLableHelper cp = ColorLableHelper.GetHelper();
+            list = cp.SelectlistItems();
+            for (int i = 0; i < list.Count(); i++)
             {
-                begin = 0;
-                button_last.Visibility = Visibility.Collapsed;
+                UsefulAlarm.Add(list.ElementAt(i));
             }
-            else
-            {
-                begin = (p - 1) * 12;
-                button_last.Visibility = Visibility.Visible;
-            }
-            if (p == page)
-            {
-                button_next.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                button_next.Visibility = Visibility.Visible;
-            }
-            int k = 0;
-            while (begin < all)
-            {
-                k++;
-                ColorLable c = list.ElementAt(begin);
-                RectangleGeometry rc = new RectangleGeometry();
-                //color
-                TextBlock t = new TextBlock();
-                t.FontSize = 52;
-                t.Margin = new Thickness(200, 0, 0, 0);
-                t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                t.Text =c.Mean;
-                //can't edit t.text
-                color.Children.Add(t);
-                if (cur_count > 5)
-                {
-                    Grid.SetRow(t, cur_count - 6);
-                    Grid.SetColumn(t, 3);
-                }
-                else
-                {
-                    Grid.SetRow(t, cur_count);
-                    Grid.SetColumn(t, 0);
-                }
-                if (k >= 12) break;
-            }
+            ReadOnly = true;
+            listView1.DataContext = UsefulAlarm;
+            
         }
        
 
-        private void appBarButton_edit_Click(object sender, RoutedEventArgs e)
-        {
-            appBarButton_save.Visibility = Visibility.Visible;
-            appBarButton_edit.Visibility = Visibility.Collapsed;
-            change = 1;
-
-        }
+       
 
         private void appBarButton_add_Click(object sender, RoutedEventArgs e)
         {
-             change = 1;
-            cur_count++;
-            all++;
-            if (cur_count > 12)
-            {
-                page++;
-                color.Children.Clear();
-
-            }
-            //RectangleGeometry rc = new RectangleGeometry();
             
-            TextBlock t = new TextBlock();
-            t.FontSize = 52;
-            t.Margin = new Thickness(50, 0, 0, 0);
-            t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-            t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-            t.Text = "set Lable";
-            
-            color.Children.Add(t);
-            if (cur_count > 6)
-            {
-                Grid.SetRow(t, cur_count - 6-1);
-                Grid.SetColumn(t, 3);
-            }
-            else
-            {
-                Grid.SetRow(t, cur_count-1);
-                Grid.SetColumn(t, 0);
-            }
         }
 
         private void appBarButton_save_Click(object sender, RoutedEventArgs e)
         {
-            appBarButton_save.Visibility = Visibility.Collapsed;
-            appBarButton_edit.Visibility = Visibility.Visible;
-            change = 0;
-        }
-
-        private void button_last_Click(object sender, RoutedEventArgs e)
-        {
-            if (change == 1)
+           for(int i = 0; i < list.Count; i++)
             {
-                ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
-                XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-                XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-                toastTextElements[0].AppendChild(toastXml.CreateTextNode("please save at first!"));
-                ToastNotification toast = new ToastNotification(toastXml);
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
+                ColorLableHelper cp = ColorLableHelper.GetHelper();
+                cp.UpdateSingleItem(list.ElementAt(i));
             }
-            else {
-                showpage(cur_page - 1);
-            }
+            show();
+
         }
 
-        private void button_next_Click(object sender, RoutedEventArgs e)
+       
+        private void color_edit_Click(object sender, RoutedEventArgs e)
         {
-            if (change == 1)
-            {
-                ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
-                XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-                XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-                toastTextElements[0].AppendChild(toastXml.CreateTextNode("please save at first!"));
-                ToastNotification toast = new ToastNotification(toastXml);
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
-            }
-            else {
-                showpage(cur_page + 1);
-            }
+            ReadOnly = false;
         }
 
-        
+        private void color_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (listView1.SelectedIndex != -1)
+            {
+                ColorLableHelper cp = ColorLableHelper.GetHelper();
+                cp.DeleteSingleItemById(list.ElementAt(listView1.SelectedIndex).Id);
+                list.RemoveAt(listView1.SelectedIndex);
+            }
+            show();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (listView1.SelectedIndex != -1)
+            {
+                list.ElementAt(listView1.SelectedIndex).Mean = Textcolor;
+            }
+        }
     }
 }

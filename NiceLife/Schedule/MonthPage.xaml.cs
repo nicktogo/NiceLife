@@ -73,17 +73,18 @@ namespace NiceLife
                     {
                         //   Foreground = "#FF3AAFC9" />
 
-                        TextBlock t = new TextBlock();
-                        t.FontSize = 52;
-                        t.Foreground = new SolidColorBrush(Colors.DarkGray);
-
-                        t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                        t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                        t.Text = Convert.ToString(lastmon);
+                        Button b = new Button();
+                        
+                        b.FontSize = 52;
+                        b.Foreground = new SolidColorBrush(Colors.DarkGray);
+                        b.Background = null;
+                        b.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                        b.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                        b.Content = Convert.ToString(lastmon);
                         lastmon--;
-                        calview.Children.Add(t);
-                        Grid.SetRow(t, 1);
-                        Grid.SetColumn(t, i);
+                        calview.Children.Add(b);
+                        Grid.SetRow(b, 1);
+                        Grid.SetColumn(b, i);
 
 
                     }
@@ -97,7 +98,9 @@ namespace NiceLife
                     if ((i == 1) && (j < week1)) continue;
                     if (k <= lastday)
                     {
-                        TextBlock t = new TextBlock();
+                       
+                        Button t = new Button();
+                        t.Background = null;
                         t.FontSize = 52;
                         if (k == today.Day)
                         {
@@ -110,7 +113,7 @@ namespace NiceLife
 
                         t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                         t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                        t.Text = Convert.ToString(k);
+                        t.Content = Convert.ToString(k);
                         calview.Children.Add(t);
                         Grid.SetRow(t, i);
                         Grid.SetColumn(t, j);

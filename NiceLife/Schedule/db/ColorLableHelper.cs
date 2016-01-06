@@ -55,7 +55,11 @@ namespace NiceLife.Schedule.db
 
         public override void DeleteSingleItemById(long id)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(GetDeleteSingleSQL()))
+            {
+                statement.Bind("@Id", id);
+                statement.Step();
+            }
         }
 
         public override void UpdateItems(List<ColorLable> items)
@@ -65,7 +69,13 @@ namespace NiceLife.Schedule.db
 
         public override void UpdateSingleItem(ColorLable item)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(GetUpdateSingleSQL()))
+            {
+                statement.Bind("@Color", item.Color);
+                statement.Bind("@Mean", item.Mean);
+                statement.Bind("@Id", item.Id);
+                statement.Step();
+            }
         }
 
         public override List<ColorLable> SelectGroupItems(long Id)
@@ -97,7 +107,14 @@ namespace NiceLife.Schedule.db
             }
             return items;
         }
-
+        protected string GetDeleteSingleSQL()
+        {
+            return "DELETE FROM ColorLable WHERE Id=@Id";
+        }
+        protected string GetUpdateSingleSQL()
+        {
+            return "UPDATE ColorLable SET Color =@Color,Mean =@Mean WHERE Id = @Id";
+        }
         protected override String GetSelectAllSQL()
         {
             return "SELECT * FROM ColorLable WHERE Id = @Id";

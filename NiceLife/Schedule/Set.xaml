@@ -3,41 +3,33 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NiceLife"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:d ="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc ="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   >
 
     <Grid Background="#FFE4E1" Margin="0,0,0,0" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="90*"/>
-            <RowDefinition Height="10*"/>
+
         </Grid.RowDefinitions>
 
-        <Grid Name="color" Grid.Row="1" Background="#FFFBF7F7" Opacity="0.5">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="40*" />
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="40*"/>
+        <ListView Name="listView1" ItemsSource="{Binding}"  FontSize="28" Margin="131,0,130,10" Grid.Row="1" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="8" Background="{Binding ColorLable}">
+                        <Ellipse Fill="{Binding Color}" Height="50" Stroke="White" Width="50"/>
+                        <TextBox    Width="500"  TextWrapping="Wrap" Text="{Binding Mean}" IsReadOnly="{Binding ReadOnly}" Foreground="#FF5F97E8" Name="Textcolor" TextChanged="TextBox_TextChanged" Margin="50,0,0,0"/>
+                        <AppBarButton x:Name="color_edit"  Grid.Row="0" Click="color_edit_Click" HorizontalAlignment="Left" Icon="Edit" Label=""   ToolTipService.ToolTip="edit this coloelable" Margin="100,0,0,0"/>
+                        <AppBarButton x:Name="color_delete" Grid.Row="0" Click="color_delete_Click"  HorizontalAlignment="Left" Icon="Delete" Label=""  ToolTipService.ToolTip="delete this coloelable"/>
 
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Grid Grid.Row="2">
-            <Button x:Name="button_last" Click="button_last_Click" Content="LAST" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
-            <Button x:Name="button_next" Click="button_next_Click" Content="NEXT" HorizontalAlignment="Left" Margin="1071,10,0,0" VerticalAlignment="Top" FontSize="29.333" Background="#338DEAD1"/>
-        </Grid>
-        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="add" Margin="1082,9,0,-3" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable"/>
-        <AppBarButton x:Name="appBarButton_edit" Click="appBarButton_edit_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="edit" Margin="1147,8,0,-2" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable"/>
-        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="edit" Margin="1212,8,0,-2" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="add" Margin="1088,9,0,614" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable" Grid.RowSpan="2"/>
+        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Save" Label="edit" Margin="1140,8,0,0" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable"/>
 
     </Grid>
 </Page>
