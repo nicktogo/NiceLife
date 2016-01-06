@@ -17,35 +17,26 @@
             <FlyoutBase.AttachedFlyout>
                 <DatePickerFlyout/>
             </FlyoutBase.AttachedFlyout>
-            <DatePicker Grid.Row="0" DataContextChanged="choose_DataContextChanged" Name="choose" HorizontalAlignment="Left" Margin="34,19,0,0" VerticalAlignment="Top"/>
+            <DatePicker  Grid.Row="0" DateChanged="choose_DateChanged" Name="choose" HorizontalAlignment="Left" Margin="34,19,0,0" VerticalAlignment="Top"/>
 
         </Grid>
-        <Grid Name="time" Grid.Row="1"  Background="#FFFBF9FB" Opacity="0.5">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+     
+            <ListView Name="listView1" ItemsSource="{Binding}"  FontSize="28" Margin="127,0,124,10" Grid.Row="1" >
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <StackPanel Orientation="Vertical" Margin="8">
+                            <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Num}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                            <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Title}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                            <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding Description}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                            <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding BeginTime}" IsReadOnly="True" Foreground="#FF5F97E8"/>
+                            <TextBox   Width="350"  TextWrapping="Wrap" Text="{Binding EndTime}" IsReadOnly="True" Foreground="#FF5F97E8"/>
 
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="40*"/>
-
-
-            </Grid.ColumnDefinitions>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        
         </Grid>
 
 
-    </Grid>
 </Page>

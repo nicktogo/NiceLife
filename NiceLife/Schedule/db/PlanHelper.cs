@@ -68,7 +68,11 @@ namespace NiceLife.Schedule.db
 
         public override void DeleteSingleItemById(long id)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(GetDeleteSingleSQL()))
+            {
+                statement.Bind("@Id", id);
+                statement.Step();
+            }
         }
 
         public override void UpdateItems(List<Plan> items)
@@ -78,7 +82,29 @@ namespace NiceLife.Schedule.db
 
         public override void UpdateSingleItem(Plan item)
         {
-            throw new NotImplementedException();
+            using (var statement = conn.Prepare(GetUpdateSingleSQL()))
+            {
+
+                statement.Bind("@Title", item.Title);
+                statement.Bind("@ColorId", item.ColorId);
+
+                statement.Bind("@Description", item.Description);
+
+                statement.Bind("@BeginDate", DateTimeSQLite(item.BeginDate));
+                statement.Bind("@EndDate", DateTimeSQLite(item.EndDate));
+
+
+
+                statement.Bind("@Last", item.Last);
+                statement.Bind("@Loop", item.Loop);
+                statement.Bind("@IsRemind", item.IsRemind);
+                statement.Bind("@RemindId", item.RemindId);
+                statement.Bind("@Id", item.Id);
+                statement.Step();
+
+                
+
+            }
         }
 
         public override List<Plan> SelectGroupItems(long foreignId)
@@ -105,7 +131,48 @@ namespace NiceLife.Schedule.db
                 {
                     DateTime d;
                     DateTime.TryParse((String)statement[4], out d);
+                  
                     if (d.Date == date.Date)
+                    {
+                        Plan plan = CreateItem(statement);
+                        items.Add(plan);
+                    }
+                }
+            }
+            return items;
+        }
+        public List<Plan> SelectByDoing(DateTime date)
+        {
+            List<Plan> items = new List<Plan>();
+            using (var statement = conn.Prepare(GetSelectByDate()))
+            {
+                // statement.Bind("@BeginDate", DateTimeSelect(date));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime d, d2;
+                    DateTime.TryParse((String)statement[4], out d);
+                    DateTime.TryParse((String)statement[5], out d2);
+                    if (d.Date == date.Date && d <= date && d2 >= date)
+                    {
+                        Plan plan = CreateItem(statement);
+                        items.Add(plan);
+                    }
+                }
+            }
+            return items;
+        }
+        public List<Plan> SelectByFurture(DateTime date)
+        {
+            List<Plan> items = new List<Plan>();
+            using (var statement = conn.Prepare(GetSelectByDate()))
+            {
+                // statement.Bind("@BeginDate", DateTimeSelect(date));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    DateTime d;
+                    DateTime.TryParse((String)statement[4], out d);
+                    
+                    if ( d>date)
                     {
                         Plan plan = CreateItem(statement);
                         items.Add(plan);
@@ -123,8 +190,8 @@ namespace NiceLife.Schedule.db
                 while (statement.Step() == SQLiteResult.ROW)
                 {
                     DateTime d;
-                    DateTime.TryParse((String)statement[4], out d);
-                    if (d.Date < date.Date)
+                    DateTime.TryParse((String)statement[5], out d);
+                    if (d < date)
                     {
                         Plan plan = CreateItem(statement);
                         items.Add(plan);
@@ -132,6 +199,14 @@ namespace NiceLife.Schedule.db
                 }
             }
             return items;
+        }
+        protected String GetUpdateSingleSQL()
+        {
+            return "UPDATE Plan SET Title = @Title,ColorId = @ColorId,Description = @Description,BeginDate = @BeginDate,EndDate = @EndDate,Last = @Last,Loop = @Loop,IsRemind = @IsRemind,RemindId = @RemindId WHERE Id = @Id";
+        }
+        protected String GetDeleteSingleSQL()
+        {
+            return "DELETE  FROM Plan WHERE Id=@Id";
         }
         protected  String GetSelectByDate()
         {

@@ -26,7 +26,8 @@ namespace NiceLife
     /// </summary>
     public sealed partial class Add : Page
     {
-
+        private Plan p_ini;
+        private Call c_ini;
         private string title;
         private string description;
         private long id;
@@ -45,8 +46,7 @@ namespace NiceLife
         public Add()
         {
             this.InitializeComponent();
-            
-            ini();
+           ini();
         }
         public void ini()
         {
@@ -60,201 +60,312 @@ namespace NiceLife
             RemindDate.IsEnabled = false;
             RemindTime.IsEnabled = false;
             comboBox_remind.IsEnabled = false;
-            BeginDate.Date = dateTime;
-            beginDate = dateTime;
-            endDate = dateTime.AddHours(1);
+            BeginDate.Date = dateTime.Date;
+            BeginTime.Time = dateTime.TimeOfDay;
+            EndTime.Time = dateTime.AddHours(1).TimeOfDay;
            
         }
-        
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            p_ini = (Plan)e.Parameter;
+            if (p_ini != null)
+            {
+                textBox_title.Text = p_ini.Title;
+                ColorLableHelper clp = ColorLableHelper.GetHelper();
+                //   comboBox_color.SelectedValue = clp.SelectSingleItemById(p_ini.ColorId);
+                textBox_dsp.Text = p_ini.Description;
+                BeginDate.Date = p_ini.BeginDate.Date;
+                BeginTime.Time = p_ini.BeginDate.TimeOfDay;
+                EndTime.Time = p_ini.EndDate.TimeOfDay;
+                textBox_last.Text = p_ini.Last.ToString();
+                if (p_ini.Loop == 1) checkBox_year.IsChecked = true;
+                if (p_ini.Loop == 2) checkBox_month.IsChecked = true;
+                if (p_ini.Loop == 3) checkBox_week.IsChecked = true;
+                if (p_ini.Loop == 4) checkBox_day.IsChecked = true;
+                if (p_ini.IsRemind == 0) radioButton_N.IsChecked = true;
+                else
+                {
+                    radioButton_Y.IsChecked = true;
+                    CallHelper ch = CallHelper.GetHelper();
+                    c_ini = ch.SelectSingleItemById(p_ini.RemindId);
+                    if (c_ini != null)
+                    {
+                        RemindDate.Date = c_ini.Date.Date;
+                        RemindTime.Time = c_ini.Date.TimeOfDay;
+                        comboBox_remind.SelectedValue = c_ini.Type;
+                    }
+                }
+            }
+
+        }
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-           
-            if (textBox_title.Text == "")
-            {
-                ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
-                XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-                XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-                toastTextElements[0].AppendChild(toastXml.CreateTextNode("the title is null!"));
-                ToastNotification toast = new ToastNotification(toastXml);
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
-               
-              /*  if (!radioButton_Y.IsChecked.Value&&!radioButton_N.IsChecked.Value)
-                {
-                    ToastTemplateType toastTemplate2 = ToastTemplateType.ToastImageAndText01;
-                    XmlDocument toastXml2 = ToastNotificationManager.GetTemplateContent(toastTemplate2);
-                    XmlNodeList toastTextElements2 = toastXml2.GetElementsByTagName("Remind");
-                    toastTextElements2[0].AppendChild(toastXml2.CreateTextNode("Do you want to be reminded?"));
-                    ToastNotification toast2 = new ToastNotification(toastXml2);
-                    ToastNotificationManager.CreateToastNotifier().Show(toast2);
-                }*/
-               
-            }
-            else {
-                if (radioButton_Y.IsChecked.Value)
-                {
-                    isRemind = 1;
-                    remindDate = RemindDate.Date.Value.UtcDateTime;
-                    remindType = comboBox_remind.SelectedValue.ToString();
 
+            title = textBox_title.Text;
+            colorId = comboBox_color.SelectedIndex;
+            description = textBox_dsp.Text;
+            beginDate = BeginDate.Date.Value.Date;
+            beginDate = beginDate.Add(BeginTime.Time);
+            endDate = BeginDate.Date.Value.Date;
+            endDate = beginDate.Add(BeginTime.Time);
+
+            if (textBox_last.Text != "")
+                last = int.Parse(textBox_last.Text);
+
+            if (checkBox_year.IsChecked.Value)
+            {
+                loop = 1;
+            }
+            else
+            {
+                if (checkBox_month.IsChecked.Value)
+                {
+                    loop = 2;
                 }
                 else
                 {
-                    isRemind = 0;
-                }
-                Plan plan = new Plan();
-                title = textBox_title.Text;
-                colorId = comboBox_color.SelectedIndex;
-                description = textBox_dsp.Text;
-                
-                
-                if(textBox_last.Text!="")
-                    last = int.Parse(textBox_last.Text);
-               
-                if (checkBox_year.IsChecked.Value)
-                {
-                    loop = 1;
-                }
-                else
-                {
-                    if (checkBox_month.IsChecked.Value)
+                    if (checkBox_week.IsChecked.Value)
                     {
-                        loop = 2;
+                        loop = 3;
                     }
                     else
                     {
-                        if (checkBox_week.IsChecked.Value)
+                        if (checkBox_day.IsChecked.Value)
                         {
-                            loop = 3;
+                            loop = 4;
                         }
                         else
                         {
-                            if (checkBox_day.IsChecked.Value)
-                            {
-                                loop = 4;
-                            }
-                            else
-                            {
-                                loop = 0;
-                            }
+                            loop = 0;
                         }
                     }
                 }
-                Call remind = new Call();
+            }
+            if (radioButton_Y.IsChecked.Value)
+            {
+                isRemind = 1;
+                remindDate = RemindDate.Date.Value.Date;
+                remindDate.Add(RemindTime.Time);
+                if (comboBox_remind.SelectedValue != null)
+                {
+                    remindType = comboBox_remind.SelectedValue.ToString();
+                }
+
+            }
+            else
+            {
+                isRemind = 0;
+            }
+            if (p_ini == null)
+            {
+                if (textBox_title.Text == "")
+                {
+                    ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
+                    XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                    XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+                    toastTextElements[0].AppendChild(toastXml.CreateTextNode("the title is null!"));
+                    ToastNotification toast = new ToastNotification(toastXml);
+                    ToastNotificationManager.CreateToastNotifier().Show(toast);
+
+                    /*  if (!radioButton_Y.IsChecked.Value&&!radioButton_N.IsChecked.Value)
+                      {
+                          ToastTemplateType toastTemplate2 = ToastTemplateType.ToastImageAndText01;
+                          XmlDocument toastXml2 = ToastNotificationManager.GetTemplateContent(toastTemplate2);
+                          XmlNodeList toastTextElements2 = toastXml2.GetElementsByTagName("Remind");
+                          toastTextElements2[0].AppendChild(toastXml2.CreateTextNode("Do you want to be reminded?"));
+                          ToastNotification toast2 = new ToastNotification(toastXml2);
+                          ToastNotificationManager.CreateToastNotifier().Show(toast2);
+                      }*/
+
+                }
+                else {
+                   
+                    Plan plan = new Plan();
+       
+                    plan.Title = title;
+                    plan.ColorId = colorId;
+                    plan.RemindId = check_remind();
+                    plan.IsRemind = isRemind;
+                    plan.Description = description;
+                    plan.BeginDate = beginDate;
+                    plan.EndDate = endDate;
+                    plan.Last = last;
+                    plan.Loop = loop;
+                    PlanHelper ph = PlanHelper.GetHelper();
+                    ph.InsertSingleItem(plan);
+
+                    DateTime bd = beginDate, ed = endDate;
+                    if (loop == 0)
+                    {
+                        if (last != 0)
+                        {
+                            for (int i = 0; i < last; i++)
+                            {
+
+                                plan.BeginDate = bd.AddDays(1);
+                                plan.EndDate = ed.AddDays(1);
+                                bd = bd.AddDays(1);
+                                remindDate = remindDate.AddDays(1);
+                                ed = ed.AddDays(1);
+                                plan.RemindId = check_remind();
+                                ph.InsertSingleItem(plan);
+
+                            }
+                        }
+
+                    }
+                    if (loop != 0)
+                    {
+                        if (loop == 3)
+                        {
+                            while (bd.Year < DateTime.Today.Year + 2)
+                            {
+                                if (last != 0)
+                                {
+                                    for (int i = 0; i < last; i++)
+                                    {
+
+                                        plan.BeginDate = bd.AddDays(1);
+                                        plan.EndDate = ed.AddDays(1);
+                                        bd = bd.AddDays(1);
+                                        ed = ed.AddDays(1);
+                                        remindDate = remindDate.AddDays(1);
+                                        plan.RemindId = check_remind();
+                                        ph.InsertSingleItem(plan);
+
+                                    }
+                                }
+
+                                bd = bd.AddDays(7 - last);
+                                ed = ed.AddDays(7 - last);
+                                remindDate = remindDate.AddDays(7 - last);
+                                plan.BeginDate = bd;
+                                plan.EndDate = ed;
+                                plan.RemindId = check_remind();
+                                ph.InsertSingleItem(plan);
+                            }
+                        }
+                        if (loop == 2)
+                        {
+                            while (bd.Year < DateTime.Today.Year + 2)
+                            {
+                                if (last != 0)
+                                {
+                                    for (int i = 0; i < last; i++)
+                                    {
+
+                                        plan.BeginDate = bd.AddDays(1);
+                                        plan.EndDate = ed.AddDays(1);
+                                        bd = bd.AddDays(1);
+                                        ed = ed.AddDays(1);
+                                        remindDate = remindDate.AddDays(1);
+                                        plan.RemindId = check_remind();
+                                        ph.InsertSingleItem(plan);
+
+                                    }
+                                }
+                                bd = bd.AddDays(-last);
+                                ed = ed.AddDays(-last);
+                                remindDate = remindDate.AddDays(-last);
+                                bd = bd.AddMonths(1);
+                                ed = ed.AddMonths(1);
+                                remindDate = remindDate.AddMonths(1);
+                                plan.BeginDate = bd;
+                                plan.EndDate = ed;
+                                plan.RemindId = check_remind();
+                                ph.InsertSingleItem(plan);
+                            }
+
+                        }
+                        if (loop == 1)
+                        {
+                            while (bd.Year < DateTime.Today.Year + 100)
+                            {
+                                if (last != 0)
+                                {
+                                    for (int i = 0; i < last; i++)
+                                    {
+                                        ph.InsertSingleItem(plan);
+                                        plan.BeginDate = bd.AddDays(1);
+                                        plan.EndDate = ed.AddDays(1);
+                                        remindDate = remindDate.AddDays(1);
+                                        bd = bd.AddDays(1);
+                                        ed = ed.AddDays(1);
+                                        plan.RemindId = check_remind();
+                                        ph.InsertSingleItem(plan);
+
+                                    }
+                                }
+                                bd = bd.AddDays(-last);
+                                ed = ed.AddDays(-last);
+                                remindDate = remindDate.AddDays(1);
+                                bd = bd.AddYears(1);
+                                ed = ed.AddYears(1);
+                                remindDate = remindDate.AddYears(1);
+                                plan.BeginDate = bd;
+                                plan.EndDate = ed;
+                                plan.RemindId = check_remind();
+                                ph.InsertSingleItem(plan);
+                            }
+                        }
+                    }
+
+                    ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
+                    XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+                    XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+                    toastTextElements[0].AppendChild(toastXml.CreateTextNode("Setting sucessed!"));
+                    ToastNotification toast = new ToastNotification(toastXml);
+                    ToastNotificationManager.CreateToastNotifier().Show(toast);
+                    ini();
+                }
+            }
+            else
+            {
+
+                p_ini.Title = title;
+                p_ini.ColorId = colorId;
+                p_ini.Description = description;
+                p_ini.BeginDate = beginDate;
+                p_ini.EndDate = endDate;
+                p_ini.Last = last;
+                p_ini.Loop = loop;
+                p_ini.IsRemind = isRemind;
                 if (isRemind == 1)
                 {
-                    remind.Date = remindDate;
-                    remind.Type = remindType;
-                    CallHelper ch = CallHelper.GetHelper();
-                    remindId=ch.InsertSingleItem(remind);
+                    if (c_ini != null)
+                    {
+                        c_ini.Date = remindDate;
+                        c_ini.Type = remindType;
+                        CallHelper cp = CallHelper.GetHelper();
+                        cp.UpdateSingleItem(c_ini);
+                        p_ini.RemindId = c_ini.Id;
+                    }
+                    else
+                    {
+                        p_ini.RemindId = check_remind();
+                    }
                 }
-
-                plan.Title = title;
-                plan.ColorId = colorId;
-                plan.RemindId = remindId;
-                plan.IsRemind = isRemind;
-                plan.Description = description;
-                plan.BeginDate = beginDate;
-                plan.EndDate = endDate;
-                plan.Last = last;
-                plan.Loop = loop;
+                else
+                {
+                    if (c_ini != null)
+                    {
+                        CallHelper cp = CallHelper.GetHelper();
+                        cp.DeleteSingleItemById(c_ini.Id);
+                    }
+                }
+               
+               
                 PlanHelper ph = PlanHelper.GetHelper();
-                ph.InsertSingleItem(plan);
-
-                DateTime bd = beginDate,ed= endDate;
-                if (loop == 0)
-                {
-                    if (last != 0)
-                    {
-                        for (int i = 0; i < last; i++)
-                        {
-                            plan.BeginDate = bd.AddDays(1);
-                            plan.EndDate = ed.AddDays(1);
-                            bd = bd.AddDays(1);
-                            ed = ed.AddDays(1);
-
-                            ph.InsertSingleItem(plan);
-
-                        }
-                    }
-                }
-                if (loop != 0)
-                {
-                    if (loop == 2)
-                    {
-                        while (bd.Year < DateTime.Today.Year + 100)
-                        {
-                            if (last != 0)
-                            {
-                                for (int i = 0; i < last; i++)
-                                {
-                                    plan.BeginDate = bd.AddDays(1);
-                                    plan.EndDate = ed.AddDays(1);
-                                    bd = bd.AddDays(1);
-                                    ed = ed.AddDays(1);
-
-                                    ph.InsertSingleItem(plan);
-
-                                }
-                            }
-                            bd.AddDays(7);
-                            ed.AddDays(7);
-                        }
-                    }
-                    if (loop == 3)
-                    {
-                        while (bd.Year < DateTime.Today.Year + 100)
-                        {
-                            if (last != 0)
-                            {
-                                for (int i = 0; i < last; i++)
-                                {
-                                    plan.BeginDate = bd.AddDays(1);
-                                    plan.EndDate = ed.AddDays(1);
-                                    bd = bd.AddDays(1);
-                                    ed = ed.AddDays(1);
-
-                                    ph.InsertSingleItem(plan);
-
-                                }
-                            }
-                            bd.AddMonths(1);
-                            ed.AddMonths(1);
-                        }
-
-                    }
-                    if (loop == 4)
-                    {
-                        while (bd.Year < DateTime.Today.Year + 100)
-                        {
-                            if (last != 0)
-                            {
-                                for (int i = 0; i < last; i++)
-                                {
-                                    plan.BeginDate = bd.AddDays(1);
-                                    plan.EndDate = ed.AddDays(1);
-                                    bd = bd.AddDays(1);
-                                    ed = ed.AddDays(1);
-
-                                    ph.InsertSingleItem(plan);
-
-                                }
-                            }
-                            bd.AddYears(1);
-                            ed.AddYears(1);
-                        }
-                    }
-                }
+                ph.UpdateSingleItem(p_ini);
                 ToastTemplateType toastTemplate = ToastTemplateType.ToastImageAndText01;
                 XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
                 XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
                 toastTextElements[0].AppendChild(toastXml.CreateTextNode("Setting sucessed!"));
                 ToastNotification toast = new ToastNotification(toastXml);
                 ToastNotificationManager.CreateToastNotifier().Show(toast);
-                ini();
+                this.Visibility = Visibility.Collapsed;
             }
-
 
            
     }
@@ -276,6 +387,8 @@ namespace NiceLife
                 RemindDate.IsEnabled = true;
                 RemindTime.IsEnabled = true;
                 comboBox_remind.IsEnabled = true;
+                last_ini();
+
             }
         }
 
@@ -292,6 +405,7 @@ namespace NiceLife
                 checkBox_month.IsEnabled = true;
                 checkBox_day.IsEnabled = true;
                 checkBox_year.IsEnabled = true;
+                last_ini();
             }
         }
 
@@ -308,9 +422,24 @@ namespace NiceLife
                 checkBox_month.IsEnabled = true;
                 checkBox_week.IsEnabled = true;
                 checkBox_year.IsEnabled = true;
+                last_ini();
             }
         }
+        public long check_remind()
+        {
+            Call remind = new Call();
+            if (isRemind == 1)
+            {
+                remind.Date = RemindDate.Date.Value.Date;
+                remind.Date = remind.Date.Add(RemindTime.Time);
+                remind.Type = remindType;
+                remind.State = 1;
+                CallHelper ch = CallHelper.GetHelper();
+                return ch.InsertSingleItem(remind);
+            }
+            return 0;
 
+        }
         private void checkBox_month_Checked(object sender, RoutedEventArgs e)
         {
             if (checkBox_month.IsChecked.Value)
@@ -324,6 +453,7 @@ namespace NiceLife
                 checkBox_day.IsEnabled = true;
                 checkBox_week.IsEnabled = true;
                 checkBox_year.IsEnabled = true;
+                last_ini();
             }
         }
 
@@ -337,45 +467,53 @@ namespace NiceLife
             }
             else
             {
+
                 checkBox_day.IsEnabled = true;
                 checkBox_week.IsEnabled = true;
                 checkBox_month.IsEnabled = true;
+                last_ini();
             }
         }
 
         private void BeginDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
         {
-            beginDate = BeginDate.Date.Value.UtcDateTime;
+            beginDate = BeginDate.Date.Value.Date;
 
            
 
-            endDate = BeginDate.Date.Value.UtcDateTime;
+            endDate = BeginDate.Date.Value.Date;
 
             
         }
 
-       
+       public void last_ini()
+        {
+
+            if (textBox_last.Text != "")
+            {
+                if (Convert.ToInt16(textBox_last.Text) > 0)
+                {
+                    checkBox_day.IsEnabled = false;
+                }
+                if (Convert.ToInt16(textBox_last.Text) > 7)
+                {
+                    checkBox_week.IsEnabled = false;
+                }
+                if (Convert.ToInt16(textBox_last.Text) > 31)
+                {
+                    checkBox_month.IsEnabled = false;
+                }
+                if (Convert.ToInt16(textBox_last.Text) > 365)
+                {
+                    checkBox_year.IsEnabled = false;
+                }
+            }
+        }
 
         private void textBox_last_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Convert.ToInt16(textBox_last.Text) > 0)
-            {
-                checkBox_day.IsEnabled = false;
-            }
-            if (Convert.ToInt16(textBox_last.Text)>7)
-            {
-                checkBox_week.IsEnabled = false;
-            }
-            if (Convert.ToInt16(textBox_last.Text) > 31)
-            {
-                checkBox_month.IsEnabled = false;
-            }
-            if (Convert.ToInt16(textBox_last.Text) > 365)
-            {
-                checkBox_year.IsEnabled = false;
-            }
 
-
+            last_ini();
         }
 
         private void radioButton_Y_Checked(object sender, RoutedEventArgs e)
@@ -384,7 +522,9 @@ namespace NiceLife
             {
 
                 RemindDate.IsEnabled = true;
+                RemindDate.Date = DateTime.Now.Date;
                 RemindTime.IsEnabled = true;
+                RemindTime.Time = DateTime.Now.TimeOfDay;
                 comboBox_remind.IsEnabled = true;
                 radioButton_N.IsChecked = false;
             }
@@ -393,7 +533,9 @@ namespace NiceLife
 
         private void BeginTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
         {
-            beginDate.Add(BeginTime.Time);
+            beginDate = BeginDate.Date.Value.Date;
+            beginDate = beginDate.Add(BeginTime.Time);
+            EndTime.Time = BeginTime.Time;
         }
 
         private void EndTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)

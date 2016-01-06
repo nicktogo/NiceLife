@@ -132,6 +132,7 @@
     <Compile Include="Schedule\MonthPage.xaml.cs">
       <DependentUpon>MonthPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Schedule\PlanTask.cs" />
     <Compile Include="Schedule\SchedulePage.xaml.cs" />
     <Compile Include="Schedule\Select.xaml.cs" />
     <Compile Include="Schedule\Set.xaml.cs">

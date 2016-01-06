@@ -13,6 +13,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using NiceLife.Schedule.db;
+using System.Collections.ObjectModel;
+
+using Windows.UI.Notifications;
+using Windows.ApplicationModel.Background;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -25,85 +29,65 @@ namespace NiceLife.Schedule
     {
         DateTime current;
         List<Plan> list;
+        private const string PLANTASK = "PLANTAKS";
+        ObservableCollection<Alarm> UsefulAlarm = new ObservableCollection<Alarm>();
         public DayPage()
         {
             this.InitializeComponent();
             current = DateTime.Today;
             choose.Date = current.Date;
-            ini();
+           
             showtime(current);
         }
-        public void ini()
-        {
-
-            for (int i = 0; i < 12; i++)
+        private async void RegisterLiveTileTask()
+  {
+    var status = await BackgroundExecutionManager.RequestAccessAsync();
+      if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
+      {
+          return;
+      }
+            foreach (var cur in BackgroundTaskRegistration.AllTasks)
             {
-                TextBlock t = new TextBlock();
-                t.FontSize = 36;
-
-
-                t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                t.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                t.Text = Convert.ToString(i) + ":00";
-
-                time.Children.Add(t);
-                Grid.SetRow(t, i);
-                Grid.SetColumn(t, 0);
-                TextBlock t2 = new TextBlock();
-                t2.FontSize = 36;
-
-
-                t2.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                t2.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                t2.Text = Convert.ToString(i + 12) + ":00";
-
-                time.Children.Add(t2);
-                Grid.SetRow(t2, i);
-                Grid.SetColumn(t2, 2);
-            }
-        }
-        public void showtime(DateTime now)
-        {
-            time.Children.Clear();
-            ini();
-            current = now;
-            PlanHelper ph = PlanHelper.GetHelper();
-            list = ph.SelectByDate(now);
-            for(int i = 0; i < list.Count(); i++)
-            {
-                int begin = list.ElementAt(i).BeginDate.Hour;
-                int end = list.ElementAt(i).EndDate.Hour;
-                int k =end  - begin;
-                int pos = begin;
-                for(int j = 0; j < k; j++)
+                if (cur.Value.Name == PLANTASK)
                 {
-
-                    TextBlock t2 = new TextBlock();
-                    t2.FontSize = 36;
-
-
-                    t2.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                   t2.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                    t2.Text = list.ElementAt(i).Title+":"+ list.ElementAt(i).Description;
-
-                    time.Children.Add(t2);
-                    if (pos > 12)
-                    {
-                        Grid.SetRow(t2, pos-12);
-                        Grid.SetColumn(t2, 3);
-                    }
-                    else
-                    {
-                        Grid.SetRow(t2, pos);
-                        Grid.SetColumn(t2, 1);
-                    }
-                    pos++;
+                    cur.Value.Unregister(true);
                 }
             }
 
-        }
+            var taskBuilder = new BackgroundTaskBuilder
+     {
+          Name = PLANTASK,
+          TaskEntryPoint = typeof(PlanTask).FullName
+     };
+     taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+ 
+     var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+     updater.Clear();
+     var updater2 = TileUpdateManager.CreateTileUpdaterForSecondaryTile("appdota2");
+     updater2.Clear();
+     taskBuilder.SetTrigger(new TimeTrigger(1, false));
+     taskBuilder.Register();
+ }
+        public void showtime(DateTime now)
+        {
+           
+            
+            current = now;
+            PlanHelper ph = PlanHelper.GetHelper();
+           
+            list = ph.SelectByDate(now);
+            for (int i = 0; i < list.Count(); i++)
+            {
+                UsefulAlarm.Add(new Alarm(i, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate));
+            }
+            listView1.DataContext = UsefulAlarm;
 
-        private void choose_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        }
+        
+
+
+
+        private void choose_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
             showtime(choose.Date.DateTime);
         }

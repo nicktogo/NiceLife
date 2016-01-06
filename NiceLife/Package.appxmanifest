@@ -23,6 +23,14 @@
           <uap:Rotation Preference="landscape" />
         </uap:InitialRotationPreference>
       </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="NiceLife.Schedule.PlanTask">
+          <BackgroundTasks>
+            <Task Type="timer" />
+            <uap:Task Type="phoneCall" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
