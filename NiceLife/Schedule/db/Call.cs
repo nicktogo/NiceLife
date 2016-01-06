@@ -12,6 +12,7 @@ namespace NiceLife.Schedule.db
         public long Id { get; set; }
         public string Type { get; set; }
         public DateTime Date { get; set; }
+        public long PlanId { get; set; }
         public int State { get; set; }//1--undo,2---doing,3---done;
         
     }
