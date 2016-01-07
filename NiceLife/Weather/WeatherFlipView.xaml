@@ -18,6 +18,7 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
             <Setter Property="TextLineBounds" Value="Full"/>
+            <Setter Property="Margin" Value="8" />
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style x:Key="GridViewItemStyle1" TargetType="GridViewItem">
@@ -136,10 +137,10 @@
                             </GridView.HeaderTemplate>
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="data:Forecast">
-                                    <StackPanel HorizontalAlignment="Center" Margin="16">
+                                    <StackPanel HorizontalAlignment="Center" Margin="16" MinWidth="96">
                                         <TextBlock FontSize="24" Text="{x:Bind sDate}" HorizontalAlignment="Center"
                                                    Style="{StaticResource TextBlockStyle}"/>
-                                        <Image Width="150" Height="150" />
+                                        <Image Width="48" Height="48" />
                                         <Grid>
                                             <TextBlock FontSize="24" Text="{x:Bind low}" HorizontalAlignment="Left"
                                                        Style="{StaticResource TextBlockStyle}"/>
