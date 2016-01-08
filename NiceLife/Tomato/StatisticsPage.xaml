@@ -7,8 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="SkyBlue" Margin="8,0,-8,0">
-   
+    <Grid Margin="8,0,-8,0">
+
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Tomato.jpg"/>
+        </Grid.Background>
         <TextBlock FontSize="50" Text="Statistics"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,-8,0,643" Height="85" Width="191"/>
 
         <TextBlock x:Name="Titleone" FontSize="30" HorizontalAlignment="Left" Margin="364,50,0,0" TextWrapping="Wrap" Text="任务完成率" VerticalAlignment="Top" Width="311" Height="60" />

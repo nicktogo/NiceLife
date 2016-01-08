@@ -230,7 +230,11 @@ namespace NiceLife.Tomato.Database
             {
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                   else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -241,9 +245,14 @@ namespace NiceLife.Tomato.Database
             int number = 0;
             using (var statement = conn.Prepare("select count(*) from Task where Status = 'Done'"))
             {
+
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -257,7 +266,11 @@ namespace NiceLife.Tomato.Database
                 statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -271,7 +284,11 @@ namespace NiceLife.Tomato.Database
                 statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -284,7 +301,11 @@ namespace NiceLife.Tomato.Database
             {
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -298,7 +319,11 @@ namespace NiceLife.Tomato.Database
             {
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -312,7 +337,11 @@ namespace NiceLife.Tomato.Database
                 statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
@@ -326,7 +355,11 @@ namespace NiceLife.Tomato.Database
                 statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 while (statement.Step() == SQLiteResult.ROW)
                 {
-                    number = (int)statement.GetInteger(0);
+                    if (statement[0] == null)
+                    {
+                        number = 0;
+                    }
+                    else number = (int)statement.GetInteger(0);
                 }
             }
             return number;
