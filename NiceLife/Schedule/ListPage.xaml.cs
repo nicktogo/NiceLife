@@ -35,21 +35,26 @@ namespace NiceLife.Schedule
         {
             this.InitializeComponent();
             time.Date = DateTime.Today;
-           
+            appBarButton2.Visibility = Visibility.Collapsed;
+            edit.Visibility = Visibility.Collapsed;
            
         }
 
         private void appBarButton_Click(object sender, RoutedEventArgs e)
         {
             UsefulAlarm.Clear();
+            appBarButton2.Visibility = Visibility.Collapsed;
+            edit.Visibility = Visibility.Collapsed;
             choose = "doing";
             ColorLable c;
+            string color = "white";
             PlanHelper ph = PlanHelper.GetHelper();
             list = ph.SelectByDoing(now);
             for (int i = 0; i < list.Count(); i++) {
                 ColorLableHelper clp = ColorLableHelper.GetHelper();
                 c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
-                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
+                if (c != null) color = c.Color;
+                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,color));
                     }
             listView1.DataContext = UsefulAlarm;
         }
@@ -57,15 +62,19 @@ namespace NiceLife.Schedule
         private void appBarButton1_Click(object sender, RoutedEventArgs e)
         {
             UsefulAlarm.Clear();
+            appBarButton2.Visibility = Visibility.Collapsed;
+            edit.Visibility = Visibility.Collapsed;
             choose = "done";
             ColorLable c;
+            string color = "white";
             PlanHelper ph = PlanHelper.GetHelper();
             list = ph.SelectByAgo(now);
             for (int i = 0; i < list.Count(); i++)
             {
                 ColorLableHelper clp = ColorLableHelper.GetHelper();
                 c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
-                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
+                if (c != null) color = c.Color;
+                UsefulAlarm.Add(new Alarm(i+1,list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,color));
             }
             listView1.DataContext = UsefulAlarm;
         }
@@ -73,6 +82,7 @@ namespace NiceLife.Schedule
         {
             PlanHelper ph = PlanHelper.GetHelper();
             ColorLable c;
+            string color = "white";
             UsefulAlarm.Clear();
 
             if (choose == "doing")
@@ -96,7 +106,8 @@ namespace NiceLife.Schedule
             {
                 ColorLableHelper clp = ColorLableHelper.GetHelper();
                 c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
-                UsefulAlarm.Add(new Alarm(i+1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
+                if (c != null) color = c.Color;
+                UsefulAlarm.Add(new Alarm(i+1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,color));
             }
             listView1.DataContext = UsefulAlarm;
         }
@@ -138,16 +149,20 @@ namespace NiceLife.Schedule
 
         private void undo_Click(object sender, RoutedEventArgs e)
         {
+            appBarButton2.Visibility = Visibility.Visible;
+            edit.Visibility = Visibility.Visible;
             UsefulAlarm.Clear();
             choose = "undo";
             ColorLable c;
+            string color = "white";
             PlanHelper ph = PlanHelper.GetHelper();
             list = ph.SelectByFurture(now);
             for (int i = 0; i < list.Count(); i++)
             {
                 ColorLableHelper clp = ColorLableHelper.GetHelper();
                 c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
-                UsefulAlarm.Add(new Alarm(i + 1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
+                if (c != null) color = c.Color;
+                UsefulAlarm.Add(new Alarm(i + 1, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,color));
             }
             listView1.DataContext = UsefulAlarm;
         }
