@@ -7,12 +7,57 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="OrangeRed">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Tomato.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"></RowDefinition>
             <RowDefinition Height="119*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock FontSize="50" Text="历史数据"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
 
+        <DatePicker x:Name="dp_ViewDate" DateChanged="dp_ViewDate_DateChanged" Margin="778,72,0,-66" Height="181" Width="381"/>
+        <Grid Background="LightGray" HorizontalAlignment="Left" Height="275" Margin="85,26,0,0" Grid.Row="1" VerticalAlignment="Top" Width="314">
+            <TextBlock x:Name="TotalHistory" FontSize="20" HorizontalAlignment="Left" Margin="15,13,0,0" TextWrapping="Wrap" Text="历史总记录" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textblock" HorizontalAlignment="Left" Margin="21,61,0,0" TextWrapping="Wrap" Text="任务总数" VerticalAlignment="Top"/>
+            <TextBlock x:Name="numofall" HorizontalAlignment="Left" Margin="111,62,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="51,89,0,0" TextWrapping="Wrap" Text="已经完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="done" HorizontalAlignment="Left" Margin="141,91,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="51,114,0,0" TextWrapping="Wrap" Text="仍未完成" VerticalAlignment="Top" RenderTransformOrigin="0.194,0.85"/>
+            <TextBlock x:Name="undone" HorizontalAlignment="Left" Margin="141,115,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="21,154,0,0" TextWrapping="Wrap" Text="番茄总数" VerticalAlignment="Top"/>
+            <TextBlock x:Name="totaltomato" HorizontalAlignment="Left" Margin="111,155,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="51,180,0,0" TextWrapping="Wrap" Text="已经完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="donetomato" HorizontalAlignment="Left" Margin="141,182,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="51,207,0,0" TextWrapping="Wrap" Text="仍未完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="undonetomato" HorizontalAlignment="Left" Margin="141,210,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+
+
+
+
+
+
+        </Grid>
+        <Grid Background="LightCoral"  HorizontalAlignment="Left" Height="433" Margin="83,333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="315">
+            <TextBlock x:Name="textBlock5" FontSize="20" HorizontalAlignment="Left" Margin="21,22,0,0" TextWrapping="Wrap" Text="当日记录" VerticalAlignment="Top" RenderTransformOrigin="0.065,1.2"/>
+            <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="21,75,0,0" TextWrapping="Wrap" Text="任务总数" VerticalAlignment="Top"/>
+            <TextBlock x:Name="todayall" HorizontalAlignment="Left" Margin="111,75,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="51,107,0,0" TextWrapping="Wrap" Text="已经完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="todaydown" HorizontalAlignment="Left" Margin="141,107,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="51,137,0,0" TextWrapping="Wrap" Text="仍未完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="todayundone" HorizontalAlignment="Left" Margin="141,137,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="21,169,0,0" TextWrapping="Wrap" Text="番茄总数" VerticalAlignment="Top"/>
+            <TextBlock x:Name="todayalltomato" HorizontalAlignment="Left" Margin="111,169,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="51,203,0,0" TextWrapping="Wrap" Text="已经完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="todaydonetomato" HorizontalAlignment="Left" Margin="141,203,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="51,230,0,0" TextWrapping="Wrap" Text="仍未完成" VerticalAlignment="Top"/>
+            <TextBlock x:Name="todayundonetomato" HorizontalAlignment="Left" Margin="141,230,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="21,278,0,0" TextWrapping="Wrap" Text="当日评价" VerticalAlignment="Top"/>
+            <TextBlock x:Name="stars" HorizontalAlignment="Left" Margin="51,309,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+            <TextBlock x:Name="comments" HorizontalAlignment="Left" Margin="51,340,0,0" TextWrapping="Wrap" Text="comments" VerticalAlignment="Top"/>
+        </Grid>
+        <ScrollViewer x:Name="sv_TasksContent"  HorizontalAlignment="Left" Height="773" Margin="440,28,0,0" VerticalAlignment="Top" Width="1453" Grid.Row="1"/>
+        <RadioButton x:Name="radioButton" Content="copy to today" HorizontalAlignment="Left" Margin="106,785,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="radioButton_Checked"/>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiceLife.Tomato.Database;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,5 +27,132 @@ namespace NiceLife
         {
             this.InitializeComponent();
         }
+
+        public void freshOne(int comNum, int sumNum)
+        {
+            float comRate;
+            if (sumNum == 0)
+            {
+                comRate = 0;
+            }
+            else comRate = (float)comNum / sumNum;
+            warnning.Visibility = (Visibility)0;
+            if (comRate < 0.5)
+                warnning.Text = "帅的人都去学习啦！！！";
+            else
+                warnning.Text = "超级棒~";
+            double length = 310.86 * comRate;
+            Eone.StrokeDashArray.Clear();
+            Eone.StrokeDashArray.Add(length);
+            Eone.StrokeDashArray.Add(628);
+            rateone.Visibility = (Visibility)0;
+            comRate = comRate * 100;
+            String rate = comRate.ToString("0.0") + "%";
+            rateone.Text = rate;
+
+            rectcom1.Visibility = (Visibility)0;
+            rectsum1.Visibility = (Visibility)0;
+            textcom1.Visibility = (Visibility)0;
+            textsum1.Visibility = (Visibility)0;
+            line1.Visibility = (Visibility)0;
+            namecom1.Visibility = (Visibility)0;
+            namesum1.Visibility = (Visibility)0;
+            if (comRate == 0)
+            {
+                rectsum1.Height = 0;
+            }
+            rectcom1.Height = 2.75 * comRate;
+            textsum1.Text = sumNum.ToString();
+            textcom1.Text = comNum.ToString();
+
+            namecom1.Text = "完成";
+            namesum1.Text = "总数";
+        }
+
+        public void freshTwo(int comNum, int sumNum)
+        {
+            float comRate;
+            if (sumNum == 0)
+            {
+                comRate = 0;
+            }
+            else comRate = (float)comNum / sumNum;
+            warnning.Visibility = (Visibility)0;
+            if (comRate < 0.5)
+                warnning.Text = "帅的人都去学习啦！！！";
+            else
+                warnning.Text = "超级棒~";
+            double length = 310.86 * comRate;
+            Etwo.StrokeDashArray.Clear();
+            Etwo.StrokeDashArray.Add(length);
+            Etwo.StrokeDashArray.Add(628);
+            ratetwo.Visibility = (Visibility)0;
+            comRate = comRate * 100;
+            String rate = comRate.ToString("0.0") + "%";
+            ratetwo.Text = rate;
+
+            rectcom2.Visibility = (Visibility)0;
+            rectsum2.Visibility = (Visibility)0;
+            textcom2.Visibility = (Visibility)0;
+            textsum2.Visibility = (Visibility)0;
+            line2.Visibility = (Visibility)0;
+            namecom2.Visibility = (Visibility)0;
+            namesum2.Visibility = (Visibility)0;
+
+            if (comRate == 0)
+            {
+                rectsum1.Height = 0;
+            }
+            rectcom2.Height = 2.75 * comRate;
+            textsum2.Text = sumNum.ToString();
+            textcom2.Text = comNum.ToString();
+
+            namecom2.Text = "完成";
+            namesum2.Text = "总数";
+        }
+
+
+
+        private void task_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton li = (sender as RadioButton);
+            if (li.Content.ToString().Equals("今日任务"))
+            {
+                int comNumToday;
+                int sumNumToday;
+                sumNumToday = TaskHelper.GetHelper().numOfAllTaskByDate(DateTime.Now);
+                comNumToday = TaskHelper.GetHelper().numOfDoneTaskByDate(DateTime.Now);
+                freshOne(comNumToday, sumNumToday);
+            }
+            else
+            {
+                int comNumAll;
+                int sumNumAll;
+                sumNumAll = TaskHelper.GetHelper().numOfAllTask();
+                comNumAll = TaskHelper.GetHelper().numOfDoneTask();
+                freshOne(comNumAll, sumNumAll);
+            }
+
+        }
+
+        private void tomato_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton li = (sender as RadioButton);
+            if (li.Content.ToString().Equals("今日番茄"))
+            {
+                int comNumToday = TaskHelper.GetHelper().numOfDoneTomatoByDate(DateTime.Now);
+                int sumNumToday = TaskHelper.GetHelper().numOfAllTomatoByDate(DateTime.Now);
+                freshTwo(comNumToday, sumNumToday);
+            }
+            else
+            {
+                int comNumAll = TaskHelper.GetHelper().numOfDoneTomato();
+                int sumNumAll = TaskHelper.GetHelper().numOfAllTomato();
+                freshTwo(comNumAll, sumNumAll);
+            }
+
+        }
+
+
     }
 }
