@@ -34,7 +34,7 @@ namespace NiceLife
         private long PlanId;
         private string audioSrc;
         private string isSilent;
-        private long colorId;
+        private long colorId=-1;
         private long remindId;
         private DateTime remindDate;
         private string remindType;
@@ -72,7 +72,7 @@ namespace NiceLife
             {
                 comboBox_color.Items.Add(color.ElementAt(i).Color);
             }
-            comboBox_color.SelectedIndex = 0;
+          //  comboBox_color.SelectedIndex = 0;
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -118,9 +118,10 @@ namespace NiceLife
             beginDate = BeginDate.Date.Value.Date;
             beginDate = beginDate.Add(BeginTime.Time);
             endDate = BeginDate.Date.Value.Date;
-            endDate = beginDate.Add(BeginTime.Time);
+            endDate = BeginDate.Date.Value.Date.Add(BeginTime.Time);
             audioSrc =comboBox_remind.SelectedValue.ToString();
-            isSilent = checkBoxSilent.IsChecked == true ? "true" : "false";
+           
+            if(comboBox_color.SelectedIndex!=-1)
             colorId = color.ElementAt(comboBox_color.SelectedIndex).Id;
             if (textBox_last.Text != "")
                 last = int.Parse(textBox_last.Text);
@@ -574,7 +575,7 @@ namespace NiceLife
 
         private void EndTime_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
         {
-            endDate=beginDate.Date.Add(EndTime.Time);
+            endDate= BeginDate.Date.Value.Date.Add(EndTime.Time);
         }
 
         private void comboBox_color_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)

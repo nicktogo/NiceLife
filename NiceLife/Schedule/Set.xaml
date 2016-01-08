@@ -14,22 +14,13 @@
 
         </Grid.RowDefinitions>
 
-        <ListView Name="listView1" ItemsSource="{Binding}"  FontSize="28" Margin="131,0,130,10" Grid.Row="1" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="8" Background="{Binding ColorLable}">
-                        <Ellipse Fill="{Binding Color}" Height="50" Stroke="White" Width="50"/>
-                        <TextBox    Width="500"  TextWrapping="Wrap" Text="{Binding Mean}" IsReadOnly="{Binding ReadOnly}" Foreground="#FF5F97E8" Name="Textcolor" TextChanged="TextBox_TextChanged" Margin="50,0,0,0"/>
-                        <AppBarButton x:Name="color_edit"  Grid.Row="0" Click="color_edit_Click" HorizontalAlignment="Left" Icon="Edit" Label=""   ToolTipService.ToolTip="edit this coloelable" Margin="100,0,0,0"/>
-                        <AppBarButton x:Name="color_delete" Grid.Row="0" Click="color_delete_Click"  HorizontalAlignment="Left" Icon="Delete" Label=""  ToolTipService.ToolTip="delete this coloelable"/>
-
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <ListView Name="listView1"  FontSize="28" Margin="131,0,130,10" Grid.Row="1" >
+            <Frame x:Name="frame" Content=""/>
         </ListView>
 
-        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="add" Margin="1088,9,0,614" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable" Grid.RowSpan="2"/>
-        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Save" Label="edit" Margin="1140,8,0,0" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable"/>
+        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="添加" Margin="1088,9,0,36" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable"/>
+        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Save" Label="编辑" Margin="1140,8,0,0" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable" Height="59"/>
+        <Frame x:Name="frame_color" Content="" HorizontalAlignment="Left" Margin="562,0,0,0" VerticalAlignment="Top" Height="269" Width="588" Grid.Row="1"/>
 
     </Grid>
 </Page>

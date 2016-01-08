@@ -13,10 +13,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using NiceLife.Schedule.db;
-
+using NiceLife.Schedule;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -31,7 +33,8 @@ namespace NiceLife
     {
 
         public bool ReadOnly{ get; set; }
-        public string Textcolor { get; set; }
+        string changetext = "";
+        
         List <ColorLable> list;
         ObservableCollection<ColorLable> UsefulAlarm = new ObservableCollection<ColorLable>();
         public Set()
@@ -43,9 +46,10 @@ namespace NiceLife
 
         }
        
-      public void show()
+
+        public void show()
         {
-            listView1.Items.Clear();
+            UsefulAlarm.Clear();
             ColorLableHelper cp = ColorLableHelper.GetHelper();
             list = cp.SelectlistItems();
             for (int i = 0; i < list.Count(); i++)
@@ -62,7 +66,7 @@ namespace NiceLife
 
         private void appBarButton_add_Click(object sender, RoutedEventArgs e)
         {
-            
+            frame_color.Navigate(typeof(ColorSet));
         }
 
         private void appBarButton_save_Click(object sender, RoutedEventArgs e)
@@ -97,7 +101,8 @@ namespace NiceLife
         {
             if (listView1.SelectedIndex != -1)
             {
-                list.ElementAt(listView1.SelectedIndex).Mean = Textcolor;
+              //  list.ElementAt(listView1.SelectedIndex).Mean = Mean;
+       
             }
         }
     }

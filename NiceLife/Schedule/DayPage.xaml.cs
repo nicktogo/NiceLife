@@ -48,12 +48,14 @@ namespace NiceLife.Schedule
             current = now;
             PlanHelper ph = PlanHelper.GetHelper();
             ColorLable c;
+            string color="White";
             list = ph.SelectByDate(now);
             for (int i = 0; i < list.Count(); i++)
             {
                 ColorLableHelper clp = ColorLableHelper.GetHelper();
                 c = clp.SelectSingleItemById(list.ElementAt(i).ColorId);
-                UsefulAlarm.Add(new Alarm(i, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,c.Color));
+                if (c != null) color=c.Color;
+                UsefulAlarm.Add(new Alarm(i, list.ElementAt(i).Title, list.ElementAt(i).Description, list.ElementAt(i).BeginDate, list.ElementAt(i).EndDate,color));
             }
             listView1.DataContext = UsefulAlarm;
 

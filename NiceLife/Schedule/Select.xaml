@@ -20,9 +20,9 @@
                 <StackPanel x:Name="SplitViewPanePanel" Orientation="Horizontal" >
                     <AppBarButton x:Name="appBarButton2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Icon="Add" Label="" Width="100" Click="appBarButton2_Click" />
 
-                    <Button x:Name="button" Content="Month" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button_Click" Background="#33F9F4F4"/>
-                    <Button x:Name="button1" Content="Day" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button1_Click" Background="#33F7F4F4"/>
-                    <Button x:Name="button2" Content="List" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button2_Click" Background="#33F7F4F4"/>
+                    <Button x:Name="button" Content="按月查看" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button_Click" Background="#33F9F4F4"/>
+                    <Button x:Name="button1" Content="按天查看" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button1_Click" Background="#33F7F4F4"/>
+                    <Button x:Name="button2" Content="所有列表" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="200" FontSize="29.333" Click="button2_Click" Background="#33F7F4F4"/>
 
 
 
