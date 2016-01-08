@@ -219,5 +219,117 @@ namespace NiceLife.Tomato.Database
         {
             throw new NotImplementedException();
         }
+
+
+
+
+        public override int numOfAllTask()
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select count (*) from Task"))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
+
+        public override int numOfDoneTask()
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select count(*) from Task where Status = 'Done'"))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
+
+        public override int numOfAllTaskByDate(DateTime date)
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select count(*) from Task where Date Between date(@Date, 'start of day') and datetime(@Date, '+1 day', 'start of day')"))
+            {
+                statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
+
+        public override int numOfDoneTaskByDate(DateTime date)
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select count(*) from Task where Status='Done' and Date Between date(@Date, 'start of day') and datetime(@Date, '+1 day', 'start of day')"))
+            {
+                statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
+
+        public override int numOfAllTomato()
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select sum(TotalTomato) from Task"))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+
+        }
+
+        public override int numOfDoneTomato()
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select sum(DoneTomato) from Task"))
+            {
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
+
+        public override int numOfAllTomatoByDate(DateTime date)
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select sum(TotalTomato) from Task where Date Between date(@Date, 'start of day') and datetime(@Date, '+1 day', 'start of day')"))
+            {
+                statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
+
+        public override int numOfDoneTomatoByDate(DateTime date)
+        {
+            int number = 0;
+            using (var statement = conn.Prepare("select sum(DoneTomato) from Task where Date Between date(@Date, 'start of day') and datetime(@Date, '+1 day', 'start of day')"))
+            {
+                statement.Bind("@Date", date.Date.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    number = (int)statement.GetInteger(0);
+                }
+            }
+            return number;
+        }
     }
 }

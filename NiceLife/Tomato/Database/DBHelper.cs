@@ -47,5 +47,27 @@ namespace NiceLife.Tomato
         public abstract T SelectSingleItemById(long id);
 
         public abstract T CreateItem(ISQLiteStatement statement);
+
+
+
+
+
+        public abstract int numOfAllTask();
+
+        public abstract int numOfDoneTask();
+
+        public abstract int numOfAllTaskByDate(DateTime date);
+
+        public abstract int numOfDoneTaskByDate(DateTime date);
+
+
+        public abstract int numOfAllTomato();
+
+        public abstract int numOfDoneTomato();
+
+        public abstract int numOfAllTomatoByDate(DateTime date);
+
+        public abstract int numOfDoneTomatoByDate(DateTime date);
+
     }
 }

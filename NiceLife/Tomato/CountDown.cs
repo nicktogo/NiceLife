@@ -25,17 +25,17 @@ namespace NiceLife
 
         public void startTomato()
         {
-            startCountDown(17);//实际为1500
+            startCountDown(1500);//实际为1500
         }
 
         public void startShortRest()
         {
-            startCountDown(5);//实际为300
+            startCountDown(300);//实际为300
         }
 
         public void startLongRest()
         {
-            startCountDown(11);//实际为900
+            startCountDown(900);//实际为900
         }
 
         public void startCountDown(int seconds)
@@ -115,7 +115,7 @@ namespace NiceLife
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += Timer_Tick;
 
-            SetTime(15);//实际为1500
+            SetTime(1500);//实际为1500
 
             tb_TotalTomato.Text = "总🍅：" + task.TotalTomato.ToString();
             tb_DoneTomato.Text = "已完成🍅：" + task.DoneTomato.ToString();
@@ -146,7 +146,6 @@ namespace NiceLife
             pro.totalSecond = (int)(ts - sw.Elapsed).TotalSeconds;
             if (pro.totalSecond > 0)
             {
-                //HourArea.Text = pro.GetHour();
                 MinuteArea.Text = pro.GetMinute();
                 SecondArea.Text = pro.GetSecond();
             }
@@ -180,7 +179,7 @@ namespace NiceLife
 
                 timer.Stop();
                 sw.Reset();
-                SetTime(15);//实际为1500
+                SetTime(1500);//实际为1500
                 Period.Text = "番茄时间";
             }
 
@@ -191,11 +190,6 @@ namespace NiceLife
     {
         public int totalSecond;
 
-        //获取小时字符串
-        //public string GetHour()
-        //{
-        //    return string.Format("{0:D2}", totalSecond / 3600);
-        //}
 
         //获取分钟字符串
         public string GetMinute()

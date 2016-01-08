@@ -7,12 +7,54 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="OrangeRed">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25*"></RowDefinition>
-            <RowDefinition Height="119*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock FontSize="50" Text="图表统计"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,30,0,30"/>
+    <Grid Background="SkyBlue" Margin="8,0,-8,0">
+   
+        <TextBlock FontSize="50" Text="Statistics"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,-8,0,643" Height="85" Width="191"/>
+
+        <TextBlock x:Name="Titleone" FontSize="30" HorizontalAlignment="Left" Margin="364,50,0,0" TextWrapping="Wrap" Text="任务完成率" VerticalAlignment="Top" Width="311" Height="60" />
+
+        <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="300"  Margin="283,104,0,0" VerticalAlignment="Top" Width="300"/>
+        <Ellipse x:Name="Eone" HorizontalAlignment="Left" Height="300"  Margin="283,104,0,0" Stroke="OrangeRed" StrokeThickness="3" StrokeDashArray="0,628" RenderTransformOrigin="0.5,0.5"  UseLayoutRounding="False" d:LayoutRounding="Auto"  VerticalAlignment="Top" Width="300">
+            <Ellipse.RenderTransform>
+                <RotateTransform Angle="-90"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <TextBlock x:Name="rateone" HorizontalAlignment="Left" Foreground="White" Visibility="Collapsed" Margin="379,225,0,0" TextWrapping="Wrap" Text="" FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
+        <TextBlock x:Name="Titletwo" FontSize="30" HorizontalAlignment="Left" Margin="1005,53,0,0" TextWrapping="Wrap" Text="番茄完成率" VerticalAlignment="Top" Width="157" Height="36"/>
+
+        <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="300"  Margin="930,104,0,0" VerticalAlignment="Top" Width="300"/>
+        <Ellipse x:Name="Etwo" HorizontalAlignment="Left" Height="300"  Margin="930,104,0,0" Stroke="OrangeRed" StrokeThickness="3" StrokeDashArray="0,628" RenderTransformOrigin="0.5,0.5"  UseLayoutRounding="False" d:LayoutRounding="Auto"  VerticalAlignment="Top" Width="300">
+            <Ellipse.RenderTransform>
+                <RotateTransform Angle="-90"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+
+        <TextBlock x:Name="ratetwo"  HorizontalAlignment="Left"  Visibility="Collapsed" Foreground="White" Margin="1026,227,0,0" TextWrapping="Wrap" Text="" FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
+        <TextBlock x:Name="warnning" FontSize="30" Visibility="Collapsed" Foreground="White"  HorizontalAlignment="Left" Margin="590,182,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="116" Width="421"/>
+        <RadioButton Content="今日任务" HorizontalAlignment="Left" Margin="315,462,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
+        <RadioButton Content="全部任务" HorizontalAlignment="Left" Margin="459,463,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
+        <RadioButton Content="今日番茄" HorizontalAlignment="Left" Margin="970,464,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
+        <RadioButton Content="全部番茄" HorizontalAlignment="Left" Margin="1104,464,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
+
+        <Rectangle x:Name="line1" Visibility="Collapsed" Fill="Gray"  HorizontalAlignment="Left" Height="1" Margin="262,0,0,116" Grid.Row="1" Stroke="Gray" VerticalAlignment="Bottom" Width="326"/>
+        <Rectangle x:Name="rectsum1" Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="275" Margin="327,0,0,116" Grid.Row="1" Stroke="Gray" VerticalAlignment="Bottom" Width="62"/>
+        <Rectangle x:Name="rectcom1" Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="220" Margin="448,0,0,117" Grid.Row="1" Stroke="Gray" VerticalAlignment="Bottom" Width="62"/>
+        <TextBlock x:Name="textsum1" Visibility="Collapsed" HorizontalAlignment="Left" Margin="331,0,0,394" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="textcom1" Visibility="Collapsed" HorizontalAlignment="Left" Margin="457,0,0,391" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.47,-11.764"/>
+        <TextBlock x:Name="namesum1" Visibility="Collapsed" HorizontalAlignment="Left" Margin="332,0,0,86" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.564,-3.246"/>
+        <TextBlock x:Name="namecom1" Visibility="Collapsed" HorizontalAlignment="Left" Margin="454,0,0,85" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
+
+
+        <Rectangle x:Name="line2" Visibility="Collapsed" Fill="Gray"  HorizontalAlignment="Left" Height="1" Margin="937,0,0,116" Grid.Row="1" Stroke="Gray" VerticalAlignment="Bottom" Width="326"/>
+        <Rectangle x:Name="rectsum2" Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="275" Margin="992,0,0,116" Grid.Row="1" Stroke="Gray" VerticalAlignment="Bottom" Width="62"/>
+        <Rectangle x:Name="rectcom2" Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="164" Margin="1117,0,0,116" Grid.Row="1" Stroke="Gray" VerticalAlignment="Bottom" Width="62"/>
+        <TextBlock x:Name="textsum2" Visibility="Collapsed" HorizontalAlignment="Left" Margin="999,0,0,393" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="textcom2" Visibility="Collapsed" HorizontalAlignment="Left" Margin="1119,0,0,390" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="namesum2" Visibility="Collapsed" HorizontalAlignment="Left" Margin="990,0,0,85" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="namecom2" Visibility="Collapsed" HorizontalAlignment="Left" Margin="1131,0,0,86" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
+
+
+
 
     </Grid>
 </Page>
