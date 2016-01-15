@@ -57,7 +57,7 @@ namespace NiceLife
             line1.Visibility = (Visibility)0;
             namecom1.Visibility = (Visibility)0;
             namesum1.Visibility = (Visibility)0;
-            if (comRate == 0)
+            if (sumNum == 0)
             {
                 rectsum1.Height = 0;
             }
@@ -99,7 +99,7 @@ namespace NiceLife
             namecom2.Visibility = (Visibility)0;
             namesum2.Visibility = (Visibility)0;
 
-            if (comRate == 0)
+            if (sumNum == 0)
             {
                 rectsum1.Height = 0;
             }

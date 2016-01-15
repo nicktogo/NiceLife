@@ -118,7 +118,7 @@ namespace NiceLife
             beginDate = BeginDate.Date.Value.Date;
             beginDate = beginDate.Add(BeginTime.Time);
             endDate = BeginDate.Date.Value.Date;
-            endDate = BeginDate.Date.Value.Date.Add(BeginTime.Time);
+            endDate = BeginDate.Date.Value.Date.Add(EndTime.Time);
             audioSrc =comboBox_remind.SelectedValue.ToString();
            
             if(comboBox_color.SelectedIndex!=-1)

@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="110" Width="861">
 
-    <StackPanel Orientation="Horizontal" Margin="419,4,-512,0">
+    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
         <Button x:Name="btn_StartAndStop" FontSize="30" Click="btn_StartAndStop_Click" Content="开始" HorizontalAlignment="Left" VerticalAlignment="Center" Height="56" Margin="0,27,0,23" Width="131" />
         <Grid Margin="50,0,0,0">
             <Grid.RowDefinitions>
