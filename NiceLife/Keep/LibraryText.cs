@@ -112,21 +112,52 @@ public class LibraryText
 
     public async void New(RichEditBox display)
     {
-        if (await Confirm("Create New Document?", "Rich Editor", "Yes", "No"))
+        if (await Confirm("Save Current Document?", "Rich Editor", "Yes", "No"))
         {
-            set(ref display, string.Empty);
+
+            FileSavePicker picker = new FileSavePicker();
+            picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            picker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
+            picker.DefaultFileExtension = ".rtf";
+            picker.SuggestedFileName = "Document";
+            StorageFile file = await picker.PickSaveFileAsync();
+            if (file != null)
+            {
+                CachedFileManager.DeferUpdates(file);
+                await FileIO.WriteTextAsync(file, get(ref display));
+                FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+            }
         }
+
+        set(ref display, string.Empty);
     }
 
     public async void Open(RichEditBox display)
     {
         try
         {
-            FileOpenPicker picker = new FileOpenPicker();
-            picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-            picker.FileTypeFilter.Add(".rtf");
-            StorageFile file = await picker.PickSingleFileAsync();
-            set(ref display, await FileIO.ReadTextAsync(file));
+            if (await Confirm("Save Current Document?", "Rich Editor", "Yes", "No"))
+            {
+
+                FileSavePicker picker = new FileSavePicker();
+                picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+                picker.FileTypeChoices.Add("Rich Text", new List<string>() { ".rtf" });
+                picker.DefaultFileExtension = ".rtf";
+                picker.SuggestedFileName = "Document";
+                StorageFile file = await picker.PickSaveFileAsync();
+                if (file != null)
+                {
+                    CachedFileManager.DeferUpdates(file);
+                    await FileIO.WriteTextAsync(file, get(ref display));
+                    FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+                }
+            }
+            FileOpenPicker picker2 = new FileOpenPicker();
+            picker2.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            picker2.FileTypeFilter.Add(".rtf");
+            StorageFile file2 = await picker2.PickSingleFileAsync();
+            set(ref display, await FileIO.ReadTextAsync(file2));
+
         }
         catch
         {

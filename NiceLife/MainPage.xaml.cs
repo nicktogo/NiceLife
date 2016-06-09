@@ -99,5 +99,15 @@ namespace NiceLife
             List<County> counties = countyHelper.GetSelectedItems();
             bool b = counties.Count > 0 ? MainFrame.Navigate(typeof(Weather.WeatherFlipView), Weather.WeatherFlipView.NAVIGATED_FROM_MAINPAGE) : MainFrame.Navigate(typeof(WeatherPage));
         }
+
+        private void KeepRadioButton_Checked(System.Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void KeepRadioButton_Checked(System.Object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
