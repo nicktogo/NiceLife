@@ -9,11 +9,11 @@
 
     <Grid  Background="#338DEAD1">
         <Ellipse x:Name="ellipse" Fill="{Binding ColorLable}" HorizontalAlignment="Left" Height="183" Margin="227,164,0,0" Stroke="White" VerticalAlignment="Top" Width="310"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="227,539,0,0" TextWrapping="Wrap" Text="标签" VerticalAlignment="Top" FontSize="48" Foreground="#FF3A80C7"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="227,539,0,0" TextWrapping="Wrap" Text="Lable" VerticalAlignment="Top" FontSize="48" Foreground="#FF3A80C7"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="430,527,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="48" Height="94" Width="556"/>
         <AppBarButton x:Name="appBarButton" HorizontalAlignment="Left" Click="appBarButton_Click" Icon="Accept" Label="" Margin="1050,527,0,0" VerticalAlignment="Top"/>
         <Slider x:Name="sliderR" Orientation="Vertical" HorizontalAlignment="Left" Margin="696,99,0,326"  Width="50"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="276,398,0,0" TextWrapping="Wrap" Text="颜色" VerticalAlignment="Top" FontSize="48" Foreground="#FF3A80C7" Height="66" Width="149"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="276,398,0,0" TextWrapping="Wrap" Text="Color" VerticalAlignment="Top" FontSize="48" Foreground="#FF3A80C7" Height="66" Width="149"/>
         <Slider x:Name="sliderG" Orientation="Vertical" HorizontalAlignment="Left" Margin="797,99,0,326"  Width="50"/>
         <Slider x:Name="sliderB" Orientation="Vertical" HorizontalAlignment="Left" Margin="894,99,0,326"  Width="50"/>
         <Slider x:Name="sliderA" Orientation="Vertical" HorizontalAlignment="Left" Margin="591,99,0,326"  Width="50"/>
