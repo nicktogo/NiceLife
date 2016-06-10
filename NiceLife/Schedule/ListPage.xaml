@@ -28,13 +28,13 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <AppBarButton x:Name="appBarButton" Grid.Row="0" HorizontalAlignment="Left" Icon="Clock" Label="进行中" Margin="1035,9,0,25" VerticalAlignment="Stretch" Click="appBarButton_Click"/>
+        <AppBarButton x:Name="appBarButton" Grid.Row="0" HorizontalAlignment="Left" Icon="Clock" Label="Ongoing" Margin="1035,9,0,25" VerticalAlignment="Stretch" Click="appBarButton_Click"/>
 
-        <AppBarButton x:Name="appBarButton1" Grid.Row="0" HorizontalAlignment="Left" Icon="Accept" Label="已完成" Margin="1083,9,0,0" VerticalAlignment="Top" Click="appBarButton1_Click"/>
-        <AppBarButton x:Name="appBarButton2" Grid.Row="0" HorizontalAlignment="Left" Icon="Delete" Label="删除" Margin="1138,9,0,0" VerticalAlignment="Top" Click="appBarButton2_Click"/>
+        <AppBarButton x:Name="appBarButton1" Grid.Row="0" HorizontalAlignment="Left" Icon="Accept" Label="Finished" Margin="1083,9,0,0" VerticalAlignment="Top" Click="appBarButton1_Click"/>
+        <AppBarButton x:Name="appBarButton2" Grid.Row="0" HorizontalAlignment="Left" Icon="Delete" Label="Delete" Margin="1138,9,0,0" VerticalAlignment="Top" Click="appBarButton2_Click"/>
         <DatePicker Name="time" DateChanged="time_DateChanged"  HorizontalAlignment="Left"  Grid.Row="0" Margin="127,23,0,0" VerticalAlignment="Top"/>
-        <AppBarButton x:Name="edit" Grid.Row="0" HorizontalAlignment="Left" Icon="Edit" Label="编辑" Margin="1196,9,0,0" VerticalAlignment="Top" Click="edit_Click"/>
-        <AppBarButton x:Name="undo" Grid.Row="0" HorizontalAlignment="Left" Icon="Bullets" Label="未完成" Margin="981,9,0,25" VerticalAlignment="Stretch" Click="undo_Click"/>
+        <AppBarButton x:Name="edit" Grid.Row="0" HorizontalAlignment="Left" Icon="Edit" Label="Edit" Margin="1196,9,0,0" VerticalAlignment="Top" Click="edit_Click"/>
+        <AppBarButton x:Name="undo" Grid.Row="0" HorizontalAlignment="Left" Icon="Bullets" Label="Unfinished" Margin="981,9,0,25" VerticalAlignment="Stretch" Click="undo_Click"/>
 
 
     </Grid>
