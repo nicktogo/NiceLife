@@ -26,7 +26,7 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Forecast">
                     <StackPanel HorizontalAlignment="Center" Margin="10">
-                        <TextBlock FontSize="18" Text="{x:Bind date}" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="18" Text="{x:Bind date}" HorizontalAlignment="Center" FontWeight="Bold"/>
                         <Image Width="150" Height="auto" />
                         <Grid>
                             <TextBlock FontSize="16" Text="{x:Bind low}" HorizontalAlignment="Left"/>
@@ -44,16 +44,16 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel HorizontalAlignment="Center">
-                <TextBlock x:Name="DayTpye" FontSize="16" />
-                <TextBlock x:Name="DayWindDirection" FontSize="16" />
-                <TextBlock x:Name="DayWindPower" FontSize="16" />
+                <TextBlock x:Name="DayTpye" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="DayWindDirection" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="DayWindPower" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
                 <StackPanel HorizontalAlignment="Center">
-                    <TextBlock x:Name="NightTpye" FontSize="16" />
-                    <TextBlock x:Name="NightWindDirection" FontSize="16" />
-                    <TextBlock x:Name="NightWindPower" FontSize="16" />
+                    <TextBlock x:Name="NightTpye" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock x:Name="NightWindDirection" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock x:Name="NightWindPower" FontSize="16" FontWeight="Bold"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

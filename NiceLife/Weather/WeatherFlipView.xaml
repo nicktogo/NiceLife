@@ -10,9 +10,21 @@
     Loaded="Page_Loaded">
 
     <Page.Resources>
-        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Style x:Key="RealTimeTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextTrimming" Value="None"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+            <Setter Property="TextLineBounds" Value="Full"/>
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="TextTrimming" Value="None"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -85,22 +97,22 @@
                                 <RelativePanel.RenderTransform>
                                     <CompositeTransform/>
                                 </RelativePanel.RenderTransform>
-                                <TextBlock x:Name="CountyName" Text="{x:Bind realtimeDetail.CountyName}" Style="{StaticResource TextBlockStyle}"
+                                <TextBlock x:Name="CountyName" Text="{x:Bind realtimeDetail.CountyName}" Style="{StaticResource RealTimeTextBlockStyle}"
                                            FontSize="32"
                                            Margin="8"
                                            RelativePanel.AlignTopWithPanel="True"
                                            RelativePanel.AlignHorizontalCenterWithPanel="True"/>
                                 <RelativePanel RelativePanel.Below="CountyName"
                                                RelativePanel.AlignHorizontalCenterWith="CountyName">
-                                    <TextBlock x:Name="RealtimeTemp" Text="{x:Bind realtimeDetail.RealtimeTemp}" Style="{StaticResource TextBlockStyle}"
+                                    <TextBlock x:Name="RealtimeTemp" Text="{x:Bind realtimeDetail.RealtimeTemp}" Style="{StaticResource RealTimeTextBlockStyle}"
                                            FontSize="64"
                                            Margin="0, -16, 8, 8"
                                            RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                                    <TextBlock Text="℃" Style="{StaticResource TextBlockStyle}"
+                                    <TextBlock Text="℃" Style="{StaticResource RealTimeTextBlockStyle}"
                                            FontWeight="Light"
                                            Margin="-8, 0, 0, 0"
                                            RelativePanel.RightOf="RealtimeTemp"/>
-                                    <TextBlock Text="{x:Bind realtimeDetail.UpdateTime}" Style="{StaticResource TextBlockStyle}"
+                                    <TextBlock Text="{x:Bind realtimeDetail.UpdateTime}" Style="{StaticResource RealTimeTextBlockStyle}"
                                            Margin="-8, -8, 8, 8"
                                            RelativePanel.AlignVerticalCenterWithPanel="True"
                                            RelativePanel.Below="RealtimeTemp"

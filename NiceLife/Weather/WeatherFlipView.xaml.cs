@@ -280,6 +280,10 @@ namespace NiceLife.Weather
             if (currentFlipViewContainer != null)
             {
                 var ForecastGrid = FindElementByName<GridView>(currentFlipViewContainer, "ForecastGrid");
+                if (ForecastGrid == null)
+                {
+                    return;
+                }
                 ForecastGrid.SelectedIndex = 0;
             }
         }
