@@ -8,9 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="LawnGreen">
-        <TextBlock FontSize="36" Text="Weather Page" Margin="12,19,0,10"/>
-        <ComboBox x:Name="Province" HorizontalAlignment="Left" Margin="344,266,0,0" VerticalAlignment="Top" Width="120"
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/world-map.png" Stretch="None"></ImageBrush>
+        </Grid.Background>
+        <TextBlock FontSize="36" Text="选择第一个城市" Margin="20" Padding="20" Foreground="White"/>
+        <ComboBox x:Name="Province" HorizontalAlignment="Left" Margin="276,117,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OProvinces}" SelectionChanged="Province_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="area:Province">
@@ -18,7 +21,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="City" HorizontalAlignment="Left" Margin="573,266,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox x:Name="City" HorizontalAlignment="Left" Margin="547,117,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OCities}" SelectionChanged="City_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="area:City">
@@ -26,7 +29,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="County" HorizontalAlignment="Left" Margin="794,266,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox x:Name="County" HorizontalAlignment="Left" Margin="830,117,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OCounties}" SelectionChanged="County_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="area:County">
