@@ -84,17 +84,18 @@
                 <StackPanel x:Name="SplitViewPanePanel">
                     <RadioButton x:Name="BackRadioButton" Click="BackRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Background="Gray" Content="Back" GroupName="Back" />
                     <RadioButton x:Name="HamburgerRadioButton" Click="HamburgerRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Menu" GroupName="Hamburger"/>
-                    <RadioButton x:Name="KeepRadioButton" Click="KeepRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Note" GroupName="Navigation" Checked="KeepRadioButton_Checked"/>
+                    <RadioButton x:Name="KeepRadioButton" Click="KeepRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Note" GroupName="Navigation"/>
                     <RadioButton x:Name="ScheduleRadioButton" Click="ScheduleRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Schedule" GroupName="Navigation"/>
-                    <RadioButton x:Name="TomatoRadioButton" Click="TomatoRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Tomato" GroupName="Navigation"/>
-                    <RadioButton x:Name="WeatherRadioButton" Click="WeatherRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Weather" GroupName="Navigation"/>
+                    <RadioButton x:Name="TomatoRadioButton" Click="TomatoRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Tomato" GroupName="Navigation"/>
+                    <RadioButton x:Name="WeatherRadioButton" Click="WeatherRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Weather" GroupName="Navigation"/>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame Name="MainFrame">
-                    <Image Source="ms-appx:///Assets/Wide310x150Logo.scale-200.png" />
+
                 </Frame>
             </SplitView.Content>
         </SplitView>
     </Grid>
 </Page>
+
