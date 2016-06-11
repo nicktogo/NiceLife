@@ -66,7 +66,7 @@ namespace NiceLife
                         sw.Stop();
                         sw.Reset();
                         SetTime(0);
-                        btn_StartAndStop.Content = "Task completed";
+                        btn_StartAndStop.Content = "Done";
                         btn_StartAndStop.IsEnabled = false;
                     }
                     else
@@ -123,12 +123,12 @@ namespace NiceLife
 
             if(task.Date.ToString("yyyy-MM-dd") != DateTime.Now.ToString("yyyy-MM-dd"))
             {
-                btn_StartAndStop.Content = "Not today's task";
+                btn_StartAndStop.Content = "Overdue";
                 btn_StartAndStop.IsEnabled = false;
             }
             if(task.Status == "Done")
             {
-                btn_StartAndStop.Content = "Task completed";
+                btn_StartAndStop.Content = "Done";
                 btn_StartAndStop.IsEnabled = false;
             }
         }
