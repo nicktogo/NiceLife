@@ -18,8 +18,8 @@
             <Frame x:Name="frame" Content=""/>
         </ListView>
 
-        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="添加" Margin="1088,9,0,36" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable"/>
-        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Save" Label="编辑" Margin="1140,8,0,0" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable" Height="59"/>
+        <AppBarButton x:Name="appBarButton_add" Click="appBarButton_add_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Add" Label="Add" Margin="1088,9,0,36" VerticalAlignment="Stretch" ToolTipService.ToolTip="new a ColorLable"/>
+        <AppBarButton x:Name="appBarButton_save" Click="appBarButton_save_Click" Grid.Row="0" HorizontalAlignment="Left" Icon="Save" Label="Edit" Margin="1140,8,0,0" VerticalAlignment="Top" ToolTipService.ToolTip="new a ColorLable" Height="59"/>
         <Frame x:Name="frame_color" Content="" HorizontalAlignment="Left" Margin="562,0,0,0" VerticalAlignment="Top" Height="269" Width="588" Grid.Row="1"/>
 
     </Grid>

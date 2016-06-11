@@ -81,16 +81,44 @@ public class LibraryPaint
 
     public async void New(InkCanvas display)
     {
-        if (await Confirm("Create New Drawing?", "Draw Editor", "Yes", "No"))
+        if (await Confirm("Save Current Drawing?", "Draw Editor", "Yes", "No"))
         {
-            display.InkPresenter.StrokeContainer.Clear();
+            Save(display);
         }
+        FileOpenPicker picker = new FileOpenPicker();
+        picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+        picker.FileTypeFilter.Add(".jpg");
+        StorageFile file = await picker.PickSingleFileAsync();
+        using (IInputStream stream = await file.OpenSequentialReadAsync())
+        {
+            await display.InkPresenter.StrokeContainer.LoadAsync(stream);
+        }
+
+        display.InkPresenter.StrokeContainer.Clear();
     }
 
     public async void Open(InkCanvas display)
     {
         try
         {
+            if (await Confirm("Save Current Drawing?", "Draw Editor", "Yes", "No"))
+            {
+                FileSavePicker picker2 = new FileSavePicker();
+                picker2.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+                picker2.FileTypeChoices.Add("Drawing", new List<string>() { ".jpg", ".png" });
+                picker2.DefaultFileExtension = ".jpg";
+                picker2.SuggestedFileName = "Drawing";
+                StorageFile file2 = await picker2.PickSaveFileAsync();
+                if (file2 != null)
+                {
+                    CachedFileManager.DeferUpdates(file2);
+                    using (IRandomAccessStream stream = await file2.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await display.InkPresenter.StrokeContainer.SaveAsync(stream);
+                    }
+                    FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file2);
+                }
+            }
             FileOpenPicker picker = new FileOpenPicker();
             picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
             picker.FileTypeFilter.Add(".jpg");
@@ -112,7 +140,7 @@ public class LibraryPaint
         {
             FileSavePicker picker = new FileSavePicker();
             picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-            picker.FileTypeChoices.Add("Drawing", new List<string>() { ".jpg" });
+            picker.FileTypeChoices.Add("Drawing", new List<string>() { ".jpg", ".png" });
             picker.DefaultFileExtension = ".jpg";
             picker.SuggestedFileName = "Drawing";
             StorageFile file = await picker.PickSaveFileAsync();
