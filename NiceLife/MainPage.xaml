@@ -92,7 +92,7 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame Name="MainFrame">
-
+                    <Image Source="ms-appx:///Assets/Wide310x150Logo.scale-200.png" Stretch="Fill"/>
                 </Frame>
             </SplitView.Content>
         </SplitView>
