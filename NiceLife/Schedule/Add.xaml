@@ -9,7 +9,7 @@
 
     <Canvas Background="#FFE4E1" Margin="0,0,0,0" HorizontalAlignment="Stretch" >
         <Grid Height="710" Width="278">
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Title" FontSize="29.333" Foreground="#FF3AAFC9" Margin="198,30,16,638" SelectionChanged="textBlock_SelectionChanged"/>
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Title" FontSize="29.333" Foreground="#FF3AAFC9" Margin="198,30,16,638"/>
             <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Choose ColorLable" FontSize="29.333" Foreground="#FF3AAFC9" Margin="10,86,0,582" HorizontalAlignment="Left" Width="268"/>
             <TextBlock x:Name="textBlock_Copy3" TextWrapping="Wrap" Text="Description" FontSize="29.333" Foreground="#FF3AAFC9" Margin="104,161,0,507" HorizontalAlignment="Left" Width="158"/>
             <TextBlock x:Name="textBlock_Copy1" TextWrapping="Wrap" Text="Begin from" FontSize="29.333" Foreground="#FF3AAFC9" Margin="104,270,16,398"/>
