@@ -31,7 +31,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="50" Text="番茄时钟" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,29,0,29" Height="67" Width="299"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="50" Text="Tomato Timer" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,29,0,29" Height="67" Width="310"/>
             <Button FontSize="40" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Content="+" Height="80" Width="80" Margin="0,10,34,10">
                 <Button.Flyout>
                     <Flyout x:Name="fo_NewTask">
@@ -47,26 +47,20 @@
                                 <ColumnDefinition Width="80*"></ColumnDefinition>
                                 <ColumnDefinition Width="280*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">标题：</TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Title：</TextBlock>
                             <TextBox x:Name="tb_Title" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">描述：</TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Description：</TextBlock>
                             <TextBox x:Name="tb_Description" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">日期：</TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Date：</TextBlock>
                             
                             <!--<DatePicker x:Name="dp_Date" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
                             <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                <Button Content="选择日期" >
-                                    <Button.Flyout>
-                                        <DatePickerFlyout x:Name="dp_Date">
 
-                                        </DatePickerFlyout>
-                                    </Button.Flyout>
-                                </Button>
-                                <TextBlock x:Name="tb_Date" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="60,0,0,0"/>
+                                <TextBlock x:Name="tb_Date" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"/>
                             </StackPanel>
-                            
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">番茄数：</TextBlock>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Number of tomatos：</TextBlock>
                             <ComboBox x:Name="cb_Tomato" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectedIndex="0" xml:space ="preserve">
                                 <ComboBoxItem>1   🍅</ComboBoxItem>
                                 <ComboBoxItem>2   🍅🍅</ComboBoxItem>
@@ -81,17 +75,17 @@
                                 <ComboBoxItem>11 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
                                 <ComboBoxItem>12 🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</ComboBoxItem>
                             </ComboBox>
-                            <Button x:Name="btn_NewTaskConfirm" Click="NewTaskConfirm_Click" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="确认"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                            <Button x:Name="btn_NewTaskConfirm" Click="NewTaskConfirm_Click" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Save"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                         </Grid>
                     </Flyout>
                 </Button.Flyout>
             </Button>
         </Grid>
 
-        <Button Click="TodayTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="0" Content="今日任务 &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
-        <Button Click="AllTasks_Click" FontSize="36" Grid.Row="1" Grid.Column="1" Content="全部任务 &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
-        <Button Click="Statistics_Click" FontSize="36" Grid.Row="1" Grid.Column="2" Content="图表统计 &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
-        <Button Click="History_Click" FontSize="36" Grid.Row="1" Grid.Column="3" Content="历史数据 &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="TodayTasks_Click" FontSize="28" Grid.Row="1" Grid.Column="0" Content="Today's tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="AllTasks_Click" FontSize="28" Grid.Row="1" Grid.Column="1" Content="All tasks &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="Statistics_Click" FontSize="28" Grid.Row="1" Grid.Column="2" Content="Statistic &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
+        <Button Click="History_Click" FontSize="28" Grid.Row="1" Grid.Column="3" Content="Historical record &gt;" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="60" />
 
         <Grid x:Name="g_TodayTasksContent" Grid.Row="2" Grid.Column="0">
             <Grid.RowDefinitions>

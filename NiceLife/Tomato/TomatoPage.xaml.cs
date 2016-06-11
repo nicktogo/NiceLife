@@ -75,7 +75,7 @@ namespace NiceLife
                         Grid.SetColumn(tb_TaskContentTitle, 0);
 
                         TextBlock tb_TaskContentTotalTomato = new TextBlock();
-                        tb_TaskContentTotalTomato.Text = "总🍅：" + taskList.ElementAt(count).TotalTomato;
+                        tb_TaskContentTotalTomato.Text = "Total🍅：" + taskList.ElementAt(count).TotalTomato;
                         tb_TaskContentTotalTomato.FontSize = 15;
                         tb_TaskContentTotalTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentTotalTomato);
@@ -84,7 +84,7 @@ namespace NiceLife
                         Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                         TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                        tb_TaskContentDoneTomato.Text = "已完成🍅：" + taskList.ElementAt(count).DoneTomato;
+                        tb_TaskContentDoneTomato.Text = "Down🍅：" + taskList.ElementAt(count).DoneTomato;
                         tb_TaskContentDoneTomato.FontSize = 10;
                         tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -92,7 +92,7 @@ namespace NiceLife
                         Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                         TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                        tb_TaskContentUndoneTomato.Text = "未完成🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
+                        tb_TaskContentUndoneTomato.Text = "Undown🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
                         tb_TaskContentUndoneTomato.FontSize = 10;
                         tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);
@@ -131,7 +131,7 @@ namespace NiceLife
         {
             MenuFlyout mfo = new MenuFlyout();
             MenuFlyoutItem mfoItem = new MenuFlyoutItem();
-            mfoItem.Text = "删除";
+            mfoItem.Text = "Cancel";
             mfoItem.Click += deleteTask;
             mfoItem.Tag = taskList.ElementAt((int)(((Grid)sender).Tag));
             mfo.Items.Add(mfoItem);
@@ -209,13 +209,14 @@ namespace NiceLife
 
             TodayTasksFresh();
             AllTasksFresh();
-            tb_Date.Text = dp_Date.Date.ToString("yyyy-MM-dd");
+            //tb_Date.Text = dp_Date.Date.ToString("yyyy-MM-dd");
+            tb_Date.Text=DateTime.Today.ToString("yyyy-MM-dd");
             tb_Date.DataContextChanged += Tb_Date_DataContextChanged;
         }
 
         private void Tb_Date_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            tb_Date.Text = dp_Date.Date.ToString("yyyy-MM-dd");
+            //tb_Date.Text = dp_Date.Date.ToString("yyyy-MM-dd");
         }
 
         private void G_TaskContent_Tapped_More(object sender, TappedRoutedEventArgs e)
@@ -261,7 +262,8 @@ namespace NiceLife
             Task task = new Task();
             task.Title = tb_Title.Text;
             task.Description = tb_Description.Text;
-            task.Date = dp_Date.Date.DateTime;
+            //task.Date = dp_Date.Date.DateTime;
+            task.Date = DateTime.Today;
             task.Type = "Normal";
             task.Status = "Undone";
             task.TotalTomato = cb_Tomato.SelectedIndex+1;
@@ -270,7 +272,7 @@ namespace NiceLife
 
             tb_Title.Text = "";
             tb_Description.Text = "";
-            dp_Date.Date = DateTime.Now;
+            //dp_Date.Date = DateTime.Now;
             cb_Tomato.SelectedIndex = 0;
 
             TodayTasksFresh();

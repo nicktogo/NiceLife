@@ -17,9 +17,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-            <TextBlock FontSize="50" Text="任务" Margin="50,30,0,30"/>
+            <TextBlock FontSize="50" Text="Task" Margin="50,30,0,30"/>
             <DatePicker x:Name="dp_ViewDate" DateChanged="dp_ViewDate_DateChanged" Margin="50,30,0,30"/>
-            <TextBlock x:Name="tb_IsToday" FontSize="20" Text="今日"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,30,0,30"/>
+            <TextBlock x:Name="tb_IsToday" FontSize="20" Text="Today"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,30,0,30"/>
         </StackPanel>
         
         <ScrollViewer x:Name="sv_TasksContent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>

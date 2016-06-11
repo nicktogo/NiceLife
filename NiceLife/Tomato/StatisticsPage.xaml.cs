@@ -38,9 +38,9 @@ namespace NiceLife
             else comRate = (float)comNum / sumNum;
             warnning.Visibility = (Visibility)0;
             if (comRate < 0.5)
-                warnning.Text = "帅的人都去学习啦！！！";
+                warnning.Text = "";
             else
-                warnning.Text = "超级棒~";
+                warnning.Text = "";
             double length = 310.86 * comRate;
             Eone.StrokeDashArray.Clear();
             Eone.StrokeDashArray.Add(length);
@@ -65,8 +65,8 @@ namespace NiceLife
             textsum1.Text = sumNum.ToString();
             textcom1.Text = comNum.ToString();
 
-            namecom1.Text = "完成";
-            namesum1.Text = "总数";
+            namecom1.Text = "Down";
+            namesum1.Text = "Total";
         }
 
         public void freshTwo(int comNum, int sumNum)
@@ -79,9 +79,9 @@ namespace NiceLife
             else comRate = (float)comNum / sumNum;
             warnning.Visibility = (Visibility)0;
             if (comRate < 0.5)
-                warnning.Text = "帅的人都去学习啦！！！";
+                warnning.Text = "";
             else
-                warnning.Text = "超级棒~";
+                warnning.Text = "";
             double length = 310.86 * comRate;
             Etwo.StrokeDashArray.Clear();
             Etwo.StrokeDashArray.Add(length);
@@ -107,8 +107,8 @@ namespace NiceLife
             textsum2.Text = sumNum.ToString();
             textcom2.Text = comNum.ToString();
 
-            namecom2.Text = "完成";
-            namesum2.Text = "总数";
+            namecom2.Text = "Down";
+            namesum2.Text = "Total";
         }
 
 
@@ -116,7 +116,7 @@ namespace NiceLife
         private void task_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton li = (sender as RadioButton);
-            if (li.Content.ToString().Equals("今日任务"))
+            if (li.Content.ToString().Equals("Today's task"))
             {
                 int comNumToday;
                 int sumNumToday;
@@ -138,7 +138,7 @@ namespace NiceLife
         private void tomato_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton li = (sender as RadioButton);
-            if (li.Content.ToString().Equals("今日番茄"))
+            if (li.Content.ToString().Equals("Today's tomato"))
             {
                 int comNumToday = TaskHelper.GetHelper().numOfDoneTomatoByDate(DateTime.Now);
                 int sumNumToday = TaskHelper.GetHelper().numOfAllTomatoByDate(DateTime.Now);

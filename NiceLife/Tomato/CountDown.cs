@@ -66,7 +66,7 @@ namespace NiceLife
                         sw.Stop();
                         sw.Reset();
                         SetTime(0);
-                        btn_StartAndStop.Content = "任务完成";
+                        btn_StartAndStop.Content = "Task completed";
                         btn_StartAndStop.IsEnabled = false;
                     }
                     else
@@ -100,8 +100,8 @@ namespace NiceLife
 
         public void freshTomato()
         {
-            tb_DoneTomato.Text = "已完成🍅：" + task.DoneTomato.ToString();
-            tb_UndoneTomato.Text = "未完成🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
+            tb_DoneTomato.Text = "Down🍅：" + task.DoneTomato.ToString();
+            tb_UndoneTomato.Text = "Undown🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
         }
 
         public CountDown(Task _task)
@@ -117,18 +117,18 @@ namespace NiceLife
 
             SetTime(1500);//实际为1500
 
-            tb_TotalTomato.Text = "总🍅：" + task.TotalTomato.ToString();
-            tb_DoneTomato.Text = "已完成🍅：" + task.DoneTomato.ToString();
-            tb_UndoneTomato.Text = "未完成🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
+            tb_TotalTomato.Text = "Total🍅：" + task.TotalTomato.ToString();
+            tb_DoneTomato.Text = "Down🍅：" + task.DoneTomato.ToString();
+            tb_UndoneTomato.Text = "Undown🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
 
             if(task.Date.ToString("yyyy-MM-dd") != DateTime.Now.ToString("yyyy-MM-dd"))
             {
-                btn_StartAndStop.Content = "非今日任务";
+                btn_StartAndStop.Content = "Not today's task";
                 btn_StartAndStop.IsEnabled = false;
             }
             if(task.Status == "Done")
             {
-                btn_StartAndStop.Content = "任务完成";
+                btn_StartAndStop.Content = "Task completed";
                 btn_StartAndStop.IsEnabled = false;
             }
         }
@@ -136,11 +136,11 @@ namespace NiceLife
         private void Timer_Tick(object sender, object e)
         {
             if(periodNow == "ShortRest")
-                Period.Text = "小憩时间";
+                Period.Text = "Break Time";
             else if(periodNow == "LongRest")
-                Period.Text = "休息时间";
+                Period.Text = "Rest Time";
             else
-                Period.Text = "番茄时间";
+                Period.Text = "Work Time";
 
             TimeSpan ts = new TimeSpan(0, 0, seconds);
             pro.totalSecond = (int)(ts - sw.Elapsed).TotalSeconds;
@@ -164,7 +164,7 @@ namespace NiceLife
 
             if (btnStatus == "Start")
             {
-                btn_StartAndStop.Content = "停止";
+                btn_StartAndStop.Content = "Stop";
                 btnStatus = "Stop";
 
                 if (task.Status == "Undone")
@@ -174,13 +174,13 @@ namespace NiceLife
             }
             else
             {
-                btn_StartAndStop.Content = "开始";
+                btn_StartAndStop.Content = "Start";
                 btnStatus = "Start";
 
                 timer.Stop();
                 sw.Reset();
                 SetTime(1500);//实际为1500
-                Period.Text = "番茄时间";
+                Period.Text = "Work Time";
             }
 
         }

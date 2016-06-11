@@ -96,7 +96,7 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentTitle, 0);
 
                     TextBlock tb_TaskContentTotalTomato = new TextBlock();
-                    tb_TaskContentTotalTomato.Text = "总🍅：" + taskList.ElementAt(count).TotalTomato;
+                    tb_TaskContentTotalTomato.Text = "Total🍅：" + taskList.ElementAt(count).TotalTomato;
                     tb_TaskContentTotalTomato.FontSize = 15;
                     tb_TaskContentTotalTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentTotalTomato);
@@ -105,7 +105,7 @@ namespace NiceLife
                     Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                     TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                    tb_TaskContentDoneTomato.Text = "已完成🍅：" + taskList.ElementAt(count).DoneTomato;
+                    tb_TaskContentDoneTomato.Text = "Down🍅：" + taskList.ElementAt(count).DoneTomato;
                     tb_TaskContentDoneTomato.FontSize = 10;
                     tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -113,7 +113,7 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                     TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                    tb_TaskContentUndoneTomato.Text = "未完成🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
+                    tb_TaskContentUndoneTomato.Text = "Undown🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
                     tb_TaskContentUndoneTomato.FontSize = 10;
                     tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);
@@ -143,7 +143,7 @@ namespace NiceLife
         {
             MenuFlyout mfo = new MenuFlyout();
             MenuFlyoutItem mfoItem = new MenuFlyoutItem();
-            mfoItem.Text = "删除";
+            mfoItem.Text = "Cancel";
             mfoItem.Click += deleteTask;
             mfoItem.Tag = taskList.ElementAt((int)(((Grid)sender).Tag));
             mfo.Items.Add(mfoItem);

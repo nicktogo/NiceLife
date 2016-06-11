@@ -82,27 +82,27 @@ namespace NiceLife
             {
                 case 1:
                     stars.Text = "🍅🍅🍅🍅🍅";
-                    comments.Text = "棒极了！";
+                    comments.Text = "Outstanding！";
                     break;
                 case 2:
                     stars.Text = "🍅🍅🍅🍅";
-                    comments.Text = "了不起！";
+                    comments.Text = "Excellent！";
                     break;
                 case 3:
                     stars.Text = "🍅🍅🍅";
-                    comments.Text = "很好！";
+                    comments.Text = "Good！";
                     break;
                 case 4:
                     stars.Text = "🍅🍅";
-                    comments.Text = "继续努力！";
+                    comments.Text = "Normal！";
                     break;
                 case 5:
                     stars.Text = "🍅";
-                    comments.Text = "再接再厉！";
+                    comments.Text = "Bad！";
                     break;
                 default:
                     stars.Text = "";
-                    comments.Text = "重在坚持！";
+                    comments.Text = "Terrible！";
                     break;
             }
 
@@ -114,13 +114,13 @@ namespace NiceLife
 
             taskList = TaskHelper.GetHelper().SelectGroupItemsByDate(dp_ViewDate.Date.DateTime);
             Grid g_ViewTasksContent = new Grid();
-            for (int rowCount = 0; rowCount < taskList.Count / 8 + 1; rowCount++)
+            for (int rowCount = 0; rowCount < taskList.Count / 6 + 1; rowCount++)
             {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(120);
                 g_ViewTasksContent.RowDefinitions.Add(rowdef);
             }
-            for (int colCount = 0; colCount < 8; colCount++)
+            for (int colCount = 0; colCount < 6; colCount++)
             {
                 g_ViewTasksContent.ColumnDefinitions.Add(new ColumnDefinition());
             }
@@ -130,7 +130,7 @@ namespace NiceLife
             int i = 0;
             while (count < taskList.Count)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 6; j++)
                 {
                     Grid g_TaskContent = new Grid();
                     g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
@@ -156,7 +156,7 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentTitle, 0);
 
                     TextBlock tb_TaskContentTotalTomato = new TextBlock();
-                    tb_TaskContentTotalTomato.Text = "总🍅：" + taskList.ElementAt(count).TotalTomato;
+                    tb_TaskContentTotalTomato.Text = "Total🍅：" + taskList.ElementAt(count).TotalTomato;
                     tb_TaskContentTotalTomato.FontSize = 15;
                     tb_TaskContentTotalTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentTotalTomato);
@@ -165,7 +165,7 @@ namespace NiceLife
                     Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                     TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                    tb_TaskContentDoneTomato.Text = "已完成🍅：" + taskList.ElementAt(count).DoneTomato;
+                    tb_TaskContentDoneTomato.Text = "Down🍅：" + taskList.ElementAt(count).DoneTomato;
                     tb_TaskContentDoneTomato.FontSize = 10;
                     tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -173,7 +173,7 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                     TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                    tb_TaskContentUndoneTomato.Text = "未完成🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
+                    tb_TaskContentUndoneTomato.Text = "Undown🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
                     tb_TaskContentUndoneTomato.FontSize = 10;
                     tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);
