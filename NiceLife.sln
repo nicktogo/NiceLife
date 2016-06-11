@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiceLife", "NiceLife\NiceLife.csproj", "{A00E4C03-3798-40FA-88E8-12808CC77A93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseUnitTest", "DatabaseUnitTest\DatabaseUnitTest.csproj", "{C6918D9B-7ECC-4765-AAFF-18855E2093BF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -35,24 +33,6 @@ Global
 		{A00E4C03-3798-40FA-88E8-12808CC77A93}.Release|x86.ActiveCfg = Release|x86
 		{A00E4C03-3798-40FA-88E8-12808CC77A93}.Release|x86.Build.0 = Release|x86
 		{A00E4C03-3798-40FA-88E8-12808CC77A93}.Release|x86.Deploy.0 = Release|x86
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|ARM.ActiveCfg = Debug|ARM
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|ARM.Build.0 = Debug|ARM
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|ARM.Deploy.0 = Debug|ARM
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|x64.ActiveCfg = Debug|x64
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|x64.Build.0 = Debug|x64
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|x64.Deploy.0 = Debug|x64
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|x86.ActiveCfg = Debug|x86
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|x86.Build.0 = Debug|x86
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Debug|x86.Deploy.0 = Debug|x86
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|ARM.ActiveCfg = Release|ARM
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|ARM.Build.0 = Release|ARM
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|ARM.Deploy.0 = Release|ARM
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|x64.ActiveCfg = Release|x64
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|x64.Build.0 = Release|x64
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|x64.Deploy.0 = Release|x64
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|x86.ActiveCfg = Release|x86
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|x86.Build.0 = Release|x86
-		{C6918D9B-7ECC-4765-AAFF-18855E2093BF}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

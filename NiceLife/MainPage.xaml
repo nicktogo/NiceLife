@@ -82,12 +82,12 @@
                    DisplayMode="CompactOverlay" IsPaneOpen="False" PaneBackground="DarkGray">
             <SplitView.Pane>
                 <StackPanel x:Name="SplitViewPanePanel">
-                    <RadioButton x:Name="BackRadioButton" Click="BackRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Background="Gray" Content="Back" GroupName="Back" />
-                    <RadioButton x:Name="HamburgerRadioButton" Click="HamburgerRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Menu" GroupName="Hamburger"/>
-                    <RadioButton x:Name="KeepRadioButton" Click="KeepRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Note" GroupName="Navigation"/>
-                    <RadioButton x:Name="ScheduleRadioButton" Click="ScheduleRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Schedule" GroupName="Navigation"/>
-                    <RadioButton x:Name="TomatoRadioButton" Click="TomatoRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Tomato" GroupName="Navigation"/>
-                    <RadioButton x:Name="WeatherRadioButton" Click="WeatherRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Weather" GroupName="Navigation"/>
+                    <RadioButton x:Name="BackRadioButton" Click="BackRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE0C4;" Background="Gray" Content="Back" GroupName="Back" />
+                    <RadioButton x:Name="HamburgerRadioButton" Click="HamburgerRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE14C;" Content="Menu" GroupName="Hamburger"/>
+                    <RadioButton x:Name="KeepRadioButton" Click="KeepRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE7C3;" Content="Note" GroupName="Navigation"/>
+                    <RadioButton x:Name="ScheduleRadioButton" Click="ScheduleRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE787;" Content="Schedule" GroupName="Navigation"/>
+                    <RadioButton x:Name="TomatoRadioButton" Click="TomatoRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE81C;" Content="Tomato" GroupName="Navigation"/>
+                    <RadioButton x:Name="WeatherRadioButton" Click="WeatherRadioButton_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE706;" Content="Weather" GroupName="Navigation"/>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
