@@ -65,9 +65,9 @@ namespace NiceLife
                     {
                         Grid g_DateContent = new Grid();
                         if (allTaskList.ElementAt(taskCount).Date.Date.CompareTo(DateTime.Now.Date) < 0)
-                            g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                            g_DateContent.Background = new SolidColorBrush(Colors.LightGray);
                         else
-                            g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_DateContent.Background = new SolidColorBrush(Colors.LightPink);
                         g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -96,9 +96,9 @@ namespace NiceLife
                             {
                                 Grid g_DateContent = new Grid();
                                 if (allTaskList.ElementAt(taskCount).Date.Date.CompareTo(DateTime.Now.Date) < 0)
-                                    g_DateContent.Background = new SolidColorBrush(Colors.Gray);
+                                    g_DateContent.Background = new SolidColorBrush(Colors.LightGray);
                                 else
-                                    g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
+                                    g_DateContent.Background = new SolidColorBrush(Colors.LightPink);
                                 g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                                 g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                                 g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -127,14 +127,14 @@ namespace NiceLife
                     
                     Grid g_TaskContent = new Grid();
                     if (allTaskList.ElementAt(taskCount).Status == "Done")
-                        g_TaskContent.Background = new SolidColorBrush(Colors.Green);
+                        g_TaskContent.Background = new SolidColorBrush(Colors.LightSeaGreen);
                     else
                     {
                         if (allTaskList.ElementAt(taskCount).Date.Date.CompareTo(DateTime.Now.Date) < 0)
-                            g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
+                            g_TaskContent.Background = new SolidColorBrush(Colors.LightGray);
                         else
                         {
-                            g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_TaskContent.Background = new SolidColorBrush(Colors.LightPink);
                             g_TaskContent.RightTapped += G_TaskContent_RightTapped;
                         }      
                     }

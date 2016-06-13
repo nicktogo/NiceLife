@@ -22,7 +22,7 @@
                 <RotateTransform Angle="-90"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <TextBlock x:Name="rateone" Text=""  Visibility="Collapsed" HorizontalAlignment="Left" Foreground="White"   Margin="342,154,0,0" TextWrapping="Wrap" FontSize="40" VerticalAlignment="Top" Width="93" Height="50"/>
+        <TextBlock x:Name="rateone" Text=""  Visibility="Collapsed" HorizontalAlignment="Left" Foreground="White"   Margin="330,147,0,0" TextWrapping="Wrap" FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
         <TextBlock x:Name="Titletwo" FontSize="30" HorizontalAlignment="Left" Margin="720,35,0,0" TextWrapping="Wrap" Text="Tomato completion rate" VerticalAlignment="Top" Width="320" Height="36" RenderTransformOrigin="-1.219,0.746"/>
 
         <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="200"  Margin="745,80,0,0" VerticalAlignment="Top" Width="200"/>
@@ -32,25 +32,25 @@
             </Ellipse.RenderTransform>
         </Ellipse>
 
-        <TextBlock x:Name="ratetwo"  HorizontalAlignment="Left"  Foreground="White" Margin="811,157,0,0" TextWrapping="Wrap" Text=""  Visibility="Collapsed"  FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
+        <TextBlock x:Name="ratetwo"  HorizontalAlignment="Left"  Foreground="White" Margin="800,147,0,0" TextWrapping="Wrap" Text=""  Visibility="Collapsed"  FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
         <TextBlock x:Name="warnning" FontSize="30" Visibility="Collapsed" Foreground="White"  HorizontalAlignment="Left" Margin="590,182,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="116" Width="421"/>
         <RadioButton Content="Today's task" HorizontalAlignment="Left" Margin="262,291,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
         <RadioButton Content="Total task" HorizontalAlignment="Left" Margin="394,292,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
         <RadioButton Content="Today's tomato" HorizontalAlignment="Left" Margin="730,291,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
         <RadioButton Content="Total tomato" HorizontalAlignment="Left" Margin="880,289,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
 
-        <Rectangle x:Name="line1"  Visibility="Collapsed" Fill="Gray"  HorizontalAlignment="Left" Height="1" Margin="226,0,0,72" Stroke="Gray" VerticalAlignment="Bottom" Width="326"/>
-        <Rectangle x:Name="rectsum1"  Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="242" Margin="292,0,0,72" Stroke="Gray" VerticalAlignment="Bottom" Width="50"/>
-        <Rectangle x:Name="rectcom1"  Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="220" Margin="410,0,0,74" Stroke="Gray" VerticalAlignment="Bottom" Width="50"/>
+        <Rectangle x:Name="line1"  Visibility="Collapsed" Fill="LightSeaGreen"  HorizontalAlignment="Left" Height="1" Margin="226,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="326"/>
+        <Rectangle x:Name="rectsum1"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="242" Margin="292,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
+        <Rectangle x:Name="rectcom1"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="220" Margin="410,0,0,74" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
         <TextBlock x:Name="textsum1"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="300,0,0,320" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
         <TextBlock x:Name="textcom1"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="420,0,0,320" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.47,-11.764"/>
         <TextBlock x:Name="namesum1"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="290,0,0,42" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.564,-3.246"/>
         <TextBlock x:Name="namecom1"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="402,0,0,41" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
 
 
-        <Rectangle x:Name="line2"  Visibility="Collapsed" Fill="Gray"  HorizontalAlignment="Left" Height="1" Margin="684,0,0,71" Stroke="Gray" VerticalAlignment="Bottom" Width="326"/>
-        <Rectangle x:Name="rectsum2"  Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="243" Margin="752,0,0,71" Stroke="Gray" VerticalAlignment="Bottom" Width="50"/>
-        <Rectangle x:Name="rectcom2"   Visibility="Collapsed" Fill="Gray" HorizontalAlignment="Left" Height="164" Margin="877,0,0,72" Stroke="Gray" VerticalAlignment="Bottom" Width="50"/>
+        <Rectangle x:Name="line2"  Visibility="Collapsed" Fill="LightSeaGreen"  HorizontalAlignment="Left" Height="1" Margin="684,0,0,71" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="326"/>
+        <Rectangle x:Name="rectsum2"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="243" Margin="752,0,0,71" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
+        <Rectangle x:Name="rectcom2"   Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="164" Margin="877,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
         <TextBlock x:Name="textsum2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="760,0,0,319" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
         <TextBlock x:Name="textcom2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="880,0,0,318" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
         <TextBlock x:Name="namesum2"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="750,0,0,41" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>

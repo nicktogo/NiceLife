@@ -63,14 +63,14 @@ namespace NiceLife
                 {
                     Grid g_TaskContent = new Grid();
                     if (taskList.ElementAt(count).Status == "Done")
-                        g_TaskContent.Background = new SolidColorBrush(Colors.Green);
+                        g_TaskContent.Background = new SolidColorBrush(Colors.LightSeaGreen);
                     else
                     {
                         if(taskList.ElementAt(count).Date.Date.CompareTo(DateTime.Now.Date) < 0)
                             g_TaskContent.Background = new SolidColorBrush(Colors.Gray);
                         else
                         {
-                            g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_TaskContent.Background = new SolidColorBrush(Colors.LightPink);
                             g_TaskContent.RightTapped += G_TaskContent_RightTapped;
                         }
                     } 

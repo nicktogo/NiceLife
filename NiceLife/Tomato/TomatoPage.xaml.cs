@@ -47,10 +47,10 @@ namespace NiceLife
                         g_TaskContent.Tapped += G_TaskContent_Tapped;
 
                         if (taskList.ElementAt(count).Status == "Done")
-                            g_TaskContent.Background = new SolidColorBrush(Colors.Green);
+                            g_TaskContent.Background = new SolidColorBrush(Colors.LightSeaGreen);
                         else
                         {
-                            g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                            g_TaskContent.Background = new SolidColorBrush(Colors.LightPink);
                             g_TaskContent.RightTapped += G_TaskContent_RightTapped;
                         }
                         g_TaskContent.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -106,7 +106,7 @@ namespace NiceLife
                     else if (taskList.Count > 7 && count == 7)
                     {
                         Grid g_TaskContent = new Grid();
-                        g_TaskContent.Background = new SolidColorBrush(Colors.Yellow);
+                        g_TaskContent.Background = new SolidColorBrush(Colors.LightPink);
                         g_TaskContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_TaskContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_TaskContent.Margin = new Thickness(5, 5, 5, 5);
@@ -159,7 +159,7 @@ namespace NiceLife
                     if (count < dateList.Count && count != 7)
                     {
                         Grid g_DateContent = new Grid();
-                        g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
+                        g_DateContent.Background = new SolidColorBrush(Colors.LightPink);
                         g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_DateContent.Margin = new Thickness(5, 5, 5, 5);
@@ -182,7 +182,7 @@ namespace NiceLife
                     else if (dateList.Count > 7 && count == 7)
                     {
                         Grid g_DateContent = new Grid();
-                        g_DateContent.Background = new SolidColorBrush(Colors.Yellow);
+                        g_DateContent.Background = new SolidColorBrush(Colors.LightPink);
                         g_DateContent.HorizontalAlignment = HorizontalAlignment.Stretch;
                         g_DateContent.VerticalAlignment = VerticalAlignment.Stretch;
                         g_DateContent.Margin = new Thickness(5, 5, 5, 5);
