@@ -41,7 +41,7 @@ namespace NiceLife
                 warnning.Text = "";
             else
                 warnning.Text = "";
-            double length = 310.86 * comRate;
+            double length = 197 * comRate;
             Eone.StrokeDashArray.Clear();
             Eone.StrokeDashArray.Add(length);
             Eone.StrokeDashArray.Add(628);
@@ -82,7 +82,7 @@ namespace NiceLife
                 warnning.Text = "";
             else
                 warnning.Text = "";
-            double length = 310.86 * comRate;
+            double length = 197 * comRate;
             Etwo.StrokeDashArray.Clear();
             Etwo.StrokeDashArray.Add(length);
             Etwo.StrokeDashArray.Add(628);
