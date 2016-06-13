@@ -144,7 +144,7 @@
 
                             <GridView.HeaderTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="五日预报" Style="{StaticResource TitleTextBlockStyle}" Foreground="{ThemeResource ComboBoxItemSelectedForegroundThemeBrush}" FontWeight="SemiLight" FontSize="32" TextWrapping="Wrap" OpticalMarginAlignment="TrimSideBearings" Margin="8" CharacterSpacing="2" IsDoubleTapEnabled="False" ManipulationMode="TranslateInertia"/>
+                                    <TextBlock Text="Forecast" Style="{StaticResource TitleTextBlockStyle}" Foreground="{ThemeResource ComboBoxItemSelectedForegroundThemeBrush}" FontWeight="SemiLight" FontSize="32" TextWrapping="Wrap" OpticalMarginAlignment="TrimSideBearings" Margin="8" CharacterSpacing="2" IsDoubleTapEnabled="False" ManipulationMode="TranslateInertia"/>
                                 </DataTemplate>
                             </GridView.HeaderTemplate>
                             <GridView.ItemTemplate>
@@ -187,6 +187,10 @@
                                 <TextBlock x:Name="NightWindPower" FontSize="16" 
                                                Style="{StaticResource TextBlockStyle}"/>
                             </StackPanel>
+                            <TextBlock x:Name="textBlock" 
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Left" Margin="85,10,0,0" TextWrapping="Wrap" Text="Forecast Details" VerticalAlignment="Top"/>
                         </Grid>
                     </Grid>
                 </DataTemplate>

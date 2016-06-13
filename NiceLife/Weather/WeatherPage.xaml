@@ -13,7 +13,7 @@
             <ImageBrush ImageSource="/Assets/world-map.png" Stretch="None"></ImageBrush>
         </Grid.Background>
         <TextBlock FontSize="36" Text="Choose your first city..." Margin="20" Padding="20" Foreground="White"/>
-        <ComboBox x:Name="Province" HorizontalAlignment="Left" Margin="276,117,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox x:Name="Province" HorizontalAlignment="Left" Margin="510,141,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OProvinces}" SelectionChanged="Province_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="area:Province">
@@ -21,7 +21,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="City" HorizontalAlignment="Left" Margin="547,117,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox x:Name="City" HorizontalAlignment="Left" Margin="781,141,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OCities}" SelectionChanged="City_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="area:City">
@@ -29,7 +29,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="County" HorizontalAlignment="Left" Margin="830,117,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox x:Name="County" HorizontalAlignment="Left" Margin="1064,141,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OCounties}" SelectionChanged="County_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="area:County">
@@ -37,5 +37,8 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <TextBlock x:Name="provice_textblock" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Margin="420,146,0,0" TextWrapping="Wrap" Text="Province" VerticalAlignment="Top"/>
+        <TextBlock x:Name="city_textblock" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Margin="730,151,0,0" TextWrapping="Wrap" Text="City" VerticalAlignment="Top"/>
+        <TextBlock x:Name="county_textblock" Foreground="White" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Margin="987,146,0,0" TextWrapping="Wrap" Text="County" VerticalAlignment="Top"/>
     </Grid>
 </Page>
