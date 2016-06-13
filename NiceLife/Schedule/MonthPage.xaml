@@ -41,13 +41,13 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="textBlock" Grid.Row="0" Grid.Column="0" Text="Sun"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFC9473A"/>
-                    <TextBlock x:Name="textBlock2" Grid.Row="0" Grid.Column="1" Text="Mon"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
-                    <TextBlock x:Name="textBlock3" Grid.Row="0" Grid.Column="2" Text="Tue"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
-                    <TextBlock x:Name="textBlock4" Grid.Row="0" Grid.Column="3" Text="Wed"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
-                    <TextBlock x:Name="textBlock5" Grid.Row="0" Grid.Column="4" Text="Thu"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
-                    <TextBlock x:Name="textBlock6" Grid.Row="0" Grid.Column="5" Text="Fri"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
-                    <TextBlock x:Name="textBlock7" Grid.Row="0" Grid.Column="6" Text="Sat"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFC9473A"/>
+                    <TextBlock x:Name="textBlock" Grid.Row="0" Grid.Column="0" Text="Sun"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFC9473A"/>
+                    <TextBlock x:Name="textBlock2" Grid.Row="0" Grid.Column="1" Text="Mon"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
+                    <TextBlock x:Name="textBlock3" Grid.Row="0" Grid.Column="2" Text="Tue"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
+                    <TextBlock x:Name="textBlock4" Grid.Row="0" Grid.Column="3" Text="Wed"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
+                    <TextBlock x:Name="textBlock5" Grid.Row="0" Grid.Column="4" Text="Thu"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
+                    <TextBlock x:Name="textBlock6" Grid.Row="0" Grid.Column="5" Text="Fri"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF3AAFC9"/>
+                    <TextBlock x:Name="textBlock7" Grid.Row="0" Grid.Column="6" Text="Sat"  FontSize="32" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFC9473A"/>
 
                 </Grid>
                 <Grid  Name="calview" Grid.Column="1" Background="#FFFBF9FB" Opacity="0.5" Margin="96,0,72,96" >

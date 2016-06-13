@@ -75,7 +75,7 @@ namespace NiceLife
 
                         Button b = new Button();
                         
-                        b.FontSize = 52;
+                        b.FontSize = 32;
                         b.Foreground = new SolidColorBrush(Colors.DarkGray);
                         b.Background = null;
                         b.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
@@ -101,7 +101,7 @@ namespace NiceLife
                        
                         Button t = new Button();
                         t.Background = null;
-                        t.FontSize = 52;
+                        t.FontSize = 32;
                         if (k == today.Day)
                         {
                             t.Foreground =new SolidColorBrush(Colors.Red);
@@ -122,7 +122,7 @@ namespace NiceLife
                     else
                     {
                         TextBlock t = new TextBlock();
-                        t.FontSize = 52;
+                        t.FontSize = 32;
 
                         t.Foreground = new SolidColorBrush(Colors.DarkGray);
                         t.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
