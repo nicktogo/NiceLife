@@ -22,15 +22,15 @@
             <TextBlock x:Name="TotalHistory" FontSize="25" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="All records" VerticalAlignment="Top"/>
             <TextBlock x:Name="textblock" HorizontalAlignment="Left" Margin="21,37,0,0" TextWrapping="Wrap" Text="Number of tasks" VerticalAlignment="Top"/>
             <TextBlock x:Name="numofall" HorizontalAlignment="Left" Margin="161,36,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="51,61,0,0" TextWrapping="Wrap" Text="Down" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="51,61,0,0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Top"/>
             <TextBlock x:Name="done" HorizontalAlignment="Left" Margin="141,61,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="51,86,0,0" TextWrapping="Wrap" Text="Undown" VerticalAlignment="Top" RenderTransformOrigin="0.194,0.85"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="51,86,0,0" TextWrapping="Wrap" Text="Undone" VerticalAlignment="Top" RenderTransformOrigin="0.194,0.85"/>
             <TextBlock x:Name="undone" HorizontalAlignment="Left" Margin="141,87,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="21,113,0,0" TextWrapping="Wrap" Text="Number of tomatos" VerticalAlignment="Top"/>
             <TextBlock x:Name="totaltomato" HorizontalAlignment="Left" Margin="161,114,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="51,138,0,0" TextWrapping="Wrap" Text="Down" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="51,138,0,0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Top"/>
             <TextBlock x:Name="donetomato" HorizontalAlignment="Left" Margin="141,139,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="51,161,0,0" TextWrapping="Wrap" Text="Undown" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="51,161,0,0" TextWrapping="Wrap" Text="Undone" VerticalAlignment="Top"/>
             <TextBlock x:Name="undonetomato" HorizontalAlignment="Left" Margin="141,162,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
 
 
@@ -43,15 +43,15 @@
             <TextBlock x:Name="textBlock5" FontSize="25" HorizontalAlignment="Left" Margin="6,4,0,0" TextWrapping="Wrap" Text="Day records" VerticalAlignment="Top" RenderTransformOrigin="0.065,1.2"/>
             <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="21,40,0,0" TextWrapping="Wrap" Text="Number of tasks" VerticalAlignment="Top"/>
             <TextBlock x:Name="todayall" HorizontalAlignment="Left" Margin="161,40,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="51,67,0,0" TextWrapping="Wrap" Text="Down" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="51,67,0,0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Top"/>
             <TextBlock x:Name="todaydown" HorizontalAlignment="Left" Margin="141,67,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="51,90,0,0" TextWrapping="Wrap" Text="Undown" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="51,90,0,0" TextWrapping="Wrap" Text="Undone" VerticalAlignment="Top"/>
             <TextBlock x:Name="todayundone" HorizontalAlignment="Left" Margin="141,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
             <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="21,119,0,0" TextWrapping="Wrap" Text="Number of tomatos" VerticalAlignment="Top"/>
             <TextBlock x:Name="todayalltomato" HorizontalAlignment="Left" Margin="161,120,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="51,144,0,0" TextWrapping="Wrap" Text="Down" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="51,144,0,0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Top"/>
             <TextBlock x:Name="todaydonetomato" HorizontalAlignment="Left" Margin="141,145,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="51,170,0,0" TextWrapping="Wrap" Text="Undown" VerticalAlignment="Top"/>
+            <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="51,170,0,0" TextWrapping="Wrap" Text="Undone" VerticalAlignment="Top"/>
             <TextBlock x:Name="todayundonetomato" HorizontalAlignment="Left" Margin="141,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
             <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="21,202,0,0" TextWrapping="Wrap" Text="Day comments" VerticalAlignment="Top"/>
             <TextBlock x:Name="stars" HorizontalAlignment="Left" Margin="51,233,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>

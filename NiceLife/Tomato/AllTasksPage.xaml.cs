@@ -169,7 +169,7 @@ namespace NiceLife
                     Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                     TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                    tb_TaskContentDoneTomato.Text = "Down🍅：" + allTaskList.ElementAt(taskCount).DoneTomato;
+                    tb_TaskContentDoneTomato.Text = "Done🍅：" + allTaskList.ElementAt(taskCount).DoneTomato;
                     tb_TaskContentDoneTomato.FontSize = 10;
                     tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -177,7 +177,7 @@ namespace NiceLife
                     Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                     TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                    tb_TaskContentUndoneTomato.Text = "Undown🍅：" + (allTaskList.ElementAt(taskCount).TotalTomato - allTaskList.ElementAt(taskCount).DoneTomato);
+                    tb_TaskContentUndoneTomato.Text = "Undone🍅：" + (allTaskList.ElementAt(taskCount).TotalTomato - allTaskList.ElementAt(taskCount).DoneTomato);
                     tb_TaskContentUndoneTomato.FontSize = 10;
                     tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                     g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);

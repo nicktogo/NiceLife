@@ -65,7 +65,7 @@ namespace NiceLife
             textsum1.Text = sumNum.ToString();
             textcom1.Text = comNum.ToString();
 
-            namecom1.Text = "Down";
+            namecom1.Text = "Done";
             namesum1.Text = "Total";
         }
 
@@ -107,7 +107,7 @@ namespace NiceLife
             textsum2.Text = sumNum.ToString();
             textcom2.Text = comNum.ToString();
 
-            namecom2.Text = "Down";
+            namecom2.Text = "Done";
             namesum2.Text = "Total";
         }
 

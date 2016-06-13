@@ -100,8 +100,8 @@ namespace NiceLife
 
         public void freshTomato()
         {
-            tb_DoneTomato.Text = "Down🍅：" + task.DoneTomato.ToString();
-            tb_UndoneTomato.Text = "Undown🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
+            tb_DoneTomato.Text = "Done🍅：" + task.DoneTomato.ToString();
+            tb_UndoneTomato.Text = "Undone🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
         }
 
         public CountDown(Task _task)
@@ -118,8 +118,8 @@ namespace NiceLife
             SetTime(1500);//实际为1500
 
             tb_TotalTomato.Text = "Total🍅：" + task.TotalTomato.ToString();
-            tb_DoneTomato.Text = "Down🍅：" + task.DoneTomato.ToString();
-            tb_UndoneTomato.Text = "Undown🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
+            tb_DoneTomato.Text = "Done🍅：" + task.DoneTomato.ToString();
+            tb_UndoneTomato.Text = "Undone🍅：" + (task.TotalTomato - task.DoneTomato).ToString();
 
             if(task.Date.ToString("yyyy-MM-dd") != DateTime.Now.ToString("yyyy-MM-dd"))
             {
