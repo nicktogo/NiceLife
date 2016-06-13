@@ -12,7 +12,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/world-map.png" Stretch="None"></ImageBrush>
         </Grid.Background>
-        <TextBlock FontSize="36" Text="选择第一个城市" Margin="20" Padding="20" Foreground="White"/>
+        <TextBlock FontSize="36" Text="Choose your first city..." Margin="20" Padding="20" Foreground="White"/>
         <ComboBox x:Name="Province" HorizontalAlignment="Left" Margin="276,117,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{x:Bind OProvinces}" SelectionChanged="Province_SelectionChanged">
             <ComboBox.ItemTemplate>
