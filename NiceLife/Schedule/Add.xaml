@@ -20,7 +20,7 @@
 
         </Grid>
         <Grid Height="710" Canvas.Left="278" Width="362">
-            <TextBox x:Name="textBox_title" TextWrapping="Wrap" Text="" FontSize="29.333" Margin="30,20,68,639">
+            <TextBox x:Name="textBox_title" TextWrapping="Wrap" Text="" FontSize="15" Margin="30,20,68,639">
                 <TextBox.BorderBrush>
 
                     <LinearGradientBrush EndPoint="1,1" StartPoint="1,0">
@@ -38,7 +38,7 @@
                 </TextBox.BorderBrush>
 
             </TextBox>
-            <TextBox x:Name="textBox_dsp" TextWrapping="Wrap" Text="" FontSize="29.333" Margin="30,121,192,508">
+            <TextBox x:Name="textBox_dsp" TextWrapping="Wrap" Text="" FontSize="15" Margin="30,121,192,508">
                 <TextBox.BorderBrush>
 
                     <LinearGradientBrush EndPoint="1,1" StartPoint="1,0">
