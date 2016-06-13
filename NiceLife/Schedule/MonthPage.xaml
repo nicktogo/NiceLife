@@ -27,7 +27,7 @@
                           Margin="0,282,0,0" VerticalAlignment="Top" Height="60"  Icon="Back" Background="#FF3AAFC9" BorderBrush="Black" Width="68"
                           Click="appBarButton_last_Click"/>
            
-                <Grid Grid.Column="1" Background="#FFFBF9FB" Opacity="0.5" >
+                <Grid Grid.Column="1" Background="#FFFBF9FB" Opacity="0.5" Margin="102,0,66,96" >
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
@@ -50,7 +50,7 @@
                     <TextBlock x:Name="textBlock7" Grid.Row="0" Grid.Column="6" Text="Sat"  FontSize="64" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFC9473A"/>
 
                 </Grid>
-                <Grid  Name="calview" Grid.Column="1" Background="#FFFBF9FB" Opacity="0.5" >
+                <Grid  Name="calview" Grid.Column="1" Background="#FFFBF9FB" Opacity="0.5" Margin="96,0,72,96" >
                     <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
