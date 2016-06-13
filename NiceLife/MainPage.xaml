@@ -5,6 +5,7 @@
     xmlns:local="using:NiceLife"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:gif="using:XamlAnimatedGif"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -91,8 +92,9 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame Name="MainFrame">
-                    <Image Source="ms-appx:///Assets/Wide310x150Logo.scale-200.png" Stretch="Fill"/>
+                <Frame Name="MainFrame" Background="#f7f7f7">
+                    <!--<Image Source="ms-appx:///Assets/Wide310x150Logo.scale-200.png" Stretch="Fill"/>-->
+                    <Image gif:AnimationBehavior.SourceUri="ms-appx:///Assets/bootstrap.gif" />
                 </Frame>
             </SplitView.Content>
         </SplitView>

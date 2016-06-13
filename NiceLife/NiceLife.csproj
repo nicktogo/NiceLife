@@ -198,6 +198,7 @@
     <None Include="NiceLife_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\bootstrap.gif" />
     <Content Include="Assets\DefaultBackground.jpg" />
     <Content Include="Assets\Tomato.jpg" />
     <None Include="Package.StoreAssociation.xml" />

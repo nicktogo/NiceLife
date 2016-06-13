@@ -190,6 +190,7 @@
                             <TextBlock x:Name="textBlock" 
                                        FontSize="16"
                                        FontWeight="Bold"
+                                       Foreground="White"
                                        HorizontalAlignment="Left" Margin="85,10,0,0" TextWrapping="Wrap" Text="Forecast Details" VerticalAlignment="Top"/>
                         </Grid>
                     </Grid>
