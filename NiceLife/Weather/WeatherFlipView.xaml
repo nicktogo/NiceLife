@@ -158,8 +158,15 @@
                                         <Grid>
                                             <TextBlock FontSize="24" Text="{x:Bind low}" HorizontalAlignment="Left"
                                                        Style="{StaticResource TextBlockStyle}"/>
+                                            <TextBlock Text="℃" Style="{StaticResource RealTimeTextBlockStyle}"
+                                                       FontWeight="Light"
+                                                        Margin="36, 8, 0, 0"/>
                                             <TextBlock FontSize="24" Text="{x:Bind hight}" HorizontalAlignment="Right"
+                                                     Padding="0, 0, 8, 0"
                                                        Style="{StaticResource TextBlockStyle}"/>
+                                            <TextBlock Text="℃" Style="{StaticResource RealTimeTextBlockStyle}"
+                                                       FontWeight="Light"
+                                                        Margin="128, 8, 0, 0"/>
                                         </Grid>
                                     </StackPanel>
                                 </DataTemplate>
