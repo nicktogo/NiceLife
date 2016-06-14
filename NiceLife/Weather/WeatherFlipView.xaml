@@ -121,9 +121,11 @@
                             </RelativePanel>
 
                             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                                <Button x:Name="RefreshWeather" Content="更新"  Background="#19000000" Click="RefreshWeather_Click"
+                                <Button x:Name="RefreshWeather" Content="Updaate" 
+                                        Foreground="White"
+                                        Background="#19000000" Click="RefreshWeather_Click"
                                         Margin="16, 16, 16, 112" MinWidth="50" MinHeight="25"/>
-                                <AutoSuggestBox x:Name="SearchArea" PlaceholderText="更多城市"  Background="#19000000"
+                                <AutoSuggestBox x:Name="SearchArea" PlaceholderText="Find more city..."  Background="#19000000"
                                             Margin="16" QueryIcon="Find" MinWidth="150"
                                             TextChanged="SearchArea_TextChanged"
                                             SuggestionChosen="SearchArea_SuggestionChosen"
@@ -188,8 +190,8 @@
                                                Style="{StaticResource TextBlockStyle}"/>
                             </StackPanel>
                             <TextBlock x:Name="textBlock" 
-                                       FontSize="16"
-                                       FontWeight="Bold"
+                                       FontSize="20"
+                                       FontWeight="SemiLight"
                                        Foreground="White"
                                        HorizontalAlignment="Left" Margin="85,10,0,0" TextWrapping="Wrap" Text="Forecast Details" VerticalAlignment="Top"/>
                         </Grid>
