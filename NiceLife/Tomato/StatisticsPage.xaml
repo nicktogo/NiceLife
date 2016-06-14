@@ -12,49 +12,49 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Tomato.jpg"/>
         </Grid.Background>
-        <TextBlock FontSize="50" Text="Statistics"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,-8,0,643" Height="85" Width="191"/>
+        <TextBlock FontSize="30" Text="Statistics"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,-8,0,643" Height="85" Width="191"/>
 
-        <TextBlock x:Name="Titleone" FontSize="30" HorizontalAlignment="Left" Margin="250,32,0,0" TextWrapping="Wrap" Text="Task completion rate" VerticalAlignment="Top" Width="311" Height="60" />
+        <TextBlock x:Name="Titleone" FontSize="20" HorizontalAlignment="Left" Margin="80,32,0,0" TextWrapping="Wrap" Text="Task completion rate" VerticalAlignment="Top" Width="311" Height="60" />
 
-        <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="200"  Margin="283,80,0,0" VerticalAlignment="Top" Width="200"/>
-        <Ellipse x:Name="Eone" HorizontalAlignment="Left" Height="200"  Margin="283,80,0,0" Stroke="OrangeRed" StrokeThickness="3" StrokeDashArray="0,628" RenderTransformOrigin="0.5,0.5"  UseLayoutRounding="False" d:LayoutRounding="Auto"  VerticalAlignment="Top" Width="200">
+        <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="200"  Margin="113,80,0,0" VerticalAlignment="Top" Width="200"/>
+        <Ellipse x:Name="Eone" HorizontalAlignment="Left" Height="200"  Margin="113,80,0,0" Stroke="OrangeRed" StrokeThickness="3" StrokeDashArray="0,628" RenderTransformOrigin="0.5,0.5"  UseLayoutRounding="False" d:LayoutRounding="Auto"  VerticalAlignment="Top" Width="200">
             <Ellipse.RenderTransform>
                 <RotateTransform Angle="-90"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <TextBlock x:Name="rateone" Text=""  Visibility="Collapsed" HorizontalAlignment="Left" Foreground="White"   Margin="330,147,0,0" TextWrapping="Wrap" FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
-        <TextBlock x:Name="Titletwo" FontSize="30" HorizontalAlignment="Left" Margin="720,35,0,0" TextWrapping="Wrap" Text="Tomato completion rate" VerticalAlignment="Top" Width="320" Height="36" RenderTransformOrigin="-1.219,0.746"/>
+        <TextBlock x:Name="rateone" Text=""  Visibility="Collapsed" HorizontalAlignment="Left" Foreground="White"   Margin="160,147,0,0" TextWrapping="Wrap" FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
+        <TextBlock x:Name="Titletwo" FontSize="20" HorizontalAlignment="Left" Margin="550,35,0,0" TextWrapping="Wrap" Text="Tomato completion rate" VerticalAlignment="Top" Width="320" Height="36" RenderTransformOrigin="-1.219,0.746"/>
 
-        <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="200"  Margin="745,80,0,0" VerticalAlignment="Top" Width="200"/>
-        <Ellipse x:Name="Etwo" HorizontalAlignment="Left" Height="200"  Margin="745,80,0,0" Stroke="OrangeRed" StrokeThickness="3" StrokeDashArray="0,628" RenderTransformOrigin="0.5,0.5"  UseLayoutRounding="False" d:LayoutRounding="Auto"  VerticalAlignment="Top" Width="200">
+        <Ellipse Stroke="White" StrokeThickness="3" HorizontalAlignment="Left" Height="200"  Margin="575,80,0,0" VerticalAlignment="Top" Width="200"/>
+        <Ellipse x:Name="Etwo" HorizontalAlignment="Left" Height="200"  Margin="575,80,0,0" Stroke="OrangeRed" StrokeThickness="3" StrokeDashArray="0,628" RenderTransformOrigin="0.5,0.5"  UseLayoutRounding="False" d:LayoutRounding="Auto"  VerticalAlignment="Top" Width="200">
             <Ellipse.RenderTransform>
                 <RotateTransform Angle="-90"/>
             </Ellipse.RenderTransform>
         </Ellipse>
 
-        <TextBlock x:Name="ratetwo"  HorizontalAlignment="Left"  Foreground="White" Margin="800,147,0,0" TextWrapping="Wrap" Text=""  Visibility="Collapsed"  FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
-        <TextBlock x:Name="warnning" FontSize="30" Visibility="Collapsed" Foreground="White"  HorizontalAlignment="Left" Margin="590,182,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="116" Width="421"/>
-        <RadioButton Content="Today's task" HorizontalAlignment="Left" Margin="262,291,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
-        <RadioButton Content="Total task" HorizontalAlignment="Left" Margin="394,292,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
-        <RadioButton Content="Today's tomato" HorizontalAlignment="Left" Margin="730,291,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
-        <RadioButton Content="Total tomato" HorizontalAlignment="Left" Margin="880,289,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
+        <TextBlock x:Name="ratetwo"  HorizontalAlignment="Left"  Foreground="White" Margin="620,147,0,0" TextWrapping="Wrap" Text=""  Visibility="Collapsed"  FontSize="40" VerticalAlignment="Top" Width="150" Height="50"/>
+        <TextBlock x:Name="warnning" FontSize="30" Visibility="Collapsed" Foreground="White"  HorizontalAlignment="Left" Margin="420,182,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="116" Width="421"/>
+        <RadioButton Content="Today's task" HorizontalAlignment="Left" Margin="92,291,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
+        <RadioButton Content="Total task" HorizontalAlignment="Left" Margin="224,292,0,0" VerticalAlignment="Top" Checked="task_Checked"/>
+        <RadioButton Content="Today's tomato" HorizontalAlignment="Left" Margin="560,291,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
+        <RadioButton Content="Total tomato" HorizontalAlignment="Left" Margin="710,289,0,0" VerticalAlignment="Top" Checked="tomato_Checked"/>
 
-        <Rectangle x:Name="line1"  Visibility="Collapsed" Fill="LightSeaGreen"  HorizontalAlignment="Left" Height="1" Margin="226,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="326"/>
-        <Rectangle x:Name="rectsum1"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="242" Margin="292,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
-        <Rectangle x:Name="rectcom1"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="220" Margin="410,0,0,74" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
-        <TextBlock x:Name="textsum1"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="300,0,0,320" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="textcom1"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="420,0,0,320" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.47,-11.764"/>
-        <TextBlock x:Name="namesum1"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="290,0,0,42" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.564,-3.246"/>
-        <TextBlock x:Name="namecom1"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="402,0,0,41" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
+        <Rectangle x:Name="line1"  Visibility="Collapsed" Fill="LightSeaGreen"  HorizontalAlignment="Left" Height="1" Margin="56,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="326"/>
+        <Rectangle x:Name="rectsum1"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="242" Margin="122,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
+        <Rectangle x:Name="rectcom1"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="220" Margin="240,0,0,74" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
+        <TextBlock x:Name="textsum1"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="130,0,0,320" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="textcom1"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="250,0,0,320" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.47,-11.764"/>
+        <TextBlock x:Name="namesum1"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="120,0,0,42" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="0.564,-3.246"/>
+        <TextBlock x:Name="namecom1"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="232,0,0,41" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
 
 
-        <Rectangle x:Name="line2"  Visibility="Collapsed" Fill="LightSeaGreen"  HorizontalAlignment="Left" Height="1" Margin="684,0,0,71" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="326"/>
-        <Rectangle x:Name="rectsum2"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="243" Margin="752,0,0,71" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
-        <Rectangle x:Name="rectcom2"   Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="164" Margin="877,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
-        <TextBlock x:Name="textsum2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="760,0,0,319" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="textcom2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="880,0,0,318" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="namesum2"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="750,0,0,41" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
-        <TextBlock x:Name="namecom2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="875,0,0,42" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
+        <Rectangle x:Name="line2"  Visibility="Collapsed" Fill="LightSeaGreen"  HorizontalAlignment="Left" Height="1" Margin="514,0,0,71" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="326"/>
+        <Rectangle x:Name="rectsum2"  Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="243" Margin="582,0,0,71" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
+        <Rectangle x:Name="rectcom2"   Visibility="Collapsed" Fill="LightSeaGreen" HorizontalAlignment="Left" Height="164" Margin="707,0,0,72" Stroke="LightSeaGreen" VerticalAlignment="Bottom" Width="50"/>
+        <TextBlock x:Name="textsum2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="590,0,0,319" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="textcom2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="710,0,0,318" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="namesum2"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="580,0,0,41" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="namecom2"   Visibility="Collapsed" HorizontalAlignment="Left" Margin="706,0,0,42" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Bottom" RenderTransformOrigin="1.998,-0.084"/>
 
 
 

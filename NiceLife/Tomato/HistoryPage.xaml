@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <TextBlock FontSize="30" Text="Historical record"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,18,0,67"/>
 
-        <DatePicker x:Name="dp_ViewDate" DateChanged="dp_ViewDate_DateChanged" Margin="783,16,0,78" Height="31" Width="381"/>
+        <DatePicker x:Name="dp_ViewDate" DateChanged="dp_ViewDate_DateChanged" Margin="400,16,0,78" Height="31" Width="381"/>
         <Grid Background="LightGray" HorizontalAlignment="Left" Height="191" Margin="23,80,0,0" VerticalAlignment="Top" Width="270" Grid.RowSpan="2">
             <TextBlock x:Name="TotalHistory" FontSize="25" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="All records" VerticalAlignment="Top"/>
             <TextBlock x:Name="textblock" HorizontalAlignment="Left" Margin="21,37,0,0" TextWrapping="Wrap" Text="Number of tasks" VerticalAlignment="Top"/>

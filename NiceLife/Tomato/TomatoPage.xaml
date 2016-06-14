@@ -60,7 +60,7 @@
                             </StackPanel>
 
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Number of tomatos：</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Tomato：</TextBlock>
                             <ComboBox x:Name="cb_Tomato" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectedIndex="0" xml:space ="preserve">
                                 <ComboBoxItem>1   🍅</ComboBoxItem>
                                 <ComboBoxItem>2   🍅🍅</ComboBoxItem>

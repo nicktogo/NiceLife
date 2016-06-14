@@ -39,7 +39,7 @@ namespace NiceLife
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 2; j++)
                 {
-                    if (count < taskList.Count && count != 7)
+                    if (count < taskList.Count && count != 6)
                     {
                         Grid g_TaskContent = new Grid();
 
@@ -84,7 +84,7 @@ namespace NiceLife
                         Grid.SetColumnSpan(tb_TaskContentTotalTomato, 2);
 
                         TextBlock tb_TaskContentDoneTomato = new TextBlock();
-                        tb_TaskContentDoneTomato.Text = "Done🍅：" + taskList.ElementAt(count).DoneTomato;
+                        tb_TaskContentDoneTomato.Text = "Done：" + taskList.ElementAt(count).DoneTomato;
                         tb_TaskContentDoneTomato.FontSize = 10;
                         tb_TaskContentDoneTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentDoneTomato);
@@ -92,7 +92,7 @@ namespace NiceLife
                         Grid.SetColumn(tb_TaskContentDoneTomato, 0);
 
                         TextBlock tb_TaskContentUndoneTomato = new TextBlock();
-                        tb_TaskContentUndoneTomato.Text = "Undone🍅：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
+                        tb_TaskContentUndoneTomato.Text = "Undone：" + (taskList.ElementAt(count).TotalTomato - taskList.ElementAt(count).DoneTomato);
                         tb_TaskContentUndoneTomato.FontSize = 10;
                         tb_TaskContentUndoneTomato.VerticalAlignment = VerticalAlignment.Center;
                         g_TaskContent.Children.Add(tb_TaskContentUndoneTomato);
@@ -103,7 +103,7 @@ namespace NiceLife
 
                         count++;
                     }
-                    else if (taskList.Count > 7 && count == 7)
+                    else if (taskList.Count > 6 && count == 6)
                     {
                         Grid g_TaskContent = new Grid();
                         g_TaskContent.Background = new SolidColorBrush(Colors.LightPink);
@@ -156,7 +156,7 @@ namespace NiceLife
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 2; j++)
                 {
-                    if (count < dateList.Count && count != 7)
+                    if (count < dateList.Count && count != 6)
                     {
                         Grid g_DateContent = new Grid();
                         g_DateContent.Background = new SolidColorBrush(Colors.LightPink);
@@ -179,7 +179,7 @@ namespace NiceLife
 
                         count++;
                     }
-                    else if (dateList.Count > 7 && count == 7)
+                    else if (dateList.Count > 6 && count == 6)
                     {
                         Grid g_DateContent = new Grid();
                         g_DateContent.Background = new SolidColorBrush(Colors.LightPink);

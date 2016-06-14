@@ -41,13 +41,13 @@ namespace NiceLife
             allDateList = TaskHelper.GetHelper().SelectAllDate();
 
             g_AllTasksContent = new Grid();
-            for (int rowCount = 0; rowCount < (allTaskList.Count+allDateList.Count) / 8 + 1; rowCount++)
+            for (int rowCount = 0; rowCount < (allTaskList.Count+allDateList.Count) / 6 + 1; rowCount++)
             {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(120);
                 g_AllTasksContent.RowDefinitions.Add(rowdef);
             }
-            for (int colCount = 0; colCount < 8; colCount++)
+            for (int colCount = 0; colCount < 6; colCount++)
             {
                 g_AllTasksContent.ColumnDefinitions.Add(new ColumnDefinition());
             }
@@ -59,7 +59,7 @@ namespace NiceLife
             int i = 0;
             while (totalCount < allTaskList.Count+allDateList.Count)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < 6; j++)
                 {
                     if(totalCount == 0)
                     {

@@ -15,9 +15,9 @@
 
         <Grid Background="#FFE4E1" VerticalAlignment="Top"  Width="1400" HorizontalAlignment="Stretch" Height="140" >
             <TextBlock FontSize="48" Text="Schedule Page" Margin="30,30,790,12"/>
-            <AppBarButton x:Name="add" Click="add_Click" HorizontalAlignment="Left" Icon="Add" Label="Add" VerticalAlignment="Top" Width="100" Height="63" FontSize="13.333" Margin="955,30,0,0"/>
-            <AppBarButton x:Name="select" Click="select_Click" HorizontalAlignment="Left" Icon="Find" Label="View" VerticalAlignment="Top" Width="100" Height="63" FontSize="13.333" Margin="1065,30,0,0"/>
-            <AppBarButton x:Name="set" Click="set_Click" HorizontalAlignment="Left" Icon="Setting" Label="Setup" VerticalAlignment="Top" Width="100" Height="63" FontSize="13.333" Margin="1175,30,0,0"/>
+            <AppBarButton x:Name="add" Click="add_Click" HorizontalAlignment="Left" Icon="Add" Label="Add" VerticalAlignment="Top" Width="100" Height="63" FontSize="13.333" Margin="500,30,0,0"/>
+            <AppBarButton x:Name="select" Click="select_Click" HorizontalAlignment="Left" Icon="Find" Label="View" VerticalAlignment="Top" Width="100" Height="63" FontSize="13.333" Margin="600,30,0,0"/>
+            <AppBarButton x:Name="set" Click="set_Click" HorizontalAlignment="Left" Icon="Setting" Label="Setup" VerticalAlignment="Top" Width="100" Height="63" FontSize="13.333" Margin="700,30,0,0"/>
 
 
 
